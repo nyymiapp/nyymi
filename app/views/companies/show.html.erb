@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+
+<h1><%= @company.name %></h1>
+
+
+<h3>
+  <%= @company.description %>
+</h3>
+
+<% if @company.users.includes(current_user) %>
+	<h3> Admins </h3>
+	<% @company.users.each do |a| %>
+		<%= a.username %> </br>
+	<% end %>
+<% end %>
+
+<%= link_to 'Edit', edit_company_path(@company) %> |
+<%= link_to 'Back', companies_path %>

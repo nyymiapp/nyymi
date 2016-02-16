@@ -1,0 +1,5 @@
+<%# add navigation links to this file %>
+
+<% if current_user %>
+	<li><%= link_to current_user.username, current_user %></li>
+<% end %>

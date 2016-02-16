@@ -1,0 +1,17 @@
+<p id="notice"><%= notice %></p>
+
+<h1>
+  <%= @user.username %>
+</h1>
+
+<% if @user == current_user %>
+	<%= link_to 'Edit', edit_user_path(@user), class:"btn" %> 
+	</br>
+	<h3> I'm admin in </h3>
+	<% @user.companies.each do |c| %>
+		<%= link_to c.name, c %> 
+		</br>
+	<% end %>
+<% end %>
+
+<%= link_to 'Back', users_path %>
