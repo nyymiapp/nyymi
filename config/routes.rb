@@ -5,7 +5,8 @@ Rails.application.routes.draw do
 
   get 'signup', to: 'users#new'
   get 'signin', to: 'sessions#new'
-  delete 'signout', to: 'sessions#destroy'
+ get 'signout', to: 'sessions#destroy'
+  get 'about', to: 'companies#about'
 
   root :to => "open_jobs#index"
 
