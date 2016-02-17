@@ -5,6 +5,8 @@
 </h1>
 
 <% if @user == current_user %>
+	Email: <%= @user.email %> </br>
+	Phone number <%= @user.phonenumber %> </br>
 	<%= link_to 'Edit', edit_user_path(@user), class:"btn" %> 
 	</br>
 	<h3> I'm admin in </h3>
