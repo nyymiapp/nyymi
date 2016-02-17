@@ -1,12 +1,12 @@
 <%# add navigation links to this file %>
 
 <li><%= link_to 'Tietoa Nyymistä', about_path, class:"btn  btn-danger", style:"color:white;" %></li>
-<li><%= link_to "open jobs", open_jobs_path, 'data-no-turbolink' => true %></li>
-<li><%= link_to "companies", companies_path, 'data-no-turbolink' => true %></li>
+<li><%= link_to "Avoimet työpaikat", open_jobs_path, 'data-no-turbolink' => true %></li>
+<li><%= link_to "Kaikki yritykset", companies_path, 'data-no-turbolink' => true %></li>
 <% if current_user %>
 	<li><%= link_to current_user.username, current_user %></li>
-	<li><%= link_to 'Sign out', signout_path%></li>
+	<li><%= link_to 'Kirjaudu ulos', signout_path%></li>
 <% else %>
-	<li><%= link_to 'Sign in', signin_path%></li>
-	<li><%= link_to 'Sign up', signup_path%></li>
+	<li><%= link_to 'Kirjaudu sisään', signin_path%></li>
+	<li><%= link_to 'Rekisteröidy', signup_path%></li>
 <% end %>

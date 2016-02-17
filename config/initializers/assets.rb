@@ -9,6 +9,8 @@ Rails.application.config.assets.precompile += %w( font-awesome.min.css )
 
 Rails.application.config.assets.precompile += %w( bootstrap.css )
 
+Rails.application.config.assets.precompile += %w( redsilhuette.png )
+
 # Add additional assets to the asset load path
 # Rails.application.config.assets.paths << Emoji.images_path
 

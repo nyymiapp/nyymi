@@ -7,8 +7,9 @@ Rails.application.routes.draw do
   get 'signin', to: 'sessions#new'
  get 'signout', to: 'sessions#destroy'
   get 'about', to: 'companies#about'
+  get 'welcome', to: 'open_jobs#welcome'
 
-  root :to => "open_jobs#index"
+  root :to => "open_jobs#welcome"
 
   resource :session, only: [:new, :create, :destroy]
 
