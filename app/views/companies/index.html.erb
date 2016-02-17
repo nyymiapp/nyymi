@@ -1,29 +1,39 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Companies</h1>
+<script>
+  var myApp = angular.module('myApp', []);
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th colspan="3"></th>
+  myApp.controller("CompaniesController", function ($scope, $http) {
+    $http.get('companies.json').success( function(data, status, headers, config) {
+      $scope.companies = data;
+    });
+
+    $scope.order = 'name';
+
+    $scope.sort_by = function (order){
+      $scope.order = order;
+      console.log(order);
+    }
+
+    $scope.searchText = '';
+  });
+</script>
+
+<h2>Companies</h2>
+
+<div ng-app="myApp" ng-controller="CompaniesController">
+
+  search:  <input ng-model="searchText">
+
+  <table class="table table-hover">
+    <thead>
+    <th> <a ng-click="sort_by('name')">name</a> </th>
+    </thead>
+    <tr ng-repeat="company in companies| orderBy:order | filter:searchText">
+      <td>{{company.name}}</td>
     </tr>
-  </thead>
+  </table>
 
-  <tbody>
-    <% @companies.each do |company| %>
-      <tr>
-        <td><%= company.name %></td>
-        <td><%= company.description %></td>
-        <td><%= link_to 'Show', company %></td>
-        <td><%= link_to 'Edit', edit_company_path(company) %></td>
-        <td><%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
+</div>
 
 <%= link_to 'New Company', new_company_path %>

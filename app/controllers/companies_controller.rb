@@ -21,6 +21,12 @@ class CompaniesController < ApplicationController
   def edit
   end
 
+  def administration
+    @company = Company.find(params[:id])
+    @open_job = OpenJob.new
+    @open_job.company = @company
+  end
+
   # POST /companies
   # POST /companies.json
   def create

@@ -10,6 +10,13 @@ Rails.application.routes.draw do
   root :to => "companies#index"
 
   resource :session, only: [:new, :create, :destroy]
+
+  resources :companies do
+       member do
+         get 'administration'
+       end
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

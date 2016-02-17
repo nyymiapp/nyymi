@@ -1,0 +1,27 @@
+<h1> Administration </h1>
+
+<% if current_user && @company.users.includes(current_user) %>
+	<h3> Admins </h3>
+	<% @company.users.each do |a| %>
+		<%= a.username %> </br>
+	<% end %>
+
+	<h3> Create new open job </h3>
+
+	<%= form_for(@open_job) do |f| %>
+    	<%= f.hidden_field :company_id %>
+    	<div class="field">
+    		<%= f.label :name %><br>
+    		<%= f.text_field :name, class:"form-control" %>
+		</div>
+ 		 <div class="field">
+   			 <%= f.label :description %><br>
+   			 <%= f.text_area :description, class:"form-control" %>
+ 		 </div>
+ 		 <div class="field">
+    		<%= f.label :expires %><br>
+    		<%= f.date_field :expires %>
+		</div>
+    <%= f.submit %>
+  <% end %>
+<% end %>
