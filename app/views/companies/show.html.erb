@@ -9,10 +9,7 @@
 </h3>
 
 <% if @company.users.includes(current_user) %>
-	<h3> Admins </h3>
-	<% @company.users.each do |a| %>
-		<%= a.username %> </br>
-	<% end %>
+	<%= link_to "Admin page", administration_company_path(@company) %>
 <% end %>
 
 <%= link_to 'Edit', edit_company_path(@company) %> |

@@ -28,7 +28,7 @@ class OpenJobsController < ApplicationController
 
     respond_to do |format|
       if @open_job.save
-        format.html { redirect_to @open_job, notice: 'Open job was successfully created.' }
+        format.html { redirect_to administration_company_path(@open_job.company), notice: 'Open job was successfully created.' }
         format.json { render :show, status: :created, location: @open_job }
       else
         format.html { render :new }

@@ -1,4 +1,4 @@
-<h1> Administration </h1>
+<h1> Administration of <%= @company.name %></h1>
 
 <% if current_user && @company.users.includes(current_user) %>
 	<h3> Admins </h3>
@@ -23,5 +23,10 @@
     		<%= f.date_field :expires %>
 		</div>
     <%= f.submit %>
+
+    <h3> Open jobs </h3>
+    <% @company.open_jobs.each do |o| %>
+    	<%= link_to o.name, o %> </br>
+    <% end %>
   <% end %>
 <% end %>

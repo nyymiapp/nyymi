@@ -33,7 +33,6 @@ class CompaniesController < ApplicationController
     @company = Company.new(company_params)
     if current_user
       @company.users << current_user
-      current_user.companies << @company
     end
     respond_to do |format|
       if @company.save
@@ -78,6 +77,6 @@ class CompaniesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def company_params
-      params.require(:company).permit(:name, :description)
+      params.require(:company).permit(:name, :description, :location)
     end
 end

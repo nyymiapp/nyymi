@@ -28,9 +28,11 @@
   <table class="table table-hover">
     <thead>
     <th> <a ng-click="sort_by('name')">name</a> </th>
+    <th> <a ng-click="sort_by('location')">location</a> </th>
     </thead>
     <tr ng-repeat="company in companies| orderBy:order | filter:searchText">
-      <td>{{company.name}}</td>
+      <td><%= link_to '{{company.name}}', 'companies/{{company.id}}' %></td>
+       <td>{{company.location}}</td>
     </tr>
   </table>
 

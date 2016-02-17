@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get 'signin', to: 'sessions#new'
   delete 'signout', to: 'sessions#destroy'
 
-  root :to => "companies#index"
+  root :to => "open_jobs#index"
 
   resource :session, only: [:new, :create, :destroy]
 

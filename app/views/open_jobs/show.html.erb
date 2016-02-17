@@ -1,22 +1,14 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Company:</strong>
-  <%= @open_job.company_id %>
-</p>
+
+<h1><%= @open_job.name %>,  <%= @open_job.company.name %>  </h1>
+
+
+
+<h4><%= @open_job.description %></h4>
 
 <p>
-  <strong>Name:</strong>
-  <%= @open_job.name %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @open_job.description %>
-</p>
-
-<p>
-  <strong>Expires:</strong>
+  <strong>Expires in :</strong>
   <%= @open_job.expires %>
 </p>
 
