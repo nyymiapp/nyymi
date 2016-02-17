@@ -12,5 +12,5 @@
 	<%= link_to "Admin page", administration_company_path(@company) %>
 <% end %>
 
-<%= link_to 'Edit', edit_company_path(@company) %> |
-<%= link_to 'Back', companies_path %>
+<%= link_to 'Edit', edit_company_path(@company), 'data-no-turbolink' => true  %> |
+<%= link_to 'Back', companies_path, 'data-no-turbolink' => true  %>

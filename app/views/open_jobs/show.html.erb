@@ -12,5 +12,5 @@
   <%= @open_job.expires %>
 </p>
 
-<%= link_to 'Edit', edit_open_job_path(@open_job) %> |
-<%= link_to 'Back', open_jobs_path %>
+<%= link_to 'Edit', edit_open_job_path(@open_job), 'data-no-turbolink' => true  %> |
+<%= link_to 'Back', open_jobs_path, 'data-no-turbolink' => true  %>
