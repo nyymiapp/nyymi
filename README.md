@@ -8,9 +8,15 @@ Nyymissä on kaksi käyttäjätyyppiä, yrityksen ylläpitäjä sekä työnhakij
 
 Sovelluksessa on sekä one-to-many että many-to-many-yhteyksiä (yritys - adminkäyttäjä). 
 
-##Ulkoiset gemit ja muut kirjastot
+##Ulkoasu
 
 Käytin ulkoasussa http://www.free-css.com/free-css-templates/page193/spot css-templatea itse muokattuna. 
 
+## Yksityisyydenhallinta
+
 Yksityisenhallinnassa käytetään deklaratiivisen autentikoinnin gemiä CanCania (https://github.com/ryanb/cancan ). Se helpottaa sen määrittelyä, mille sivuille mitkäkin käyttäjän saavat mennä. 
+
+##Kielilokalisointi
+
+ei vielä tehty
 
