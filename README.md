@@ -20,6 +20,9 @@ Yksityisenhallinnassa käytetään deklaratiivisen autentikoinnin gemiä CanCani
 
 ei vielä tehty
 
+## Muut ulkoiset gemit
+JSONin generoinnin ehdollisuuteen käytin jbuilder-gemiä. (https://github.com/rails/jbuilder)
+
 ##Testaus 
 
 ei vielä tehty
