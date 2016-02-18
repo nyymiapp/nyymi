@@ -1,6 +1,8 @@
 <% if current_user && @company.users.includes(current_user) %>
   <h1> Administration of <%= @company.name %></h1>
 
+       <%= link_to 'Destroy company', @company , method: :delete, data: { confirm: 'Are you sure? All open jobs of this company will be also deleted.' }, class:"btn btn-danger", style:"color:white;"%>
+
 	<h3> Admins </h3>
 	<% @company.users.each do |a| %>
 		<%= a.username %> </br>
@@ -30,6 +32,7 @@
     	<%= link_to o.name, o %> </br>
     <% end %>
   <% end %>
+
 
 <% else %>
 You're not admin of this company.

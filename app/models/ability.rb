@@ -8,7 +8,7 @@ class Ability
             can [:welcome, :index, :show, :create, :new], OpenJob
             can [:index, :show, :about, :new, :create], Company
 
-            can [:edit, :update, :administration], Company do |p|
+            can [:edit, :update, :administration, :destroy], Company do |p|
                 p.users.includes(user)
             end
         else 
