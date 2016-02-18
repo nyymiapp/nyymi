@@ -43,6 +43,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def my_companies
+    @user = User.find(params[:id])
+  end
+
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update

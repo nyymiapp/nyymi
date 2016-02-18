@@ -29,10 +29,7 @@
 <% end %>
 
 </br>
-
-<% if can? :edit, @open_job %>
-	<%= link_to 'Edit', edit_open_job_path(@open_job), 'data-no-turbolink' => true  %> |
-<% end %>
+</br>
 <%= link_to 'Back', open_jobs_path, 'data-no-turbolink' => true  %>
 
 <script>

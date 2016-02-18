@@ -1,0 +1,7 @@
+<h3> Companies I'm admin in </h3>
+<table class="table table-hover">
+		<% @user.companies.each do |c| %>
+			<tr><%= link_to c.name, c %> </tr>
+			</br>
+		<% end %>
+</table>

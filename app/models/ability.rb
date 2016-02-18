@@ -4,7 +4,7 @@ class Ability
    def initialize(user)
         if user
             can [:index, :show], User
-            can [:edit, :update, :destroy], User, :id => user.id
+            can [:edit, :update, :destroy, :my_companies], User, :id => user.id
             can [:welcome, :index, :show, :create, :new, :administration], OpenJob
             can [:index, :show, :about, :new, :create], Company
             can [:new, :create], Application
