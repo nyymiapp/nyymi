@@ -1,12 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Open job:</strong>
-  <%= @application.open_job_id %>
+  <h2> Application for <%= @application.open_job.name %> of <%= link_to @application.open_job.company.name, @application.open_job.company %> </h2>
 </p>
 
 <p>
-  <strong>User:</strong>
+  <strong>User id:</strong>
   <%= @application.user_id %>
 </p>
 

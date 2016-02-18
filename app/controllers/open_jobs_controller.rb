@@ -23,6 +23,10 @@ class OpenJobsController < ApplicationController
     @open_job = OpenJob.new
   end
 
+   def administration
+    @open_job = OpenJob.find(params[:id])
+  end
+
   # GET /open_jobs/1/edit
   def edit
   end
@@ -31,7 +35,7 @@ class OpenJobsController < ApplicationController
   # POST /open_jobs.json
   def create
     @open_job = OpenJob.new(open_job_params)
-    if not current_user or @open_job.company.users.excludes(current_user)
+    if not current_user or not @open_job.company.users.includes(current_user)
       redirect_to :root, notice: "You must be admin of company to create new open job!"
     end
     respond_to do |format|

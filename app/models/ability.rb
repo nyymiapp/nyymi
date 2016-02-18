@@ -5,11 +5,20 @@ class Ability
         if user
             can [:index, :show], User
             can [:edit, :update, :destroy], User, :id => user.id
-            can [:welcome, :index, :show, :create, :new], OpenJob
+            can [:welcome, :index, :show, :create, :new, :administration], OpenJob
             can [:index, :show, :about, :new, :create], Company
+            can [:new, :create], Application
 
             can [:edit, :update, :administration, :destroy], Company do |p|
                 p.users.includes(user)
+            end
+
+            can [:edit, :update, :administration, :destroy], OpenJob do |p|
+                p.company.users.includes(user)
+            end
+
+            can [:show, :destroy], Application do |p|
+                p.open_job.company.users.includes(user)
             end
         else 
             can [:welcome, :index, :show], OpenJob

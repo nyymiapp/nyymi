@@ -1,0 +1,13 @@
+<% if current_user && @open_job.company.users.includes(current_user) %>
+  <h1> Administration of <%= @open_job.name %></h1>
+
+       <%= link_to 'Destroy this open job', @open_job , method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger", style:"color:white;"%>
+
+	<h3> Applications </h3>
+	<% @open_job.applications.each do |a| %>
+		<%= link_to a.id, a %> </br>
+	<% end %>
+
+<% else %>
+You're not admin of company of this open job.
+<% end %>
