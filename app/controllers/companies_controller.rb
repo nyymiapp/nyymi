@@ -1,5 +1,10 @@
 class CompaniesController < ApplicationController
+  load_and_authorize_resource :except => :create
   before_action :set_company, only: [:show, :edit, :update, :destroy]
+
+  before_filter do
+    params[:user] &&= user_params
+  end
 
   # GET /companies
   # GET /companies.json

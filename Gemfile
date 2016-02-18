@@ -28,6 +28,8 @@ gem 'bootstrap-sass'
 
 gem 'jquery-turbolinks'
 
+gem "cancan"
+
 group :development do
   gem 'rails_layout'
 end

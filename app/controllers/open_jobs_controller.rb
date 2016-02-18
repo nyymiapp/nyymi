@@ -1,4 +1,5 @@
 class OpenJobsController < ApplicationController
+  load_and_authorize_resource
   before_action :set_open_job, only: [:show, :edit, :update, :destroy]
 
   # GET /open_jobs

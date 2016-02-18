@@ -1,4 +1,5 @@
 class ApplicationsController < ApplicationController
+  load_and_authorize_resource
   before_action :set_application, only: [:show, :edit, :update, :destroy]
 
   # GET /applications
