@@ -30,6 +30,8 @@ gem 'jquery-turbolinks'
 
 gem "cancan"
 
+gem 'jbuilder', '~> 2.0'
+
 group :development do
   gem 'rails_layout'
 end

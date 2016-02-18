@@ -12,15 +12,18 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :username %><br>
-    <%= f.text_field :username, class:"form-control" %>
+    <%= f.label :realname %><br>
+    Oikea nimesi ei tule näkyviin työhakemuksissa.
+    <%= f.text_field :realname, class:"form-control" %>
   </div>
    <div class="field">
     <%= f.label :email %><br>
+    Sähköpostiosoitteesi ei tule näkyviin työhakemuksissa. 
     <%= f.text_field :email, class:"form-control" %>
   </div>
   <div class="field">
     <%= f.label :phonenumber %><br>
+    Puhelinnumerosi ei tule näkyviin työhakemuksissa.
     <%= f.text_field :phonenumber, class:"form-control" %>
   </div>
    <div class="field">

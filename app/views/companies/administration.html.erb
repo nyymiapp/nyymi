@@ -1,8 +1,8 @@
 <% if current_user && @company.users.includes(current_user) %>
   <h1> Administration of <%= @company.name %></h1>
 
-       <%= link_to 'Destroy company', @company , method: :delete, data: { confirm: 'Are you sure? All open jobs of this company will be also deleted.' }, class:"btn btn-danger", style:"color:white;"%>
-
+       <%= link_to 'Destroy company', @company , method: :delete, data: { confirm: 'Are you sure? All open jobs of this company will be also deleted.' }, class:"btn btn-danger", style:"color:white;"%> 
+        <%= link_to 'Edit', edit_company_path(@company), 'data-no-turbolink' => true, class:"btn btn-primary", style:"color:white;"  %> 
 	<h3> Admins </h3>
 	<% @company.users.each do |a| %>
 		<%= a.username %> </br>
@@ -22,14 +22,14 @@
  		 </div>
  		 <div class="field">
     		<%= f.label :expires %><br>
-        Tämän jälkeen työpaikkaa ei enää näytetä avoimissa työpaikoissa.
+        Tämän jälkeen työpaikkaa ei enää näytetä avoimissa työpaikoissa, mutta se säilyy yrityksen ylläpidossa. </br>
     		<%= f.date_field :expires %>
 		</div>
     <%= f.submit %>
 
-    <h3> Open jobs </h3>
+    <h3> Administration of open jobs </h3>
     <% @company.open_jobs.each do |o| %>
-    	<%= link_to o.name, o %> </br>
+    	<%= link_to o.name, administration_open_job_path(o) %> </br>
     <% end %>
   <% end %>
 

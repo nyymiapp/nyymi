@@ -3,16 +3,27 @@
 
 <h1><%= @company.name %></h1>
 
+<%= link_to("Website", "http://#{@company.website}") %>
 
 <h3>
   <%= @company.description %>
 </h3>
 
-
 <% if can? :edit, @company %>
 
-	<%= link_to "Admin page", administration_company_path(@company) %>
-	<%= link_to 'Edit', edit_company_path(@company), 'data-no-turbolink' => true  %> |
+	<%= link_to "Admin page", administration_company_path(@company), class:"btn btn-primary", style:"color:white;" %>
 
 <% end %>
-<%= link_to 'Back', companies_path, 'data-no-turbolink' => true  %>
+
+<h3> Our open jobs </h3>
+<% @company.open_jobs.each do |o| %>
+	<%= link_to o.name, o %>
+</br>
+<% end %>
+<% if @company.open_jobs.length == 0 %>
+	Ei avoimia työpaikkoja tällä hetkellä.
+	</br>
+<% end %>
+
+</br>
+<%= link_to 'Back', companies_path, 'data-no-turbolink' => true, style:"btn"  %>

@@ -5,8 +5,13 @@
 </p>
 
 <p>
-  <strong>User id:</strong>
-  <%= @application.user_id %>
+  <strong>Username:</strong>
+  <%= @application.user.username %>
+</p>
+
+<p>
+  <strong>Vapaa kenttä</strong></br>
+  <%= @application.freetext %>
 </p>
 
 <%= link_to 'Edit', edit_application_path(@application) %> |

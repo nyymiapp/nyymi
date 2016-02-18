@@ -5,15 +5,15 @@
 </h1>
 
 <% if @user == current_user %>
-	Email: <%= @user.email %> </br>
-	Phone number <%= @user.phonenumber %> </br>
-	<%= link_to 'Edit', edit_user_path(@user), class:"btn" %> 
+	<%= link_to 'Edit', edit_user_path(@user), class:"btn btn-primary", style:"color:white;" %>  </br></br>
 	</br>
 	<h3> I'm admin in </h3>
-	<% @user.companies.each do |c| %>
-		<%= link_to c.name, c %> 
-		</br>
-	<% end %>
+	<table class="table table-hover">
+		<% @user.companies.each do |c| %>
+			<tr><%= link_to c.name, c %> </tr>
+			</br>
+		<% end %>
+	</table>
 <% end %>
 
 <%= link_to 'Back', users_path %>

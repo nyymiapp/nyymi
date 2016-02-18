@@ -26,7 +26,7 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
   end
-  
+
   # POST /users
   # POST /users.json
   def create
@@ -75,6 +75,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:username, :password, :password_confirmation, :phonenumber, :email)
+      params.require(:user).permit(:username, :password, :password_confirmation, :phonenumber, :email, :realname)
     end
 end
