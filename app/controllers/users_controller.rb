@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
   load_and_authorize_resource
-  
+
+  before_filter do
+    params[:user] &&= user_params
+  end
+
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
@@ -22,7 +26,7 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
   end
-
+  
   # POST /users
   # POST /users.json
   def create

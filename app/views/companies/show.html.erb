@@ -8,9 +8,11 @@
   <%= @company.description %>
 </h3>
 
-<% if @company.users.includes(current_user) %>
-	<%= link_to "Admin page", administration_company_path(@company) %>
-<% end %>
 
-<%= link_to 'Edit', edit_company_path(@company), 'data-no-turbolink' => true  %> |
+<% if can? :edit, @company %>
+
+	<%= link_to "Admin page", administration_company_path(@company) %>
+	<%= link_to 'Edit', edit_company_path(@company), 'data-no-turbolink' => true  %> |
+
+<% end %>
 <%= link_to 'Back', companies_path, 'data-no-turbolink' => true  %>
