@@ -10,6 +10,11 @@ class OpenJobsController < ApplicationController
   # GET /open_jobs/1
   # GET /open_jobs/1.json
   def show
+    @application = Application.new
+    if current_user
+      @application.user = current_user
+      @application.open_job = @open_job
+    end
   end
 
   # GET /open_jobs/new

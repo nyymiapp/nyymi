@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Open job:</strong>
+  <%= @application.open_job_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @application.user_id %>
+</p>
+
+<%= link_to 'Edit', edit_application_path(@application) %> |
+<%= link_to 'Back', applications_path %>

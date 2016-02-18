@@ -1,6 +1,6 @@
-<h1> Administration of <%= @company.name %></h1>
-
 <% if current_user && @company.users.includes(current_user) %>
+  <h1> Administration of <%= @company.name %></h1>
+
 	<h3> Admins </h3>
 	<% @company.users.each do |a| %>
 		<%= a.username %> </br>
@@ -29,4 +29,7 @@
     	<%= link_to o.name, o %> </br>
     <% end %>
   <% end %>
+
+<% else %>
+You're not admin of this company.
 <% end %>

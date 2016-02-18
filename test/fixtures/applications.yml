@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  open_job_id: 1
+  user_id: 1
+
+two:
+  open_job_id: 1
+  user_id: 1
