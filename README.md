@@ -4,11 +4,11 @@ Nyymi on rekrytointipalvelu, joka piilottaa kaikki hakijoiden iän, sukupuolen j
 
 Nyymissä on kaksi käyttäjätyyppiä, yrityksen ylläpitäjä sekä työnhakija. Yrityksen ylläpitäjä voi tietysti myös hakea töitä. Sovellus itsessään on käyttöohje. 
 
-Tekninen toteutus
+##Tekninen toteutus
 
 Sovelluksessa on sekä one-to-many että many-to-many-yhteyksiä (yritys - adminkäyttäjä). 
 
-Ulkoiset gemit ja muut kirjastot
+##Ulkoiset gemit ja muut kirjastot
 
 Käytin ulkoasussa http://www.free-css.com/free-css-templates/page193/spot css-templatea itse muokattuna. 
 
