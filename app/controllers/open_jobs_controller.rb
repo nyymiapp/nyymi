@@ -31,7 +31,9 @@ class OpenJobsController < ApplicationController
   # POST /open_jobs.json
   def create
     @open_job = OpenJob.new(open_job_params)
-
+    if not current_user or @open_job.company.users.excludes(current_user)
+      redirect_to :root, notice: "You must be admin of company to create new open job!"
+    end
     respond_to do |format|
       if @open_job.save
         format.html { redirect_to administration_company_path(@open_job.company), notice: 'Open job was successfully created.' }
