@@ -31,6 +31,9 @@
     <% @company.open_jobs.each do |o| %>
     	<%= link_to o.name, administration_open_job_path(o) %> </br>
     <% end %>
+    <% if @company.open_jobs.length == 0 %>
+      No open jobs yet!
+    <% end %>
   <% end %>
 
 

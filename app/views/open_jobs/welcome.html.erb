@@ -21,7 +21,6 @@
 
   <div class="container w">
     <div class="row centered">
-      <br><br>
       <div class="col-lg-4">
         <i class="fa fa-heart"></i>
         <h4>MAAHANMUUTTAJAT</h4>
@@ -40,7 +39,46 @@
         <p>Prosessi kesken? Nyymissä et joudu selittelemään. </p>
       </div><!-- col-lg-4 -->
     </div><!-- row -->
-    <br>
-    <br>
+
+  </br></br>
+  
+    <div class="row centered">
+      <div class="col-lg-4">
+        <!--<i class="fa fa-heart"></i> -->
+        <h4></h4>
+        <p></p>
+      </div><!-- col-lg-4 -->
+
+      <div class="col-lg-4" style="background-color:#EEA236;  border: 1px solid #E0E0E0;" id="signup_button">
+        <!--<i class="fa fa-laptop"></i> -->
+      </br>
+        <h4 style="color:#E0E0E0">REKISTERÖIDY</h4>
+        <p></p>
+      </div><!-- col-lg-4 -->
+
+      <div class="col-lg-4">
+        <!--<i class="fa fa-trophy"></i> -->
+        <h4></h4>
+        <p> </p>
+      </div><!-- col-lg-4 -->
+    </div><!-- row -->
+
   </div><!-- container -->
 </div>
+
+<script>
+$(document).ready(function(){
+    $("#signup_button").click(function(){
+        window.location.assign("/signup");
+    });
+
+     $("#signup_button").hover(function(){
+      //  text-decoration: none;
+        $(this).css("background", "#EEEEEE");
+        $(this).css("text-decoration", "none");
+    }, function(){
+        $(this).css("background", "#EEA236");
+    });
+});
+
+</script>

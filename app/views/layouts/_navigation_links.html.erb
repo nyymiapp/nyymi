@@ -1,7 +1,7 @@
 <%# add navigation links to this file %>
 
-<li><%= link_to "Nyymi", root_path, 'data-no-turbolink' => true, class:"btn btn-warning", style:"color:white;" %></li>
-<li><%= link_to 'Tietoa Nyymistä', about_path, class:"btn  btn-danger", style:"color:white;" %></li>
+<li><%= link_to "Nyymi", root_path, 'data-no-turbolink' => true, class:"btn btn-warning", style:"color:white;border-radius:0;" %></li>
+<li><%= link_to 'Tietoa yritykselle', about_path, class:"btn  btn-danger", style:"color:white;border-radius:0;" %></li>
 <li><%= link_to "Avoimet työpaikat", open_jobs_path, 'data-no-turbolink' => true, style:"color:white;" %></li>
 <li><%= link_to "Kaikki yritykset", companies_path, 'data-no-turbolink' => true, style:"color:white;"  %></li>
 <% if current_user %>

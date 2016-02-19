@@ -42,9 +42,11 @@ class CompaniesController < ApplicationController
     if current_user
       @company.users << current_user
     end
+    @company.save
+    flash[:safe] = %Q[Company created! Now #{view_context.link_to("create new open jobs", administration_company_path(@company))}]
     respond_to do |format|
       if @company.save
-        format.html { redirect_to @company, notice: 'Company was successfully created.' }
+        format.html { redirect_to @company }
         format.json { render :show, status: :created, location: @company }
       else
         format.html { render :new }

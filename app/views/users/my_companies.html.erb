@@ -1,4 +1,5 @@
-<h3> Yritysten ylläpito </h3>
+<h3> Yritysten ylläpito</h3>
+Olet ylläpitäjänä näissä yrityksissä. </br> </br>
 <table class="table table-hover">
 		<% @user.companies.each do |c| %>
 			<tr><%= link_to c.name, administration_company_path(c) %> </tr>
