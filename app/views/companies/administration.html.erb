@@ -1,42 +1,42 @@
 <% if current_user && @company.users.includes(current_user) %>
-  <h1> Administration of <%= @company.name %></h1>
+  <h1> <%= @company.name %> ylläpito</h1>
 
-       <%= link_to 'Destroy company', @company , method: :delete, data: { confirm: 'Are you sure? All open jobs of this company will be also deleted.' }, class:"btn btn-danger", style:"color:white;"%> 
-        <%= link_to 'Edit', edit_company_path(@company), 'data-no-turbolink' => true, class:"btn btn-primary", style:"color:white;"  %> 
-	<h3> Admins </h3>
+       <%= link_to 'Poista yritys', @company , method: :delete, data: { confirm: 'Oletko varma? Kaikki yrityksen avoimet työpaikat poistuvat myös.' }, class:"btn btn-danger", style:"color:white;"%> 
+        <%= link_to 'Muokkaa perustietoja', edit_company_path(@company), 'data-no-turbolink' => true, class:"btn btn-primary", style:"color:white;"  %> 
+	<h3> Ylläpitäjät </h3>
 	<% @company.users.each do |a| %>
 		<%= a.username %> </br>
 	<% end %>
 
-	<h3> Create new open job </h3>
+	<h3> Luo uusi avoin työpaikka </h3>
 
 	<%= form_for(@open_job) do |f| %>
     	<%= f.hidden_field :company_id %>
     	<div class="field">
-    		<%= f.label :name %><br>
+    		Nimi
     		<%= f.text_field :name, class:"form-control" %>
 		</div>
  		 <div class="field">
-   			 <%= f.label :description %><br>
+   			 Työn kuvaus
    			 <%= f.text_area :description, class:"form-control" %>
  		 </div>
  		 <div class="field">
-    		<%= f.label :expires %><br>
+    		<b>Vanhentumisaika </b></br>
         Tämän jälkeen työpaikkaa ei enää näytetä avoimissa työpaikoissa, mutta se säilyy yrityksen ylläpidossa. </br>
     		<%= f.date_field :expires %>
 		</div>
     <%= f.submit %>
 
-    <h3> Administration of open jobs </h3>
+    <h3> Avoimien työpaikkojen ylläpito </h3>
     <% @company.open_jobs.each do |o| %>
     	<%= link_to o.name, administration_open_job_path(o) %> </br>
     <% end %>
     <% if @company.open_jobs.length == 0 %>
-      No open jobs yet!
+      Ei vielä työpaikkoja!
     <% end %>
   <% end %>
 
 
 <% else %>
-You're not admin of this company.
+  Et ole ylläpitäjä.
 <% end %>
