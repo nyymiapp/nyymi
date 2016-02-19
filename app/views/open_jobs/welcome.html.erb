@@ -52,7 +52,7 @@
       <div class="col-lg-4" style="background-color:#EEA236;  border: 1px solid #E0E0E0;" id="signup_button">
         <!--<i class="fa fa-laptop"></i> -->
       </br>
-        <h4 style="color:#E0E0E0">REKISTERÖIDY</h4>
+        <h4 style="color:white;">REKISTERÖIDY</h4>
         <p></p>
       </div><!-- col-lg-4 -->
 
@@ -74,10 +74,13 @@ $(document).ready(function(){
 
      $("#signup_button").hover(function(){
       //  text-decoration: none;
+      // #E0E0E0
         $(this).css("background", "#EEEEEE");
         $(this).css("text-decoration", "none");
+        $(this).css("color", "#E0E0E0");
     }, function(){
         $(this).css("background", "#EEA236");
+        $(this).css("color", "white");
     });
 });
 
