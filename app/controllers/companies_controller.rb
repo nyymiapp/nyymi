@@ -33,6 +33,7 @@ class CompaniesController < ApplicationController
     @company = Company.find(params[:id])
     @open_job = OpenJob.new
     @open_job.company = @company
+    @open_job.expires = DateTime.now + 2.months
   end
 
   # POST /companies

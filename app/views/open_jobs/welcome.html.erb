@@ -2,7 +2,7 @@
 
 <div style="font-family:fontawesome-webfontti">
 <div class="container wb" >
-  
+
     <div class="row centered">
       <br><br>
       <div class="col-lg-8 col-lg-offset-2">
@@ -42,6 +42,8 @@
     </div><!-- row -->
 
   </br></br>
+
+  <% if not current_user %>
   
     <div class="row centered">
       <div class="col-lg-4">
@@ -63,7 +65,8 @@
         <p> </p>
       </div><!-- col-lg-4 -->
     </div><!-- row -->
-
+    <% end %>
+    
   </div><!-- container -->
 </div>
 

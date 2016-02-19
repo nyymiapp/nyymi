@@ -38,6 +38,10 @@ class OpenJobsController < ApplicationController
     if not current_user or not @open_job.company.users.includes(current_user)
       redirect_to :root, notice: "You must be admin of company to create new open job!"
     end
+    if not @open_job.save
+       redirect_to :back, notice: "Viimeistä hakupäivää ei asetettu tai se on menneisyydessä!"
+       return
+    end
     respond_to do |format|
       if @open_job.save
         format.html { redirect_to administration_company_path(@open_job.company), notice: 'Open job was successfully created.' }
