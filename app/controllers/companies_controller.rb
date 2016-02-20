@@ -27,6 +27,7 @@ class CompaniesController < ApplicationController
 
   # GET /companies/1/edit
   def edit
+    authorize! :edit, @company
   end
 
   def administration
