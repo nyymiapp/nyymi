@@ -10,15 +10,14 @@ class Ability
             can [:new, :create], Application
 
             can [:edit, :update, :administration, :destroy], Company do |p|
-                p.users.includes(user)
+                p.users.include? user
             end
 
             can [:edit, :update, :administration, :destroy], OpenJob do |p|
-                p.company.users.includes(user)
+                p.company.users.include? user
             end
-
             can [:show, :destroy], Application do |p|
-                p.open_job.company.users.includes(user)
+                p.open_job.company.users.include? user
             end
         else 
             can [:welcome, :index, :show], OpenJob
