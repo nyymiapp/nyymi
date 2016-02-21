@@ -25,9 +25,11 @@ JSONin generoinnin ehdollisuuteen käytin jbuilder-gemiä. (https://github.com/r
 
 ##Testausuunnitelma 
 
-Yksikkötestejä User, Company ja OpenJob -olioiden validointiin. 
+Yksikkötestejä on User, Company ja OpenJob -olioiden validointiin. 
 
-Kaikki sivut capybara-testataan erityisesti sen varalta, että ulkopuoliset eivät pääse näkemään heille tarkoittamatonta sisältöä. 
+###Capybara -testaus
+
+Kaikkien luokkien kaikki sivut testataan erityisesti yksityisyyden takaamiseksi. 
 
 ###Company
 
@@ -61,12 +63,24 @@ About -sivu
 
 ###User
 
+Rekisteröityminen:
 * Kun käyttäjä ei ole kirjautunut sisään, navigaatiopalkissa näkyy Rekisteröidy -ja Kirjaudu sisään -napit
 * Käyttäjä kirjautuu automaattisesti sisään rekisteröityessä
 * Kun käyttäjä on kirjautunut sisään, navigaatiopalkissa näkyy Kirjaudu ulos -nappi
 
+Show-sivu
 * Käyttäjä ei pääse muiden käyttäjien sivulle kirjautuneena
 * Käyttäjä ei pääse muiden käyttäjien sivulle kirjautumattomana 
+
+Poistaminen
+* Käyttäjä ei voi poistaa muita käyttäjiä kirjautumattomana
+* Käyttäjä ei voi poistaa muita käyttäjiä kirjautuneena
+* Käyttäjä voi poistaa itsensä
+
+Edit -sivu
+* Käyttäjä ei voi muokata muiden käyttäjien tietoja kirjautumattomana
+* Käyttäjä ei voi muokata muiden käyttäjien tietoja kirjautuneena
+* Käyttäjä voi muokata omia tietojaan 
 
 ###Open job
 
