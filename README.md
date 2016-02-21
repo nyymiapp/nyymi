@@ -33,7 +33,7 @@ Kaikkien luokkien kaikki sivut testataan erityisesti yksityisyyden takaamiseksi.
 
 ###Company
 
-New-sivu
+<b>New-sivu</b>
 * Jos käyttäjä ei ole kirjautunut, cancan estää pääsemästä new -sivulle
 
 Index-sivu
