@@ -27,7 +27,7 @@ JSONin generoinnin ehdollisuuteen käytin jbuilder-gemiä. (https://github.com/r
 
 ###Yksikkötestaus
 
-Yksikkötestejä on User, Company ja OpenJob -olioiden validointiin. 
+Yksikkötestejä on User, Company ja OpenJob -olioiden validointiin sekä open_jobs.json -vastauksesta varmistamiseen, ettei vanhentuneita avoimia työpaikkoja ole mukana listauksessa. (HUOM tee tämä) 
 
 ###Capybara -testaus
 
