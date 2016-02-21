@@ -36,48 +36,48 @@ Kaikkien luokkien kaikki sivut testataan erityisesti yksityisyyden takaamiseksi.
 <b>New-sivu</b>
 * Jos käyttäjä ei ole kirjautunut, cancan estää pääsemästä new -sivulle
 
-Index-sivu
+<b>Index-sivu</b>
 * Jos käyttäjä ei ole kirjautunut, Luo uusi yritys -nappia ei ole
 * Kun käyttäjä luo yrityksen kirjautuneena, hänestä tulee ylläpitäjä.
 
-Edit-sivu: 
+<b>Edit-sivu: </b>
 * Käyttäjä ei pääse edit-sivulle, jos hän ei ole ylläpitäjä mutta on kirjautunut
 * Käyttäjä ei pääse edit-sivulle, jos hän ei ole kirjautunut lainkaan
 
-Administration -sivu
+<b>Administration -sivu</b>
 * Käyttäjä ei pääse administration-sivulle, jos hän ei ole ylläpitäjä mutta on kirjautunut
 * Käyttäjä ei pääse administration-sivulle, jos hän ei ole kirjautunut lainkaan
 
-Yrityksen poistaminen
+<b>Yrityksen poistaminen</b>
 * Käyttäjä ei voi poistaa yritystä, jos hän ei ole ylläpitäjä mutta on kirjautunut
 * Käyttäjä ei voi poistaa yritystä, jos hän ei ole kirjautunut lainkaan
 
-Administration -sivulle vievä nappi
+<b>Administration -sivulle vievä nappi</b>
 * Yrityksen sivulla ei näy administration -nappia (vie kyseiselle sivulle), jos käyttäjä on kirjautunut mutta ei ole ylläpitäjä
 * Yrityksen sivulla ei näy administration -nappia, jos käyttäjä ei ole kirjautunut lainkaan
 * Yrityksen sivulla näkyy administration -nappi 
 
-About -sivu
+<b>About -sivu</b>
 * Käyttäjä pääsee about-sivulle (Tietoa yritykselle) kirjautuneena
 * Käyttäjä pääsee about-sivulle (Tietoa yritykselle) kirjautumattomana 
 
 ###User
 
-Rekisteröityminen:
+<b>Rekisteröityminen:</b>
 * Kun käyttäjä ei ole kirjautunut sisään, navigaatiopalkissa näkyy Rekisteröidy -ja Kirjaudu sisään -napit
 * Käyttäjä kirjautuu automaattisesti sisään rekisteröityessä
 * Kun käyttäjä on kirjautunut sisään, navigaatiopalkissa näkyy Kirjaudu ulos -nappi
 
-Show-sivu
+<b>Show-sivu</b>
 * Käyttäjä ei pääse muiden käyttäjien sivulle kirjautuneena
 * Käyttäjä ei pääse muiden käyttäjien sivulle kirjautumattomana 
 
-Poistaminen
+<b>Poistaminen</b>
 * Käyttäjä ei voi poistaa muita käyttäjiä kirjautumattomana
 * Käyttäjä ei voi poistaa muita käyttäjiä kirjautuneena
 * Käyttäjä voi poistaa itsensä
 
-Edit -sivu
+<b>Edit -sivu</b>
 * Käyttäjä ei voi muokata muiden käyttäjien tietoja kirjautumattomana
 * Käyttäjä ei voi muokata muiden käyttäjien tietoja kirjautuneena
 * Käyttäjä voi muokata omia tietojaan 
