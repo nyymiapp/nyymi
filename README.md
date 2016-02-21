@@ -25,6 +25,8 @@ JSONin generoinnin ehdollisuuteen käytin jbuilder-gemiä. (https://github.com/r
 
 ##Testausuunnitelma 
 
+###Yksikkötestaus
+
 Yksikkötestejä on User, Company ja OpenJob -olioiden validointiin. 
 
 ###Capybara -testaus
