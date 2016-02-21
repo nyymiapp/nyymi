@@ -23,7 +23,21 @@ ei vielä tehty
 ## Muut ulkoiset gemit
 JSONin generoinnin ehdollisuuteen käytin jbuilder-gemiä. (https://github.com/rails/jbuilder). 
 
-##Testaus 
+##Testausuunnitelma 
 
-ei vielä tehty
+Yksikkötestejä User, Company ja OpenJob -olioiden validointiin. 
+
+Kaikki sivut capybara-testataan erityisesti sen varalta, että ulkopuoliset eivät pääse näkemään heille tarkoittamatonta sisältöä. 
+
+###Company
+
+* Jos käyttäjä ei ole kirjautunut, hän ei voi luoda uutta yritystä
+* Kun käyttäjä luo yrityksen, hänestä tulee ylläpitäjä.
+* 
+
+###User
+
+###Open job
+
+###Application
 
