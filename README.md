@@ -31,11 +31,42 @@ Kaikki sivut capybara-testataan erityisesti sen varalta, että ulkopuoliset eiv�
 
 ###Company
 
-* Jos käyttäjä ei ole kirjautunut, hän ei voi luoda uutta yritystä
-* Kun käyttäjä luo yrityksen, hänestä tulee ylläpitäjä.
-* 
+New-sivu
+* Jos käyttäjä ei ole kirjautunut, cancan estää pääsemästä new -sivulle
+
+Index-sivu
+* Jos käyttäjä ei ole kirjautunut, Luo uusi yritys -nappia ei ole
+* Kun käyttäjä luo yrityksen kirjautuneena, hänestä tulee ylläpitäjä.
+
+Edit-sivu: 
+* Käyttäjä ei pääse edit-sivulle, jos hän ei ole ylläpitäjä mutta on kirjautunut
+* Käyttäjä ei pääse edit-sivulle, jos hän ei ole kirjautunut lainkaan
+
+Administration -sivu
+* Käyttäjä ei pääse administration-sivulle, jos hän ei ole ylläpitäjä mutta on kirjautunut
+* Käyttäjä ei pääse administration-sivulle, jos hän ei ole kirjautunut lainkaan
+
+Yrityksen poistaminen
+* Käyttäjä ei voi poistaa yritystä, jos hän ei ole ylläpitäjä mutta on kirjautunut
+* Käyttäjä ei voi poistaa yritystä, jos hän ei ole kirjautunut lainkaan
+
+Administration -sivulle vievä nappi
+* Yrityksen sivulla ei näy administration -nappia (vie kyseiselle sivulle), jos käyttäjä on kirjautunut mutta ei ole ylläpitäjä
+* Yrityksen sivulla ei näy administration -nappia, jos käyttäjä ei ole kirjautunut lainkaan
+* Yrityksen sivulla näkyy administration -nappi 
+
+About -sivu
+* Käyttäjä pääsee about-sivulle (Tietoa yritykselle) kirjautuneena
+* Käyttäjä pääsee about-sivulle (Tietoa yritykselle) kirjautumattomana 
 
 ###User
+
+* Kun käyttäjä ei ole kirjautunut sisään, navigaatiopalkissa näkyy Rekisteröidy -ja Kirjaudu sisään -napit
+* Käyttäjä kirjautuu automaattisesti sisään rekisteröityessä
+* Kun käyttäjä on kirjautunut sisään, navigaatiopalkissa näkyy Kirjaudu ulos -nappi
+
+* Käyttäjä ei pääse muiden käyttäjien sivulle kirjautuneena
+* Käyttäjä ei pääse muiden käyttäjien sivulle kirjautumattomana 
 
 ###Open job
 
