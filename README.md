@@ -88,5 +88,7 @@ Kaikkien luokkien kaikki sivut testataan erityisesti yksityisyyden takaamiseksi.
 
 ###Open job
 
+* Yrityksen ylläpitäjä voi luoda uuden avoimen työpaikan administration -sivulta 
+
 ###Application
 
