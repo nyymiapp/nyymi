@@ -36,11 +36,11 @@ Kaikkien luokkien kaikki sivut testataan erityisesti yksityisyyden takaamiseksi.
 ###Company
 
 <b>New-sivu</b>
-* Jos käyttäjä ei ole kirjautunut, cancan estää pääsemästä new -sivulle
+* Jos käyttäjä ei ole kirjautunut, cancan estää pääsemästä new -sivulle t
 
 <b>Index-sivu</b>
-* Jos käyttäjä ei ole kirjautunut, Luo uusi yritys -nappia ei ole
-* Kun käyttäjä luo yrityksen kirjautuneena, hänestä tulee ylläpitäjä.
+* Jos käyttäjä ei ole kirjautunut, Luo uusi yritys -nappia ei ole t
+* Kun käyttäjä luo yrityksen kirjautuneena, hänestä tulee ylläpitäjä. t
 
 <b>Edit-sivu: </b>
 * Käyttäjä ei pääse edit-sivulle, jos hän ei ole ylläpitäjä mutta on kirjautunut
@@ -62,8 +62,8 @@ Kaikkien luokkien kaikki sivut testataan erityisesti yksityisyyden takaamiseksi.
 * Yrityksen sivulla näkyy administration -nappi 
 
 <b>About -sivu</b>
-* Käyttäjä pääsee about-sivulle (Tietoa yritykselle) kirjautuneena
-* Käyttäjä pääsee about-sivulle (Tietoa yritykselle) kirjautumattomana 
+* Käyttäjä pääsee about-sivulle (Tietoa yritykselle) kirjautuneena t
+* Käyttäjä pääsee about-sivulle (Tietoa yritykselle) kirjautumattomana  t
 
 ###User
 
