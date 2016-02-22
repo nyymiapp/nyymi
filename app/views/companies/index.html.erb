@@ -38,4 +38,6 @@
 
 </div>
 
-<%= link_to 'Luo uusi yritys', new_company_path %>
+<% if current_user %>
+  <%= link_to 'Luo uusi yritys', new_company_path %>
+<% end %>

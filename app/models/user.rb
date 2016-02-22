@@ -10,6 +10,6 @@ class User < ActiveRecord::Base
 
     validates :password, length:{ minimum: 4 }, format: {with: PASSWORD_FORMAT}
 
-    validates :username, length: { minimum: 1 }
+    validates :username, uniqueness: true, length: { minimum: 1 }
 
 end

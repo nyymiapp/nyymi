@@ -12,16 +12,6 @@ class CompaniesController < ApplicationController
     @companies = Company.all
   end
 
-  def is_current_user_admin(company)
-    #company.users.each do |u|
-     # if current_user.id == u.id
-      #  return true
-      #end
-    #end
-    #return false
-    return company.users.includes(current_user)
-  end
-
   # GET /companies/1
   # GET /companies/1.json
   def show
@@ -37,15 +27,11 @@ class CompaniesController < ApplicationController
 
   # GET /companies/1/edit
   def edit
-     ensure_that_current_user_is_admin
+
   end
 
   def administration
     @company = Company.find(params[:id])
-    if not is_current_user_admin(@company)
-      #redirect_to root_path, notice: "You're not admin of this company!"
-      #return
-    end
     @open_job = OpenJob.new
     @open_job.company = @company
     @open_job.expires = DateTime.now + 2.months
@@ -56,7 +42,7 @@ class CompaniesController < ApplicationController
   def create
     @company = Company.new(company_params)
     if current_user
-      @company.users << current_user
+      current_user.companies << @company
     end
     @company.save
     flash[:safe] = %Q[Company created! Now #{view_context.link_to("create new open jobs", administration_company_path(@company))}]

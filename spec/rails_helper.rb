@@ -1,5 +1,10 @@
+require 'simplecov'
+SimpleCov.start('rails')
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV['RAILS_ENV'] ||= 'test'
+
+require 'capybara/rspec'
 require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
@@ -54,4 +59,11 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  def sign_in(credentials)
+    visit new_session_path
+    fill_in('username', with:credentials[:username])
+    fill_in('password', with:credentials[:password])
+    click_button('Kirjaudu sisään')
+  end
 end

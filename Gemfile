@@ -32,6 +32,8 @@ gem "cancan"
 
 gem 'jbuilder', '~> 2.0'
 
+gem 'simplecov', :require => false, :group => :test
+
 group :development do
   gem 'rails_layout'
 end

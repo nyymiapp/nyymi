@@ -9,8 +9,8 @@
   <%= @company.description %>
 </h3>
 
-<% if can? :edit, @company %>
-
+<% if current_user and current_user.companies.include? @company %>
+	
 	<%= link_to "Admin page", administration_company_path(@company), class:"btn btn-primary", style:"color:white;" %>
 
 <% end %>
