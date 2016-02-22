@@ -86,3 +86,11 @@ Kaikkien luokkien kaikki sivut testataan erityisesti yksityisyyden takaamiseksi.
 
 ###Application
 
+
+
+#TODO: 
+
+- job/school experiencen lisäys AJAXilla 
+- kielilokalisointi
+- https://github.com/plataformatec/devise
+
