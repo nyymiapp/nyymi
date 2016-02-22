@@ -80,7 +80,6 @@ Kaikkien luokkien kaikki sivut testataan erityisesti yksityisyyden takaamiseksi.
 <b>Poistaminen</b>
 * Käyttäjä ei voi poistaa muita käyttäjiä kirjautumattomana
 * Käyttäjä ei voi poistaa muita käyttäjiä kirjautuneena
-* Käyttäjä voi poistaa itsensä
 
 <b>Edit -sivu</b>
 * Käyttäjä ei voi muokata muiden käyttäjien tietoja kirjautumattomana
