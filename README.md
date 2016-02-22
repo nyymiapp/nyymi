@@ -53,9 +53,7 @@ Kaikkien luokkien kaikki sivut testataan erityisesti yksityisyyden takaamiseksi.
 * Käyttäjä pääsee administration -sivulle, jos hän on ylläpitäjä t
 
 <b>Yrityksen poistaminen</b>
-* Käyttäjä ei voi poistaa yritystä, jos hän ei ole ylläpitäjä mutta on kirjautunut
-* Käyttäjä ei voi poistaa yritystä, jos hän ei ole kirjautunut lainkaan
-* Käyttäjä voi poistaa yrityksen kirjautuneena
+* Käyttäjä voi poistaa yrityksen kirjautuneena ylläpitäjänä
 
 <b>Administration -sivulle vievä nappi</b>
 * Yrityksen sivulla ei näy administration -nappia (vie kyseiselle sivulle), jos käyttäjä on kirjautunut mutta ei ole ylläpitäjä t
