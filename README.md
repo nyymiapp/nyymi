@@ -68,9 +68,9 @@ Kaikkien luokkien kaikki sivut testataan erityisesti yksityisyyden takaamiseksi.
 ###User
 
 <b>Rekisteröityminen:</b>
-* Kun käyttäjä ei ole kirjautunut sisään, navigaatiopalkissa näkyy Rekisteröidy -ja Kirjaudu sisään -napit
+* Kun käyttäjä ei ole kirjautunut sisään, navigaatiopalkissa näkyy Rekisteröidy -ja Kirjaudu sisään -napit t
 * Käyttäjä kirjautuu automaattisesti sisään rekisteröityessä
-* Kun käyttäjä on kirjautunut sisään, navigaatiopalkissa näkyy Kirjaudu ulos -nappi
+* Kun käyttäjä on kirjautunut sisään, navigaatiopalkissa näkyy Kirjaudu ulos -nappi t
 
 <b>Show-sivu</b>
 * Käyttäjä ei pääse muiden käyttäjien sivulle kirjautuneena
