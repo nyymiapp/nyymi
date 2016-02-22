@@ -74,9 +74,6 @@ Kaikkien luokkien kaikki sivut testataan erityisesti yksityisyyden takaamiseksi.
 * Käyttäjä ei pääse muiden käyttäjien sivulle kirjautuneena
 * Käyttäjä ei pääse muiden käyttäjien sivulle kirjautumattomana 
 
-<b>Poistaminen</b>
-* Käyttäjä ei voi poistaa muita käyttäjiä kirjautumattomana
-* Käyttäjä ei voi poistaa muita käyttäjiä kirjautuneena
 
 <b>Edit -sivu</b>
 * Käyttäjä ei voi muokata muiden käyttäjien tietoja kirjautumattomana
