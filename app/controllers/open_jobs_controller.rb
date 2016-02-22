@@ -39,7 +39,7 @@ class OpenJobsController < ApplicationController
       redirect_to :root, notice: "You must be admin of company to create new open job!"
     end
     if not @open_job.save
-       redirect_to :back, notice: "Viimeistä hakupäivää ei asetettu tai se on menneisyydessä!"
+       redirect_to :back, notice: "Nimeä tai viimeistä hakupäivää ei asetettu tai se on menneisyydessä!"
        return
     end
     respond_to do |format|
