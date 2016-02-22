@@ -43,23 +43,20 @@ Kaikkien luokkien kaikki sivut testataan erityisesti yksityisyyden takaamiseksi.
 * Kun käyttäjä luo yrityksen kirjautuneena, hänestä tulee ylläpitäjä. t
 
 <b>Edit-sivu: </b>
-* Käyttäjä ei pääse edit-sivulle, jos hän ei ole ylläpitäjä mutta on kirjautunut
-* Käyttäjä ei pääse edit-sivulle, jos hän ei ole kirjautunut lainkaan
-* Käyttäjä pääsee edit -sivulle ja muokatut tiedot tulevat näkyviin yrityksen sivulla muokkaukden jälkeen
+* Käyttäjä ei pääse edit-sivulle, jos hän ei ole ylläpitäjä mutta on kirjautunut t
+* Käyttäjä ei pääse edit-sivulle, jos hän ei ole kirjautunut lainkaan t
+* Käyttäjä pääsee edit -sivulle ja muokatut tiedot tulevat näkyviin yrityksen sivulla muokkauksen jälkeen jos ylläpitäjä t
 
 <b>Administration -sivu</b>
-* Käyttäjä ei pääse administration-sivulle, jos hän ei ole ylläpitäjä mutta on kirjautunut
-* Käyttäjä ei pääse administration-sivulle, jos hän ei ole kirjautunut lainkaan
-* Käyttäjä pääsee administration -sivulle, jos hän on ylläpitäjä
+* Käyttäjä ei pääse administration-sivulle, jos hän ei ole ylläpitäjä mutta on kirjautunut t
+* Käyttäjä ei pääse administration-sivulle, jos hän ei ole kirjautunut lainkaan t
+* Käyttäjä pääsee administration -sivulle, jos hän on ylläpitäjä t
 
 <b>Yrityksen poistaminen</b>
-* Käyttäjä ei voi poistaa yritystä, jos hän ei ole ylläpitäjä mutta on kirjautunut
-* Käyttäjä ei voi poistaa yritystä, jos hän ei ole kirjautunut lainkaan
-* Käyttäjä voi poistaa yrityksen kirjautuneena
+* Käyttäjä voi poistaa yrityksen kirjautuneena ylläpitäjänä
 
 <b>Administration -sivulle vievä nappi</b>
-* Yrityksen sivulla ei näy administration -nappia (vie kyseiselle sivulle), jos käyttäjä on kirjautunut mutta ei ole ylläpitäjä
-* Yrityksen sivulla ei näy administration -nappia, jos käyttäjä ei ole kirjautunut lainkaan
+* Yrityksen sivulla ei näy administration -nappia (vie kyseiselle sivulle), jos käyttäjä on kirjautunut mutta ei ole ylläpitäjä t
 * Yrityksen sivulla näkyy administration -nappi jos käyttäjä on ylläpitäjä t
 
 <b>About -sivu</b>
@@ -77,9 +74,6 @@ Kaikkien luokkien kaikki sivut testataan erityisesti yksityisyyden takaamiseksi.
 * Käyttäjä ei pääse muiden käyttäjien sivulle kirjautuneena
 * Käyttäjä ei pääse muiden käyttäjien sivulle kirjautumattomana 
 
-<b>Poistaminen</b>
-* Käyttäjä ei voi poistaa muita käyttäjiä kirjautumattomana
-* Käyttäjä ei voi poistaa muita käyttäjiä kirjautuneena
 
 <b>Edit -sivu</b>
 * Käyttäjä ei voi muokata muiden käyttäjien tietoja kirjautumattomana
