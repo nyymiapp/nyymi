@@ -59,7 +59,7 @@ Kaikkien luokkien kaikki sivut testataan erityisesti yksityisyyden takaamiseksi.
 <b>Administration -sivulle vievä nappi</b>
 * Yrityksen sivulla ei näy administration -nappia (vie kyseiselle sivulle), jos käyttäjä on kirjautunut mutta ei ole ylläpitäjä
 * Yrityksen sivulla ei näy administration -nappia, jos käyttäjä ei ole kirjautunut lainkaan
-* Yrityksen sivulla näkyy administration -nappi 
+* Yrityksen sivulla näkyy administration -nappi jos käyttäjä on ylläpitäjä t
 
 <b>About -sivu</b>
 * Käyttäjä pääsee about-sivulle (Tietoa yritykselle) kirjautuneena t
