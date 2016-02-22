@@ -45,10 +45,12 @@ Kaikkien luokkien kaikki sivut testataan erityisesti yksityisyyden takaamiseksi.
 <b>Edit-sivu: </b>
 * Käyttäjä ei pääse edit-sivulle, jos hän ei ole ylläpitäjä mutta on kirjautunut
 * Käyttäjä ei pääse edit-sivulle, jos hän ei ole kirjautunut lainkaan
+* Käyttäjä pääsee edit -sivulle ja muokatut tiedot tulevat näkyviin yrityksen sivulla muokkaukden jälkeen
 
 <b>Administration -sivu</b>
 * Käyttäjä ei pääse administration-sivulle, jos hän ei ole ylläpitäjä mutta on kirjautunut
 * Käyttäjä ei pääse administration-sivulle, jos hän ei ole kirjautunut lainkaan
+* Käyttäjä pääsee administration -sivulle, jos hän on ylläpitäjä
 
 <b>Yrityksen poistaminen</b>
 * Käyttäjä ei voi poistaa yritystä, jos hän ei ole ylläpitäjä mutta on kirjautunut
