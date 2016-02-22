@@ -43,9 +43,9 @@ Kaikkien luokkien kaikki sivut testataan erityisesti yksityisyyden takaamiseksi.
 * Kun käyttäjä luo yrityksen kirjautuneena, hänestä tulee ylläpitäjä. t
 
 <b>Edit-sivu: </b>
-* Käyttäjä ei pääse edit-sivulle, jos hän ei ole ylläpitäjä mutta on kirjautunut
-* Käyttäjä ei pääse edit-sivulle, jos hän ei ole kirjautunut lainkaan
-* Käyttäjä pääsee edit -sivulle ja muokatut tiedot tulevat näkyviin yrityksen sivulla muokkaukden jälkeen
+* Käyttäjä ei pääse edit-sivulle, jos hän ei ole ylläpitäjä mutta on kirjautunut t
+* Käyttäjä ei pääse edit-sivulle, jos hän ei ole kirjautunut lainkaan t
+* Käyttäjä pääsee edit -sivulle ja muokatut tiedot tulevat näkyviin yrityksen sivulla muokkauksen jälkeen jos ylläpitäjä t
 
 <b>Administration -sivu</b>
 * Käyttäjä ei pääse administration-sivulle, jos hän ei ole ylläpitäjä mutta on kirjautunut
