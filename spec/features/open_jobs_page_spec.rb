@@ -1,16 +1,15 @@
 require 'rails_helper'
+require 'spec_helper'
 
 describe "Open jobs page" do
 	describe "When user is administrator" do 
 		let!(:user) { FactoryGirl.create :user }
+		Capybara.javascript_driver = :poltergeist
 
 		it "can create an open job and edit description" do 
 			sign_in_and_create_company
-			click_link "Admin page"
-			fill_in('open_job[name]', with:'developer')
-  			fill_in('open_job[description]', with:'rails-kehittäjä')
-  			click_button "Create Open job"
-			expect(page).to have_content "Open job was successfully created."
+			create_open_job
+
 			click_link "developer"
 			expect(page).to have_content "developer ylläpito"
 			click_link "Edit"
@@ -20,7 +19,6 @@ describe "Open jobs page" do
 		end
 
 		it "can destroy open job" do 
-			page.driver.accept_js_confirms!
 			sign_in_and_create_company
 			click_link "Admin page"
 			fill_in('open_job[name]', with:'developer')
@@ -48,6 +46,16 @@ describe "Open jobs page" do
   			click_button "Create Open job"
 			expect(page).to have_content "Nimeä tai viimeistä hakupäivää ei asetettu tai se on menneisyydessä!"
 		end
+
+		it "can see applications of open job" do 
+			sign_in_and_create_company
+			create_open_job
+			application = Application.create user_id: User.first.id, open_job_id: OpenJob.first.id, freetext: "olen pekka"
+			visit administration_open_job_path(OpenJob.first)
+			click_link OpenJob.first.id
+			expect(page).to have_content "Pekka"
+			expect(page).to have_content "olen pekka"
+		end
 	end
 
 	describe "When not logged in" do 
@@ -61,16 +69,7 @@ describe "Open jobs page" do
 
 	describe "When logged in" do 
 		let!(:user) { FactoryGirl.create :user }
-		it "should be able to make an application" do 
-			company = Company.create name:"Yritys"
-			open_job = OpenJob.create name:"developer", company: company
-			sign_in(username:"Pekka", password:"Foobar1")
-			visit open_job_path(OpenJob.first)
-			#find("#send_application_button").click
-			#sleep(3.seconds)
-			#click_button "Create Application"
-			#save_and_open_page
-		end
+		
 	end
 end
 
@@ -83,4 +82,12 @@ def sign_in_and_create_company
   	fill_in('company[description]', with:'kuvaus')
 
     click_button "Create Company"
+end
+
+def create_open_job
+		click_link "Admin page"
+		fill_in('open_job[name]', with:'developer')
+  		fill_in('open_job[description]', with:'rails-kehittäjä')
+  		click_button "Create Open job"
+		expect(page).to have_content "Open job was successfully created."
 end

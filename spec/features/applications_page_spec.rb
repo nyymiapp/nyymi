@@ -8,7 +8,11 @@ describe "Applications page" do
 		it "user can make an application" do
 			sign_in_create_company_create_open_job
 			sign_in(username:"Pekka2", password:"Foobar1")
-			visit open_jobs_path
+			visit new_application_path
+			fill_in('application[open_job_id]', with:'1')
+			fill_in('application[user_id]', with:'1')
+			click_button "Create Application"
+			expect(page).to have_content "Application was successfully created."
 		end
 	end
 end
