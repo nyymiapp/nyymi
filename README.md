@@ -90,8 +90,9 @@ Kaikkien luokkien kaikki sivut testataan erityisesti yksityisyyden takaamiseksi.
 
 #TODO: 
 
-- job/school experiencen lisäys AJAXilla 
-- kielilokalisointi
-- https://github.com/plataformatec/devise
-- haastattelukutsu jollakin message gemillä 
+1. job/school experiencen lisäys ajaxilla 
+2. haastattelukutsu jollakin message gemillä 
+3. react näkymiä 
+4. kielilokalisointi
+5. https://github.com/plataformatec/devise autentikointi 
 
