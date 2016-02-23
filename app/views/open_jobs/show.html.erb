@@ -20,6 +20,23 @@
  			</br>
  			<b>Vapaa kenttä</b> </br> 
  			<%= f.text_area :freetext,  class:"form-control", size:"5x5" %></br>
+
+ 			<% @application.experiences.each do |e| %>
+ 				<%= e.description %>
+ 			<% end %>
+
+ 			<div class="btn btn-primary" id="add_experience_button"> Lisää uusi työ/opiskelukokemus</div> </br> </br>
+
+ 			<div id="add_experience_form" style="display:none;">
+ 				<%= f.fields_for :experience, :remote=>true do |ff| %>
+  					<div>
+  					  <%= ff.label :description %>
+ 					  <%= ff.text_field :description %>
+ 					  <%= ff.submit %>
+  					</div>
+				<% end %>
+ 			</div>
+
 		<%= f.submit %>
 		<% end %>
 	</div>
@@ -36,6 +53,12 @@
 $( document ).ready(function() {
     $( "#send_application_button" ).click(function() {
   		$( "#application_form" ).slideToggle( "slow", function() {
+    	// Animation complete.
+  		});
+	});
+
+	 $( "#add_experience_button" ).click(function() {
+  		$( "#add_experience_form" ).slideToggle( "slow", function() {
     	// Animation complete.
   		});
 	});
