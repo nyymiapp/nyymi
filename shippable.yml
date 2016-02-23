@@ -1,0 +1,13 @@
+# language setting
+language: ruby
+
+# version numbers
+rvm:
+  - 2.0.0
+
+script:
+        - rspec -fd spec
+
+env:
+  global:
+    - APP_NAME=nyymi
