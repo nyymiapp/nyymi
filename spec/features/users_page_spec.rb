@@ -8,6 +8,15 @@ describe "Users page" do
 			expect(page).to have_content "Kirjaudu sisään"
 		end
 
+		it "should not log in when credentials are wrong" do 
+			visit root_path
+			click_link "Kirjaudu sisään"
+			fill_in('username', with:'käyttäjänimi')
+			fill_in('password', with:'salasana')
+			click_button "Kirjaudu sisään"
+			expect(page).to have_content "Käyttäjänimi ja/tai salasana väärin"
+		end
+
 		it "should log in automaticly when registered" do 
 			visit root_path
 			click_link "Rekisteröidy"
@@ -18,10 +27,8 @@ describe "Users page" do
   			fill_in('user[phonenumber]', with:'111')
   			fill_in('user[password]', with:'Foobar1!')
   			fill_in('user[password_confirmation]', with:'Foobar1!')
-
-  			expect{
       		click_button "Create User"
-    			}.to change{User.count}.from(0).to(1)
+    		expect(User.count).to eq(1)
 			expect(page).to have_content "Welcome! Now you can"
 		end
 
@@ -35,12 +42,16 @@ describe "Users page" do
 			expect(page).to have_content "Kirjaudu ulos"
 		end
 
-		#it "can edit realname" do 
-		#	visit root_path
-		#	sign_in(username:"Pekka", password:"Foobar1")
-		#	click_link "Muokkaa tietoja"
-		#	fill_in('user[realname]', with:'feikki')
-		#end
+		it "can edit realname" do 
+			visit root_path
+			sign_in(username:"Pekka", password:"Foobar1")
+			click_link "Muokkaa tietoja"
+			fill_in('user[realname]', with:'feikki')
+			fill_in('user[password]', with:'Foobar1')
+			fill_in('user[password_confirmation]', with:'Foobar1')
+			click_button "Update User"
+			expect(page).to have_content "feikki"
+		end
 	end
 
 

@@ -5,6 +5,7 @@
 </h1>
 
 <% if @user == current_user %>
+	<%= @user.realname %> </br>
 	<%= link_to 'Muokkaa tietoja', edit_user_path(@user), class:"btn btn-primary", style:"color:white;" %>  </br></br>
 <% end %>
 

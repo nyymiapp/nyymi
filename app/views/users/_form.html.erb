@@ -12,6 +12,12 @@
   <% end %>
 
   <div class="field">
+    <b>Käyttäjänimi</b> </br>
+    Tulee näkyviin työhakemuksissa.
+    <%= f.text_field :username, class:"form-control" %>
+  </div>
+
+  <div class="field">
     <b>Oikea nimi</b> </br>
     Oikea nimesi ei tule näkyviin työhakemuksissa.
     <%= f.text_field :realname, class:"form-control" %>
