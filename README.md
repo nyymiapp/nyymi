@@ -93,4 +93,5 @@ Kaikkien luokkien kaikki sivut testataan erityisesti yksityisyyden takaamiseksi.
 - job/school experiencen lisäys AJAXilla 
 - kielilokalisointi
 - https://github.com/plataformatec/devise
+- haastattelukutsu jollakin message gemillä 
 
