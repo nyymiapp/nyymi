@@ -93,4 +93,5 @@ Kaikkien luokkien kaikki sivut testataan erityisesti yksityisyyden takaamiseksi.
 3. react näkymiä 
 4. kielilokalisointi
 5. https://github.com/plataformatec/devise autentikointi 
+6. kartta lokaatiosta yritykselle
 
