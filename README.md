@@ -3,7 +3,7 @@
 Nyymi on rekrytointipalvelu, joka piilottaa kaikki hakijoiden iän, sukupuolen ja etnisen taustan kertovat tiedot.
 ##Tekninen toteutus
 
-Sovelluksessa on sekä one-to-many että many-to-many-yhteyksiä (yritys - adminkäyttäjä). 
+Sovelluksessa on sekä one-to-many että many-to-many-yhteyksiä. CI:nä [shippable](https://app.shippable.com/).  
 
 ##Ulkoasu
 
@@ -88,7 +88,7 @@ Kaikkien luokkien kaikki sivut testataan erityisesti yksityisyyden takaamiseksi.
 #TODO: 
 
 1. job/school experiencen lisäys ajaxilla 
-2. haastattelukutsu jollakin message gemillä 
+2. haastattelukutsu jollakin message gemillä  https://github.com/mailboxer/mailboxer 
 3. react näkymiä 
 4. kielilokalisointi
 5. https://github.com/plataformatec/devise autentikointi 
