@@ -27,33 +27,44 @@ class ApplicationsController < ApplicationController
   # POST /applications
   # POST /applications.json
   def create
-    @application = Application.new(application_params)
+    @application = Application.new(params[:application])
+
+    @application.user_id = current_user.id
+    @application.open_job = OpenJob.find(params[:open_job_id])
+    @application.freetext = params[:freetext]
+    @application.abandoned = false
+
+    @application.save
+
+    session[:current_application_id] = @application.id
+
+    @application.open_job.applications << @application
+    @application.open_job.save!
 
     respond_to do |format|
       if @application.save
         format.html { redirect_to :back, notice: 'Application was successfully created.' }
-        format.json { render :show, status: :created, location: @application }
+        format.json { render :text => "/open_jobs"  }
       else
         format.html { render :new }
-        format.json { render json: @application.errors, status: :unprocessable_entity }
+        format.json { render :text => "/open_jobs" }
       end
     end
   end
 
-   # poistettu coveragen lisäämiseksi :-)))
-  # PATCH/PUT /applications/1
-  # PATCH/PUT /applications/1.json
-  #def update 
-   # respond_to do |format|
-    #  if @application.update(application_params)
-    #    format.html { redirect_to @application, notice: 'Application was successfully updated.' }
-     #   format.json { render :show, status: :ok, location: @application }
-     # else
-      #  format.html { render :edit }
-      #  format.json { render json: @application.errors, status: :unprocessable_entity }
-     # end
-   # end
- # end
+   def toggle_abandoned
+    application = Application.find(params[:id])
+    if application.abandoned == nil || application.abandoned == false
+      application.abandoned = true
+    else 
+      application.abandoned = false
+    end
+    application.save!
+    new_status = application.abandoned ? "hylätty" : "ei-hylätty"
+
+    redirect_to :back, notice:"Hakemuksen status: #{new_status}"
+  end
+
 
   # DELETE /applications/1
   # DELETE /applications/1.json
@@ -69,6 +80,6 @@ class ApplicationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def application_params
-      params.require(:application).permit(:open_job_id, :user_id, :freetext)
+      params.require(:application).permit(:open_job_id, :user_id, :freetext, :abandoned)
     end
 end

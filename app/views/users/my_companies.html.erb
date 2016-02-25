@@ -6,34 +6,13 @@
 		<% end %>
 </table>
 
-<h3> Työpaikat </h3>
-
-
-<div ng-app="myApp" ng-controller="OpenJobsAdministrationController">
-
-  <input ng-model="searchText">
-
-  <table class="table table-hover">
-    <thead>
-    <th> <a ng-click="sort_by('name')">name</a> </th>
-    <th> <a ng-click="sort_by('company.name')">company</a> </th>
-    <th> <a ng-click="sort_by('company.location')">location</a> </th>
-    </thead>
-    <tr ng-repeat="open_job in open_jobs| orderBy:order | filter:searchText">
-      <td><%= link_to '{{open_job.name}}', 'open_jobs/{{open_job.id}}' %></td>
-      <td><%= link_to '{{open_job.company.name}}', 'companies/{{open_job.company.id}}' %></td>
-      <td>{{open_job.company.location}}</td>
-    </tr>
-  </table>
-
-</div>
-
 <script>
+
 
   var myApp = angular.module('myApp', []);
 
-  myApp.controller("OpenJobsAdministrationController", function ($scope, $http) {
-    $http.get('open_jobs.json').success( function(data, status, headers, config) {
+  myApp.controller("OpenJobsController", function ($scope, $http) {
+    $http.get('/current_user_open_jobs.json').success( function(data, status, headers, config) {
       $scope.open_jobs = data;
     });
 
@@ -46,5 +25,23 @@
 
     $scope.searchText = '';
   });
-
 </script>
+
+<h2>Avoimien työpaikkojen ylläpitosivut</h2>
+
+<div ng-app="myApp" ng-controller="OpenJobsController">
+
+  <input ng-model="searchText">
+
+  <table class="table table-hover">
+    <thead>
+    <th> <a ng-click="sort_by('name')">name</a> </th>
+    <th> <a ng-click="sort_by('company.name')">company</a> </th>
+    </thead>
+    <tr ng-repeat="open_job in open_jobs| orderBy:order | filter:searchText">
+      <td><%= link_to '{{open_job.name}} ylläpitoon', '/open_jobs/{{open_job.id}}/administration' %></td>
+      <td><%= link_to '{{open_job.companyname}} ylläpitoon', '/companies/{{open_job.company_id}}/administration' %></td>
+    </tr>
+  </table>
+
+</div>

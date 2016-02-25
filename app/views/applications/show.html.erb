@@ -1,8 +1,20 @@
 <p id="notice"></p>
 
 <p>
-  <h2> Application for <%= @application.open_job.name %> of <%= link_to @application.open_job.company.name, @application.open_job.company %> </h2>
+  <h2> Hakemus työhön <%= @application.open_job.name %> <%= link_to @application.open_job.company.name, @application.open_job.company %>
+  	<% if @application.abandoned  %>
+      <span class="label label-info">hylätty</span>
+  	<% end %>
+  </h2>
 </p>
+
+<% if !@application.abandoned %>
+	<%= link_to "hylkää hakemus", toggle_abandoned_application_path(@application.id), method: :post, class: "btn btn-danger btn-lg", style:"color:white;" %>
+<% else %>
+	<%= link_to "poista hylätyistä", toggle_abandoned_application_path(@application.id), method: :post, class: "btn btn-danger btn-lg", style:"color:white;" %>
+<% end %>
+
+</br></br>
 
 <p>
   <strong>Username:</strong>
@@ -14,9 +26,27 @@
   <%= @application.freetext %>
 </p>
 
-<% @application.experiences.each do |e| %>
-	<%= e.description %>
-<% end %>
+<h2>Kokemukset</h2>
 
-<%= link_to 'Edit', edit_application_path(@application) %> |
-<%= link_to 'Back', applications_path %>
+<table class="table">
+   <thead>
+      <tr>
+        <th>Kuvaus/opiskeluohjelma</th>
+        <th>Paikka</th>
+        <th>Alku</th>
+        <th>Loppu</th>
+      </tr>
+    </thead>
+    <tbody>
+<% @application.experiences.each do |e| %>
+	<tr>
+	<td><%= e.description %> </td>
+	<td><%= e.place %></td>
+	<td><%= e.start %></td>
+	<td><%= e.end %></td>
+	</tr>
+<% end %>
+</tbody>
+</table>
+
+<%= link_to 'Takaisin', administration_open_job_path(@application.open_job) %>

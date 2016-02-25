@@ -10,57 +10,60 @@
   <%= @open_job.expires %>
 </p>
 
+
+
+
+
+    <!--<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script> -->
+  <%= javascript_include_tag 'app', 'data-turbolinks-track' => true %>
+
 <% if current_user %>
-	<div class="btn btn-primary" id="send_application_button"> New application </div>
+  <div ng-app="äpsylä" ng-controller="MainCtrl">
 
-	<div id="application_form" style="display:none;">
-		<%= form_for(@application) do |f| %>
-    		<%= f.hidden_field :open_job_id %>
- 			<%= f.hidden_field :user_id %>
- 			</br>
- 			<b>Vapaa kenttä</b> </br> 
- 			<%= f.text_area :freetext,  class:"form-control", size:"5x5" %></br>
+    <div id="create_application_button" class="btn btn-primary">
+      Tee hakemus!
+    </div>
 
- 			<% @application.experiences.each do |e| %>
- 				<%= e.description %>
- 			<% end %>
 
- 			<div class="btn btn-primary" id="add_experience_button"> Lisää uusi työ/opiskelukokemus</div> </br> </br>
+    <div id="send_application_form" style="display:none;border: 1px solid #2ecc71; padding:10px; border-radius:1px;" ></br>
+    	Vapaa kenttä </br></br>
+		<textarea type='text' ng-model='application.freetext' name='application[freetext]' rows="5" cols="80"></textarea> </br></br>
 
- 			<div id="add_experience_form" style="display:none;">
- 				<%= f.fields_for :experience, :remote=>true do |ff| %>
-  					<div>
-  					  <%= ff.label :description %>
- 					  <%= ff.text_field :description %>
- 					  <%= ff.submit %>
-  					</div>
-				<% end %>
- 			</div>
 
-		<%= f.submit %>
-		<% end %>
+		<div id="experiences"> </div></br></br>
+
+		<div id="create_experience_button" class="btn btn-primary">Lisää työ/opiskelukokemus</div></br></br>
+
+		<div style="display:none;border: 1px solid #2ecc71; padding:10px; border-radius:1px;" id="create_experience_form">
+
+			<h4>Uusi kokemus </h4>
+			Paikka </br><input type='text' ng-model='experience.place' name='experience[place]'> </br></br>
+			Kuvaus 	(opiskeluohjelma/työnkuvaus) </br><textarea type='text' ng-model='experience.description' name='experience[description]' rows="5" cols="50"></textarea> </br></br>
+			Alku <input type="date" name="experience[start]" ng-model="experience.start"
+       placeholder="yyyy-MM-dd" /> </br> </br>
+
+       		Loppu <input type="date" name="experience[end]" ng-model="experience.end"
+       placeholder="yyyy-MM-dd" /> </br> </br>
+
+			<button ng-click='addExperience()'>Tallenna kokemus</button>
+		</div></br>
+		<button ng-click='sendApplication()' class="btn btn-default btn-lg" style="background-color:#2ecc71;color:white;">Lähetä hakemus!</button>
 	</div>
 
+  </div>
 <% else %>
-	Kirjaudu sisään jotta voit hakea!
+Kirjaudu sisään jotta voit hakea!
 <% end %>
-
-</br>
-</br>
-<%= link_to 'Back', open_jobs_path, 'data-no-turbolink' => true  %>
-
 <script>
-$( document ).ready(function() {
-    $( "#send_application_button" ).click(function() {
-  		$( "#application_form" ).slideToggle( "slow", function() {
-    	// Animation complete.
-  		});
-	});
+$( "#create_application_button" ).click(function() {
+  $( "#send_application_form" ).slideToggle( "slow", function() {
+    // Animation complete.
+  });
+});
 
-	 $( "#add_experience_button" ).click(function() {
-  		$( "#add_experience_form" ).slideToggle( "slow", function() {
-    	// Animation complete.
-  		});
-	});
+$( "#create_experience_button" ).click(function() {
+  $( "#create_experience_form" ).slideToggle( "slow", function() {
+    // Animation complete.
+  });
 });
 </script>

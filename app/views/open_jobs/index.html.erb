@@ -19,6 +19,17 @@
 
     $scope.searchText = '';
   });
+
+
+  $( document ).ready(function() {
+    var notice = localStorage.getItem("notification");
+    localStorage.setItem("notification", "");
+    if(notice == "Application created!"){
+      $("#notice").html("<div class='alert alert-success'>" + notice + " <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button></div>");
+    }
+
+  });
+
 </script>
 
 <h2>Avoimet työpaikat</h2>
@@ -34,8 +45,8 @@
     <th> <a ng-click="sort_by('company.location')">location</a> </th>
     </thead>
     <tr ng-repeat="open_job in open_jobs| orderBy:order | filter:searchText">
-      <td><%= link_to '{{open_job.name}}', 'open_jobs/{{open_job.id}}' %></td>
-      <td><%= link_to '{{open_job.company.name}}', 'companies/{{open_job.company.id}}' %></td>
+      <td><%= link_to '{{open_job.name}}', 'open_jobs/{{open_job.id}}',  'data-no-turbolink' => true %></td>
+      <td><%= link_to '{{open_job.company.name}}', 'companies/{{open_job.company.id}}', 'data-no-turbolink' => true %></td>
       <td>{{open_job.company.location}}</td>
     </tr>
   </table>

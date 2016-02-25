@@ -15,15 +15,33 @@
 
 <% end %>
 
-<h3> Our open jobs </h3>
+<h3> Avoimet työpaikat </h3>
+<table class="table">
+<tbody>
 <% @company.open_jobs.each do |o| %>
-	<%= link_to o.name, o %>
+	<tr>
+	<td><%= link_to o.name, o %></td>
+	</tr>
 </br>
 <% end %>
+</tbody>
+</table>
+
 <% if @company.open_jobs.length == 0 %>
 	Ei avoimia työpaikkoja tällä hetkellä.
 	</br>
 <% end %>
 
 </br>
+
+<h3> Paikka </h3>
+
+<iframe
+  width="300"
+  height="225"
+  frameborder="0" style="border:0"
+  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDHa4KyabobnijWEJ_29JzrrXUae13jJ-4&q=<%=@company.location%>" allowfullscreen>
+</iframe>
+
+</br></br>
 <%= link_to 'Back', companies_path, 'data-no-turbolink' => true, style:"btn"  %>

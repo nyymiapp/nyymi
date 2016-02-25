@@ -1,14 +1,43 @@
 <% if current_user && @open_job.company.users.includes(current_user) %>
-  <h1> <%= @open_job.name %> ylläpito</h1>
+  <h1> <%= @open_job.name %> ylläpito
 
-       <%= link_to 'Poista avoin työpaikka', @open_job , method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger", style:"color:white;"%>
-       <% if can? :edit, @open_job %>
-         <%= link_to 'Edit', edit_open_job_path(@open_job), 'data-no-turbolink' => true  %> 
+       <span><%= link_to 'Poista', @open_job , method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger", style:"color:white;"%></span>
+
+<% if can? :edit, @open_job %>
+        <span> <%= link_to 'Muokkaa', edit_open_job_path(@open_job), 'data-no-turbolink' => true, class:"btn btn-default"  %> </span>
        <% end %>
-	<h3> Hakemukset </h3>
-	<% @open_job.applications.each do |a| %>
-		<%= link_to a.id, a %> </br>
+  </h1>
+
+Vanhentuu hakijoille: <%= @open_job.expires %></br></br>
+<i><%= @open_job.description %></i>
+
+</br></br>
+	<h2> Hakemukset 
+
+
+     <% if session[:show_abandoned] == "true" %>
+        <span> <%= link_to "Älä näytä hylättyjä hakemuksia", toggle_showing_abandoned_path, method: :post, class: "btn btn-primary", style:"color:white;" %></span>
+        <% else %>
+        <span><%= link_to "Näytä myös hylätyt hakemukset", toggle_showing_abandoned_path, method: :post, class: "btn btn-primary", style:"color:white;" %></span>
+        <% end %>
+
+  </h2>
+
+  <table class="table">
+
+     <thead>
+      <tr>
+        <th>Käyttäjänimi</th>
+      </tr>
+    </thead>
+
+  <tbody>
+	<% @applications.each do |a| %>
+    <tr>
+		<td><%= link_to a.user.username, a %> </td>
+    </tr>
 	<% end %>
+  </tbody>
 
 <% else %>
  Et ole ylläpitäjä.

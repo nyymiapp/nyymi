@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   get 'about', to: 'companies#about'
   get 'welcome', to: 'open_jobs#welcome'
 
+  get 'current_user_open_jobs', to: 'open_jobs#current_user_open_jobs'
+
   root :to => "open_jobs#welcome"
 
   resource :session, only: [:new, :create, :destroy]
@@ -33,6 +35,14 @@ Rails.application.routes.draw do
          get 'my_companies'
        end
   end
+
+
+  resources :applications do
+    post 'toggle_abandoned', on: :member
+  end
+
+
+  post 'toggle_showing_abandoned',  to: 'open_jobs#toggle_showing_abandoned' 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
