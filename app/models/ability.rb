@@ -3,7 +3,7 @@ class Ability
 
    def initialize(user)
         if user
-            can [:index, :show], User
+            can [:show], User
             can [:edit, :update, :destroy, :my_companies], User, :id => user.id
 
             can [:welcome, :index, :show, :create, :new, :administration], OpenJob
@@ -24,7 +24,7 @@ class Ability
         else 
             can [:welcome, :index, :show], OpenJob
             can [:index, :show, :about], Company
-            can [:index, :show, :new, :create], User
+            can [:show, :new, :create], User
         end
     end
 end
