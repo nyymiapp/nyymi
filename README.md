@@ -1,16 +1,14 @@
 # nyymi
 
-Nyymi on rekrytointipalvelu, joka piilottaa kaikki hakijoiden iän, sukupuolen ja etnisen taustan kertovat tiedot. Tutkitusti yli 50-vuotiaiden sekä maahanmuuttajien on vaikeampi saada töitä, joten Nyymi on tarkoitettu lieventämään työnantajien ennakkoluuloja rekrytoinnissa. 
+Nyymi on rekrytointipalvelu, joka piilottaa kaikki hakijoiden iän, sukupuolen ja etnisen taustan kertovat tiedot.
 
-Nyymissä on kaksi käyttäjätyyppiä, yrityksen ylläpitäjä sekä työnhakija. Yrityksen ylläpitäjä voi tietysti myös hakea töitä. Sovellus itsessään on käyttöohje. 
+##Tekninen toteutus ja CI
 
-##Tekninen toteutus
-
-Sovelluksessa on sekä one-to-many että many-to-many-yhteyksiä (yritys - adminkäyttäjä). 
+Sovelluksessa on sekä one-to-many että many-to-many-yhteyksiä. CI-systeeminä on [shippable](https://app.shippable.com/). 
 
 ##Ulkoasu
 
-Käytin ulkoasussa http://www.free-css.com/free-css-templates/page193/spot css-templatea itse muokattuna. 
+http://www.free-css.com/free-css-templates/page193/spot 
 
 ## Yksityisyydenhallinta
 
@@ -90,9 +88,9 @@ Kaikkien luokkien kaikki sivut testataan erityisesti yksityisyyden takaamiseksi.
 
 #TODO: 
 
-1. job/school experiencen lisäys ajaxilla 
-2. haastattelukutsu jollakin message gemillä 
+2. haastattelukutsu jollakin message gemillä https://github.com/mailboxer/mailboxer 
 3. react näkymiä 
 4. kielilokalisointi
 5. https://github.com/plataformatec/devise autentikointi 
+6. emailin lähetys kun saa uuden hakemuksen 
 
