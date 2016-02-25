@@ -39,8 +39,8 @@
     <th> <a ng-click="sort_by('company.name')">company</a> </th>
     </thead>
     <tr ng-repeat="open_job in open_jobs| orderBy:order | filter:searchText">
-      <td><%= link_to '{{open_job.name}} ylläpitoon', '/open_jobs/{{open_job.id}}/administration' %></td>
-      <td><%= link_to '{{open_job.companyname}} ylläpitoon', '/companies/{{open_job.company_id}}/administration' %></td>
+      <td><%= link_to '{{open_job.name}}', '/open_jobs/{{open_job.id}}/administration' %></td>
+      <td><%= link_to '{{open_job.companyname}}', '/companies/{{open_job.company_id}}/administration' %></td>
     </tr>
   </table>
 
