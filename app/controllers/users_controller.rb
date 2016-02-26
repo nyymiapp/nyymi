@@ -39,7 +39,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        notic = %Q[Welcome! Now you can #{view_context.link_to("search open jobs", open_jobs_path)} or #{view_context.link_to("create a company and new open jobs", new_company_path)}.]
+        notic = %Q[Tervetuloa! Nyt #{view_context.link_to("hae työpaikkoja", open_jobs_path)} tai #{view_context.link_to("luo yritys ja työpaikkoja.", new_company_path)}.]
         flash[:safe] = notic
         format.html { redirect_to @user }
         format.json { render :show, status: :created, location: @user }
