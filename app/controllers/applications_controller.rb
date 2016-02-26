@@ -1,3 +1,5 @@
+require 'mail'
+
 class ApplicationsController < ApplicationController
   load_and_authorize_resource
   before_action :set_application, only: [:show, :edit, :update, :destroy]
@@ -36,6 +38,8 @@ class ApplicationsController < ApplicationController
 
     @application.save
 
+    send_email_for_admins(@application)
+
     session[:current_application_id] = @application.id
 
     @application.open_job.applications << @application
@@ -63,6 +67,17 @@ class ApplicationsController < ApplicationController
     new_status = application.abandoned ? "hylätty" : "ei-hylätty"
 
     redirect_to :back, notice:"Hakemuksen status: #{new_status}"
+  end
+
+  def send_email_for_admins(application)
+    application.open_job.company.users.each do |u|
+      begin
+        puts u.email
+        NotificationMailer.email("nyymi@nyymiapp.com", u.email, "Your company has new application.", "New application in Nyymi").deliver_now
+      rescue => ex
+        puts "ei toiminut" + ex.message
+      end
+    end
   end
 
 
