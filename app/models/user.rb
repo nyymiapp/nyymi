@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   	(?=.*[A-Z])        # Must contain an upper case character
 	/x
 
-    validates :password, length:{ minimum: 4 }, format: {with: PASSWORD_FORMAT}
+    validates :password, length:{ minimum: 4 }
 
     validates :username, uniqueness: true, length: { minimum: 1 }
 
