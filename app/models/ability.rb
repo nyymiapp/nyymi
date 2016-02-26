@@ -7,7 +7,7 @@ class Ability
             can [:edit, :update, :destroy, :my_companies], User, :id => user.id
 
             can [:welcome, :index, :show, :create, :new, :administration], OpenJob
-            can [:index, :show, :about, :new, :create], Company
+            can [:index, :show, :about, :new, :create, :add_admin], Company
             can [:new, :create], Application
 
             can [:edit, :update, :administration, :destroy], Company do |p|

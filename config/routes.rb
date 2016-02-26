@@ -41,6 +41,10 @@ Rails.application.routes.draw do
     post 'toggle_abandoned', on: :member
   end
 
+  resources :companies do
+    post 'add_admin', on: :member
+  end
+
 
   post 'toggle_showing_abandoned',  to: 'open_jobs#toggle_showing_abandoned' 
   # The priority is based upon order of creation: first created -> highest priority.

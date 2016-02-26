@@ -1,3 +1,5 @@
+<p id="notice"></p>
+
 <% if current_user && @company.users.includes(current_user) %>
   <h1> <%= @company.name %> ylläpito</h1>
 
@@ -6,7 +8,70 @@
 	<h3> Ylläpitäjät </h3>
 	<% @company.users.each do |a| %>
 		<%= a.username %> </br>
-	<% end %>
+	<% end %></br>
+
+<script>
+
+$( document ).ready(function() {
+  $( "#add_admin_button" ).click(function() {
+    $( "#add_admin_form" ).slideToggle( "slow", function() {
+    // Animation complete.
+    });
+  });
+
+  var notice = localStorage.getItem("notification");
+    localStorage.setItem("notification", "");
+    if(notice == "Käyttäjää ei löydy tai hän on jo ylläpitäjä." || notice == "Ylläpitäjä lisätty."){
+      $("#notice").html("<div class='alert alert-success'>" + notice + " <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button></div>");
+    }
+});
+
+  var appi = angular.module('admin_app', []);
+
+appi.controller('MainCtrl', [
+'$scope',
+function($scope){
+
+  $scope.admin = {};
+  $scope.admin.username = " ";
+
+  $scope.addAdmin = function(){
+
+    $scope.company_id=(/companies\/(\d+)\/administration/.exec(window.location.href)[1]);
+
+    var admin = {
+      username: $scope.admin.username,
+      company_id: $scope.company_id, 
+    }
+
+    $.post('/companies/'+ $scope.company_id + '/add_admin', admin)
+    .success(function(data, status) {
+        localStorage.setItem("notification", "Ylläpitäjä lisätty.");
+        location.reload();
+    }).error(function(data, status) {
+        localStorage.setItem("notification", "Käyttäjää ei löydy tai hän on jo ylläpitäjä.");
+        location.reload();
+    });
+
+  };
+
+}]);
+
+</script>
+
+<div class="btn btn-primary" id="add_admin_button">Lisää uusi ylläpitäjä</div></br>
+
+<div ng-app="admin_app" ng-controller="MainCtrl">
+
+  {{adminnotice}}
+
+  <div id="add_admin_form" style="display:none;"></br>
+    Lisää uusi ylläpitäjä käyttäjänimellä:</br>
+    <input type='text' ng-model='admin.username' name='admin[username]'> </br></br>
+    <button ng-click='addAdmin()'>Lisää</button>
+  </div>
+
+</div>
 
 	<h3> Luo uusi avoin työpaikka </h3>
 
@@ -40,3 +105,4 @@
 <% else %>
   Et ole ylläpitäjä.
 <% end %>
+

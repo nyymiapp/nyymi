@@ -70,7 +70,7 @@ class OpenJobsController < ApplicationController
     end
     respond_to do |format|
       if @open_job.save
-        format.html { redirect_to administration_company_path(@open_job.company), notice: 'Avoin työpaikka luotu.' }
+        format.html { redirect_to administration_company_path(@open_job.company), notice: 'Avoin työpaikka luotu. Saat sähköpostin kun siihen tulee hakemus.' }
         format.json { render :show, status: :created, location: @open_job }
       else
         format.html { render :new }
