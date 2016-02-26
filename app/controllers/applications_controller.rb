@@ -72,10 +72,9 @@ class ApplicationsController < ApplicationController
   def send_email_for_admins(application)
     application.open_job.company.users.each do |u|
       begin
-        puts u.email
         NotificationMailer.email("nyymi@nyymiapp.com", u.email, "Your company has new application.", "New application in Nyymi").deliver_now
       rescue => ex
-        puts "ei toiminut" + ex.message
+        puts ex.message
       end
     end
   end
