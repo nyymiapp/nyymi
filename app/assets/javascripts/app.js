@@ -14,15 +14,15 @@ function($scope){
   $scope.addExperience = function(){
   	var experience = {
     	place: $scope.experience.place,
-    	description: $scope.experience.description,
-    	start: $scope.experience.start,
+    	description: $scope.experience.des,
+    	start: $scope.experience.starting,
     	end: $scope.experience.end
 	}
 	$( "#experiences" ).append("kokemus " + $scope.experience.place + " tallennettu");
 	 $scope.experiences.push(experience);
 	 $scope.experience.place = "";
-	 $scope.experience.description = "";
-	 $scope.experience.start = "";
+	 $scope.experience.des = "";
+	 $scope.experience.starting = "";
 	 $scope.experience.end = "";
 	 console.log( $scope.experiences);
 
