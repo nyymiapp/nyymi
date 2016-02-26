@@ -23,8 +23,9 @@ $( "#create_experience_button" ).click(function() {
   });
 });
 
-angular.module('apsyla', [])
-.controller('MainCtrl', [
+var appi = angular.module('apsyla', []);
+
+appi.controller('MainCtrl', [
 '$scope',
 function($scope){
 
@@ -91,7 +92,7 @@ function($scope){
 
 
     <!--<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script> -->
-  <%= javascript_include_tag 'app', 'data-turbolinks-track' => true %>
+  <!--<%= javascript_include_tag 'app', 'data-turbolinks-track' => true %> -->
 
 <% if current_user %>
   <div ng-app="apsyla" ng-controller="MainCtrl">
