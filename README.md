@@ -8,7 +8,7 @@ Sovelluksessa on sekä one-to-many että many-to-many-yhteyksiä. CI-systeeminä
 
 ##Ulkoasu
 
-http://www.free-css.com/free-css-templates/page193/spot 
+http://www.free-css.com/free-css-templates/page193/spot sekä Angular ja Bootstrap. 
 
 ## Yksityisyydenhallinta
 
