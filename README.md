@@ -8,18 +8,19 @@ Sovelluksessa on sekä one-to-many että many-to-many-yhteyksiä. CI-systeeminä
 
 ##Ulkoasu
 
-http://www.free-css.com/free-css-templates/page193/spot 
+http://www.free-css.com/free-css-templates/page193/spot sekä Angular ja Bootstrap. 
 
 ## Yksityisyydenhallinta
 
-Yksityisenhallinnassa käytetään deklaratiivisen autentikoinnin gemiä CanCania (https://github.com/ryanb/cancan ). Se helpottaa sen määrittelyä, mille sivuille mitkäkin käyttäjän saavat mennä. 
+Yksityisenhallinnassa käytetään deklaratiivisen autentikoinnin gemiä CanCania (https://github.com/ryanb/cancan ).
 
 ##Kielilokalisointi
 
 ei vielä tehty
 
-## Muut ulkoiset gemit
-JSONin generoinnin ehdollisuuteen käytin jbuilder-gemiä. (https://github.com/rails/jbuilder). 
+## Muut ulkoiset gemit tai palvelut
+* JSONin generoinnin ehdollisuuteen käytetään [JBuilderia](https://github.com/rails/jbuilder). 
+* Kun yritys saa uuden hakemuksen, siitä lähetetään sähköposti ylläpitäjille [Sendgridillä](https://sendgrid.com/).
 
 ##Testausuunnitelma 
 
@@ -92,5 +93,4 @@ Kaikkien luokkien kaikki sivut testataan erityisesti yksityisyyden takaamiseksi.
 3. react näkymiä 
 4. kielilokalisointi
 5. https://github.com/plataformatec/devise autentikointi 
-6. emailin lähetys kun saa uuden hakemuksen 
 
