@@ -1,4 +1,4 @@
-angular.module('äpsylä', [])
+angular.module('apsyla', [])
 .controller('MainCtrl', [
 '$scope',
 function($scope){
