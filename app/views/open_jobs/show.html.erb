@@ -26,6 +26,18 @@ $( "#create_experience_button" ).click(function() {
   });
 });
 
+$('#experience_place').on('change', function() {
+  if(this.value == "työ" || this.value == "vapaaehtoistyö" || this.value=="luottamustoimi"){
+  	$( "#experience_strictplace" ).slideDown( "slow", function() {
+    // Animation complete.
+  	});
+  } else {
+  	$( "#experience_strictplace" ).slideUp( "slow", function() {
+    // Animation complete.
+  	});
+  }
+});
+
 });
 
 var appi = angular.module('apsyla', []);
@@ -39,6 +51,7 @@ function($scope){
 
   $scope.experience = {};
   $scope.experience.place = " ";
+  $scope.experience.strictplace = " ";
 
   $scope.experiences = [];
 
@@ -47,14 +60,17 @@ function($scope){
     	place: $scope.experience.place,
     	description: $scope.experience.des,
     	start: $scope.experience.starting,
-    	end: $scope.experience.end
+    	end: $scope.experience.end, 
+    	strictplace: $scope.experience.strictplace
 	}
+	console.log(experience);
 	$( "#experiences" ).append("kokemus " + $scope.experience.place + " tallennettu");
 	 $scope.experiences.push(experience);
 	 $scope.experience.place = "";
 	 $scope.experience.des = "";
 	 $scope.experience.starting = "";
 	 $scope.experience.end = "";
+	 $scope.experience.strictplace = "";
 	 console.log( $scope.experiences);
 
 	  $( "#create_experience_form" ).slideToggle( "slow", function() {
@@ -120,8 +136,21 @@ function($scope){
 		<div style="display:none;border: 1px solid #2ecc71; padding:10px; border-radius:1px;" id="create_experience_form">
 
 			<h4>Uusi kokemus </h4>
-			Paikka </br><input type='text' ng-model='experience.place' name='experience[place]'> </br></br>
-			Kuvaus 	(opiskeluohjelma/työnkuvaus) </br><textarea type='text' ng-model='experience.des' name='experience[des]' rows="5" cols="50"></textarea> </br></br>
+			 Valitse tyyppi: <select name="experience[place]" ng-model="experience.place" id="experience_place">
+      			<option value="yliopisto">Yliopisto</option> <!-- interpolation -->
+     			<option value="ammattikorkeakoulu">Ammattikorkeakoulu</option>
+     			<option value="työ">Työ</option>
+     			<option value="lukio">Lukio</option>
+     			<option value="ammattikoulu">Ammattikoulu</option>
+     			<option value="luottamustoimi">Luottamustoimi</option>
+     			<option value="muu koulutus">Muu koulutus</option>
+     			<option value="vapaaehtoistyö">Vapaaehtoistyö</option>
+     			<option value="muu kokemus">Muu kokemus</option>
+    		</select> </br> </br>
+    		<div id="experience_strictplace" style="display:none;"> 
+				Paikan nimi </br><input type='text' ng-model='experience.strictplace' name='experience[strictplace]'> </br></br>
+			</div>
+			Kuvaus tekemisestä </br><textarea type='text' ng-model='experience.des' name='experience[des]' rows="5" cols="50"></textarea> </br></br>
 			Alku <input type="date" name="experience[starting]" ng-model="experience.starting"
        placeholder="yyyy-MM-dd" /> </br> </br>
 

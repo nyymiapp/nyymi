@@ -32,7 +32,8 @@
    <thead>
       <tr>
         <th>Kuvaus/opiskeluohjelma</th>
-        <th>Paikka</th>
+        <th>Tyyppi</th>
+        <th>Paikka jos relevantti</th>
         <th>Alku</th>
         <th>Loppu</th>
       </tr>
@@ -42,6 +43,7 @@
 	<tr>
 	<td><%= e.description %> </td>
 	<td><%= e.place %></td>
+	<td><%= e.strictplace %></td>
 	<td><%= e.start %></td>
 	<td><%= e.end %></td>
 	</tr>

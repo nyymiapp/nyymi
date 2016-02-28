@@ -27,6 +27,7 @@ class ExperiencesController < ApplicationController
     @experience = Experience.new
     @experience.place = params[:place]
     @experience.description = params[:description]
+    @experience.strictplace = params[:strictplace]
     @experience.start = params[:start]
     @experience.end = params[:end]
     @experience.application = Application.find(session[:current_application_id])
@@ -75,6 +76,6 @@ class ExperiencesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def experience_params
-      params.require(:experience).permit(:application_id, :place, :description, :start, :end)
+      params.require(:experience).permit(:application_id, :place, :description, :start, :end, :strictplace)
     end
 end
