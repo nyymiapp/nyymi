@@ -64,7 +64,7 @@ function($scope){
     	strictplace: $scope.experience.strictplace
 	}
 	console.log(experience);
-	$( "#experiences" ).append("kokemus " + $scope.experience.place + " tallennettu");
+	$( "#experiences" ).append("kokemus " + $scope.experience.place + " tallennettu </br>");
 	 $scope.experiences.push(experience);
 	 $scope.experience.place = "";
 	 $scope.experience.des = "";
@@ -131,7 +131,7 @@ function($scope){
 
 		<div id="experiences"> </div></br></br>
 
-		<div id="create_experience_button" class="btn btn-primary">Lisää työ/opiskelukokemus</div></br></br>
+		<div id="create_experience_button" class="btn btn-primary">Lisää kokemus</div></br></br>
 
 		<div style="display:none;border: 1px solid #2ecc71; padding:10px; border-radius:1px;" id="create_experience_form">
 

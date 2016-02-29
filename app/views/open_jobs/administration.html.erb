@@ -34,7 +34,12 @@ Vanhentuu hakijoille: <%= @open_job.expires %></br></br>
   <tbody>
 	<% @applications.each do |a| %>
     <tr>
-		<td><%= link_to a.user.username, a %> </td>
+    <% div_id = "hidden-partial-#{a.id}" -%>
+		<td><div id="<%= div_id -%>" class="hidden_partial_button"> <%=a.user.username %></div>
+      <div style="display:none;" id="<%= div_id -%>divi" class="hidden_partial">
+        <%= render 'applications/showpartial', a: a %>
+      </div>
+    </td>
     </tr>
 	<% end %>
   </tbody>
@@ -42,3 +47,16 @@ Vanhentuu hakijoille: <%= @open_job.expires %></br></br>
 <% else %>
  Et ole ylläpitäjä.
 <% end %>
+
+<script>
+$( document ).ready(function() {
+
+$( ".hidden_partial_button" ).click(function() {
+  id = this.id
+  $( "#" + id + "divi" ).slideToggle( "slow", function() {
+    // Animation complete.
+  });
+});
+
+});
+</script>

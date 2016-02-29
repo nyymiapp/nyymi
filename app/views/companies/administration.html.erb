@@ -19,6 +19,12 @@ $( document ).ready(function() {
     });
   });
 
+   $( "#create_open_job_button" ).click(function() {
+    $( "#create_open_job_form" ).slideToggle( "slow", function() {
+    // Animation complete.
+    });
+  });
+
   var notice = localStorage.getItem("notification");
     localStorage.setItem("notification", "");
     if(notice == "Käyttäjää ei löydy tai hän on jo ylläpitäjä." || notice == "Ylläpitäjä lisätty."){
@@ -70,9 +76,11 @@ function($scope){
     <input type='text' ng-model='admin.username' name='admin[username]'> </br></br>
     <button ng-click='addAdmin()'>Lisää</button>
   </div>
-
+  </br>
 </div>
 
+<div class="btn btn-primary" id="create_open_job_button">Luo uusi avoin työpaikka</div>
+<div style="display:none;" id="create_open_job_form"> 
 	<h3> Luo uusi avoin työpaikka </h3>
 
 	<%= form_for(@open_job) do |f| %>
@@ -91,16 +99,16 @@ function($scope){
     		<%= f.date_field :expires %>
 		</div>
     <%= f.submit %>
+</div>
 
-    <h3> Avoimien työpaikkojen ylläpito </h3>
+ <h3> Avoimien työpaikkojen ylläpito </h3>
     <% @company.open_jobs.each do |o| %>
-    	<%= link_to o.name, administration_open_job_path(o) %> </br>
+      <%= link_to o.name, administration_open_job_path(o) %> </br>
     <% end %>
     <% if @company.open_jobs.length == 0 %>
       Ei vielä työpaikkoja!
     <% end %>
   <% end %>
-
 
 <% else %>
   Et ole ylläpitäjä.

@@ -1,0 +1,49 @@
+<p>
+  	<% if a.abandoned  %>
+      <span class="label label-info">hylätty</span>
+  	<% end %>
+  </h2>
+</p>
+
+<% if !a.abandoned %>
+	<%= link_to "hylkää hakemus", toggle_abandoned_application_path(a.id), method: :post, class: "btn btn-danger btn-lg", style:"color:white;" %>
+<% else %>
+	<%= link_to "poista hylätyistä", toggle_abandoned_application_path(a.id), method: :post, class: "btn btn-danger btn-lg", style:"color:white;" %>
+<% end %>
+
+</br></br>
+
+<p>
+  <strong>Username:</strong>
+  <%= a.user.username %>
+</p>
+
+<p>
+  <strong>Vapaa kenttä</strong></br>
+  <%= a.freetext %>
+</p>
+
+<h2>Kokemukset</h2>
+
+<table class="table">
+   <thead>
+      <tr>
+        <th>Kuvaus/opiskeluohjelma</th>
+        <th>Tyyppi</th>
+        <th>Paikka jos relevantti</th>
+        <th>Alku</th>
+        <th>Loppu</th>
+      </tr>
+    </thead>
+    <tbody>
+<% a.experiences.each do |e| %>
+	<tr>
+	<td><%= e.description %> </td>
+	<td><%= e.place %></td>
+	<td><%= e.strictplace %></td>
+	<td><%= e.start %></td>
+	<td><%= e.end %></td>
+	</tr>
+<% end %>
+</tbody>
+</table>

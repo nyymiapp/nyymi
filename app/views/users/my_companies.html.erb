@@ -1,8 +1,9 @@
-<h3> Yritysten ylläpitosivut </h3>
+<h2> Yritysten ylläpitosivut </h2>
 <table class="table table-hover">
 		<% @user.companies.each do |c| %>
-			<tr><%= link_to c.name, administration_company_path(c) %> </tr>
-			</br>
+      <tr>
+			<td><%= link_to c.name, administration_company_path(c) %> </td>
+			</tr>
 		<% end %>
 </table>
 
