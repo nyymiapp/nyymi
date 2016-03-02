@@ -42,7 +42,7 @@ function($scope, $parse){
     var contentt = getter($scope);
 
     getter.assign($scope, "");
-    
+
     var message = {
       content: contentt,
       conversation_id: param_conversation_id, 
@@ -79,21 +79,28 @@ function($scope, $parse){
 	<% @user.conversations.each do |a| %>
     <tr>
     <% div_id = "hidden-partial-#{a.id}" -%>
-		<td><div id="<%= div_id -%>" class="hidden_partial_button"> <%=a.company.name %></div>
+		<td><div id="<%= div_id -%>" class="hidden_partial_button btn btn-default"> <%=a.company.name %></div>
       <div style="display:none;" id="<%= div_id -%>divi" class="hidden_partial">
         <%= render 'conversations/showpartial', conversation: a %>
       </div>
     </td>
     </tr>
 	<% end %>
-  </tbody>
 
 <% if @user.companies.count > 0 %>
 	<% @user.companies.each do |c| %>
-		<% c.conversations.each do |con| %>
-    <%= User.find(con.user_id).username %>
+		<% c.conversations.each do |a| %>
+     <tr>
+    <% div_id = "hidden-partial-#{a.id}" -%>
+    <td><div id="<%= div_id -%>" class="hidden_partial_button btn btn-default"> <%= User.find(a.user).username %></div>
+      <div style="display:none;" id="<%= div_id -%>divi" class="hidden_partial">
+        <%= render 'conversations/showpartial', conversation: a %>
+      </div>
+    </td>
+    </tr>
 		<% end %>
 	<% end %>
+   </tbody>
 
 <% end %>
 
