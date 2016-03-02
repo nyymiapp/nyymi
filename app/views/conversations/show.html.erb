@@ -1,0 +1,7 @@
+<p id="notice"><%= notice %></p>
+
+<% @conversation.messages.each do |m| %>
+	<b><%= User.find(m.sender_id).username %></b> <%= m.content %> </br>
+<% end %>
+
+

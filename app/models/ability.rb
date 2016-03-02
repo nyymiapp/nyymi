@@ -4,7 +4,7 @@ class Ability
    def initialize(user)
         if user
             can [:show], User
-            can [:edit, :update, :destroy, :my_companies], User, :id => user.id
+            can [:edit, :update, :destroy, :my_companies, :messages], User, :id => user.id
 
             can [:welcome, :index, :show, :create, :new, :administration], OpenJob
             can [:index, :show, :about, :new, :create, :add_admin], Company
@@ -21,6 +21,10 @@ class Ability
             can [:show, :destroy, :toggle_abandoned], Application do |p|
                 p.open_job.company.users.include? user
             end
+            can [:show, :destroy, :edit], Conversation do |p|
+                p.user == user or p.company.users.include? user 
+            end
+            can [:show, :destroy, :edit, :create, :new], Message 
         else 
             can [:welcome, :index, :show], OpenJob
             can [:index, :show, :about], Company

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160228171707) do
+ActiveRecord::Schema.define(version: 20160302101019) do
 
   create_table "applications", force: :cascade do |t|
     t.integer  "open_job_id"
@@ -36,6 +36,13 @@ ActiveRecord::Schema.define(version: 20160228171707) do
     t.integer "user_id",    null: false
   end
 
+  create_table "conversations", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "company_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "experiences", force: :cascade do |t|
     t.integer  "application_id"
     t.string   "place"
@@ -45,6 +52,18 @@ ActiveRecord::Schema.define(version: 20160228171707) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.string   "strictplace"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text     "content"
+    t.integer  "user_id"
+    t.integer  "company_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "conversation_id"
+    t.integer  "sender_id"
+    t.integer  "receiver_id"
+    t.string   "sendername"
   end
 
   create_table "open_jobs", force: :cascade do |t|
@@ -65,6 +84,8 @@ ActiveRecord::Schema.define(version: 20160228171707) do
     t.string   "email"
     t.string   "phonenumber"
     t.string   "realname"
+    t.string   "channel"
+    t.string   "sendername"
   end
 
 end

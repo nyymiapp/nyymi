@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
 	has_and_belongs_to_many :companies
 	has_many :applications
 	has_many :open_jobs, through: :companies
+	has_many :conversations
 
 	PASSWORD_FORMAT = /\A
   	(?=.*\d)           # Must contain a digit

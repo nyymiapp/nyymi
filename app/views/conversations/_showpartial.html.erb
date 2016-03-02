@@ -1,0 +1,18 @@
+<div id="div-item-data" data-item-company-id="<%= conversation.company.id %>" data-item-conversation-id="<%= conversation.id %>"></div>
+
+<div id="conversation-<%= conversation.id %>"> 
+	<% conversation.messages.each do |m| %>
+		<b><%= User.find(m.sender_id).username %>: </b> <%= m.content %>  </br>
+	<% end %>
+</div>
+
+  <div id="send_message_form"></br>
+
+  <form ng-submit="sendMessage(<%= conversation.id %>)" ng-controller="MainCtrl">
+    Lähetä viesti </br>
+    <input type='text' ng-model="message.content<%= conversation.id %>" name='message[content<%= conversation.id %>]' rows="5" cols="80">  </br></br>
+    <!--<button ng-click='sendMessage(<%= conversation.id %>)'>Lähetä</button> -->
+    <input type="submit" id="submit" value="Lähetä" />
+  </form>
+  </div>
+  </br>

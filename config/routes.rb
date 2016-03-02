@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :conversations
   resources :experiences
   resources :applications
   resources :open_jobs
@@ -10,6 +11,7 @@ Rails.application.routes.draw do
  get 'signout', to: 'sessions#destroy'
   get 'about', to: 'companies#about'
   get 'welcome', to: 'open_jobs#welcome'
+  post 'messages', to: 'messages#create'
 
   get 'current_user_open_jobs', to: 'open_jobs#current_user_open_jobs'
 
@@ -33,6 +35,7 @@ Rails.application.routes.draw do
   resources :users do
        member do
          get 'my_companies'
+         get 'messages'
        end
   end
 

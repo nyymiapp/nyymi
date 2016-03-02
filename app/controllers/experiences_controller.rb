@@ -10,6 +10,7 @@ class ExperiencesController < ApplicationController
   # GET /experiences/1
   # GET /experiences/1.json
   def show
+    
   end
 
   # GET /experiences/new

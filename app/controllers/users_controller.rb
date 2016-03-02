@@ -1,3 +1,5 @@
+require 'digest/bubblebabble'
+
 class UsersController < ApplicationController
   load_and_authorize_resource :except => :update
 
@@ -5,7 +7,7 @@ class UsersController < ApplicationController
     params[:user] &&= user_params
   end
 
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :messages]
 
 # poistettu coveragen lisäämiseks
   # GET /users
@@ -28,10 +30,16 @@ class UsersController < ApplicationController
   def edit
   end
 
+  def messages
+
+  end
+
   # POST /users
   # POST /users.json
   def create
     @user = User.new(user_params)
+
+    @user.channel = Digest::SHA256.bubblebabble (@user.username + @user.password_digest)
 
     @user.save
     @user.authenticate(params[:password])

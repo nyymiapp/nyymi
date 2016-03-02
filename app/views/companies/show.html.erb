@@ -1,9 +1,51 @@
 <p id="notice"></p>
 
+<script>
+
+$( document ).ready(function() {
+  $( "#send_message_button" ).click(function() {
+    $( "#send_message_form" ).slideToggle( "slow", function() {
+    // Animation complete.
+    });
+  });
+});
+
+  var appi = angular.module('send_message_app', []);
+
+appi.controller('MainCtrl', [
+'$scope',
+function($scope){
+
+  $scope.message = {};
+  $scope.message.content = " ";
+
+  $scope.sendMessage = function(){
+
+    $scope.company_id=(/companies\/(\d+)/.exec(window.location.href)[1]);
+
+    var message = {
+      content: $scope.message.content,
+      company_id: $scope.company_id, 
+    }
+
+    $.post('/messages', message)
+    .success(function(data, status) {
+         $( "#send_message_form" ).slideToggle( "slow", function() {
+    		// Animation complete.
+    	});
+    }).error(function(data, status) {
+        alert("error");
+    });
+
+  };
+
+}]);
+
+</script>
 
 <h1><%= @company.name %></h1>
 
-<%= link_to("Website", "http://#{@company.website}") %>
+<%= link_to("Website", "http://#{@company.website}") %> 
 
 <h3>
   <%= @company.description %>
@@ -33,6 +75,18 @@
 <% end %>
 
 </br>
+
+<div class="btn btn-primary" id="send_message_button">Lähetä viesti</div></br>
+
+<div ng-app="send_message_app" ng-controller="MainCtrl">
+
+  <div id="send_message_form" style="display:none;"></br>
+    Lähetä viesti </br>
+    <textarea type='text' ng-model="message.content" name='message[content]' rows="5" cols="80"> </textarea> </br></br>
+    <button ng-click='sendMessage()'>Lähetä</button>
+  </div>
+  </br>
+</div>
 
 <h3> Paikka </h3>
 

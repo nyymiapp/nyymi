@@ -3,3 +3,24 @@
 http://www.tem.fi/files/32827/TEMjul_16_2012_web.pdf 
 
 http://www.hs.fi/talous/a1455689527865?jako=fe3a81bd50a0fd569ecec8943ee37906&ref=og-url
+
+<!DOCTYPE html>
+<head>
+  <title>Pusher Test</title>
+  <script>
+    // Enable pusher logging - don't include this in production
+    Pusher.log = function(message) {
+      if (window.console && window.console.log) {
+        window.console.log(message);
+      }
+    };
+
+    var pusher = new Pusher('f510b36c2a7566d4a93a', {
+      encrypted: true
+    });
+    var channel = pusher.subscribe('test_channel');
+    channel.bind('my_event', function(data) {
+      alert(data.message);
+    });
+  </script>
+</head>

@@ -18,6 +18,9 @@ class CompaniesController < ApplicationController
   end
 
   def about
+     Pusher.trigger('test_channel', 'my_event', {
+      message: 'hello world'
+      })
   end
 
   # GET /companies/new

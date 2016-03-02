@@ -1,0 +1,117 @@
+
+<script>
+
+$( document ).ready(function() {
+
+Pusher.log = function(message) {
+      if (window.console && window.console.log) {
+        window.console.log(message);
+      }
+};
+
+var user_id = document.getElementById('div-item-data').getAttribute("data-user-id");
+
+var pusher = new Pusher('f510b36c2a7566d4a93a', {
+    encrypted: true
+});
+
+var channel = pusher.subscribe('message_channel_' + user_id);
+channel.bind('new_message', function(data) {
+      var obj = JSON.parse(data.message)
+      $( "#conversation-" + obj.conversation_id ).append("<b>"+ obj.sendername + "</b>: " + obj.content + "</br>");
+      console.log(obj.message);
+});
+
+});
+
+var appi = angular.module('send_message_to_conversation_app', []);
+
+appi.controller('MainCtrl', [
+'$scope','$parse',
+function($scope, $parse){
+
+
+  $scope.message = {};
+  $scope.message.content = " ";
+
+  $scope.sendMessage = function(param_conversation_id){
+
+    var the_string = 'message.content' + param_conversation_id;
+    var getter = $parse(the_string);
+
+    var contentt = getter($scope);
+
+    getter.assign($scope, "");
+    
+    var message = {
+      content: contentt,
+      conversation_id: param_conversation_id, 
+    }
+
+    $.post('/messages', message)
+    .success(function(data, status) {
+         
+    }).error(function(data, status) {
+        alert("error");
+    });
+
+  };
+
+}]);
+
+</script>
+
+<div id="div-item-data" data-user-id="<%= current_user.channel %>"></div>
+
+<div ng-app="send_message_to_conversation_app" ng-controller="MainCtrl">
+
+<h2> Keskustelut </h2>
+
+<table class="table">
+
+     <thead>
+      <tr>
+        <th>Keskustelukumppani</th>
+      </tr>
+    </thead>
+
+  <tbody>
+	<% @user.conversations.each do |a| %>
+    <tr>
+    <% div_id = "hidden-partial-#{a.id}" -%>
+		<td><div id="<%= div_id -%>" class="hidden_partial_button"> <%=a.company.name %></div>
+      <div style="display:none;" id="<%= div_id -%>divi" class="hidden_partial">
+        <%= render 'conversations/showpartial', conversation: a %>
+      </div>
+    </td>
+    </tr>
+	<% end %>
+  </tbody>
+
+<% if @user.companies.count > 0 %>
+	<% @user.companies.each do |c| %>
+		<% c.conversations.each do |con| %>
+    <%= User.find(con.user_id).username %>
+		<% end %>
+	<% end %>
+
+<% end %>
+
+<% if @user.conversations.count == 0 %>
+  Sinulla ei ole vielä keskusteluja. Voit lähettää yrityksille yksityisviestejä niiden sivuilta. 
+<% end %>
+
+</div>
+
+<script>
+$( document ).ready(function() {
+
+$( ".hidden_partial_button" ).click(function() {
+  id = this.id
+  $( "#" + id + "divi" ).slideToggle( "slow", function() {
+    // Animation complete.
+  });
+});
+
+});
+</script>
