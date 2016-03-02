@@ -22,7 +22,7 @@ class MessagesController < ApplicationController
     if params[:conversation_id] == nil or params[:conversation_id] == ""
       admin = Company.find(@message.company_id).users.include? current_user
       if admin
-        id=receiver_id
+        id=@message.receiver_id
       else
         id=current_user.id
       end

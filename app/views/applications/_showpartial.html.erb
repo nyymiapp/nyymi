@@ -6,6 +6,15 @@
 	<%= link_to "poista hylätyistä", toggle_abandoned_application_path(a.id), method: :post, class: "btn btn-default", style:"" %>
 <% end %>
 
+  <div id="send_message_form"></br>
+
+  <form ng-submit="sendMessage(<%= a.user.id %>, <%= a.open_job.company.id %>, <%= a.id %>)" ng-controller="OpenJobAdminCtrl">
+    Lähetä haastattelukutsu käyttäjälle <%= a.user.username %> </br>
+    <input type='text' ng-model="message.content<%= a.id %>" name='message[content<%= a.id %>]' rows="5" cols="80">  </br></br>
+    <input type="submit" id="submit" value="Lähetä" />
+  </form>
+  </div>
+
 </br></br>
 
 <p>
