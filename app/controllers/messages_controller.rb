@@ -42,6 +42,9 @@ class MessagesController < ApplicationController
     })
 
     conversation.company.users.each do |u|
+      if u.id == conversation.user_id
+        next
+      end
       c = 'message_channel_' + u.channel
       Pusher.trigger(c, 'new_message', {
         message: @message.to_json

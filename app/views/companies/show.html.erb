@@ -23,6 +23,10 @@ function($scope){
 
     $scope.company_id=(/companies\/(\d+)/.exec(window.location.href)[1]);
 
+    $( "#send_message_form" ).slideToggle( "slow", function() {
+        // Animation complete.
+    });
+
     var message = {
       content: $scope.message.content,
       company_id: $scope.company_id, 
@@ -30,9 +34,7 @@ function($scope){
 
     $.post('/messages', message)
     .success(function(data, status) {
-         $( "#send_message_form" ).slideToggle( "slow", function() {
-    		// Animation complete.
-    	});
+        $scope.message.content = " ";
     }).error(function(data, status) {
         alert("error");
     });
