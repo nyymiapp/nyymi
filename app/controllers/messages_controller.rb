@@ -20,13 +20,17 @@ class MessagesController < ApplicationController
 
     # user id pitää olla SE joka ei ole yrityksen ylläpitäjä!
     if params[:conversation_id] == nil or params[:conversation_id] == ""
-      if @message.company.users.include? current_user and params[:receiver_id] != nil and params[:receiver_id] != ""
+      if @message.company.users.include? current_user and params[:receiver_id] != nil and params[:receiver_id] != "" 
         id = @message.receiver_id
         puts "receiver"
       else 
         id = current_user.id
       end
-      conversation = Conversation.create user_id: id, company_id: @message.company_id
+      if Conversation.find_by(user_id: id, company_id: @message.company_id) == nil
+        conversation = Conversation.create user_id: id, company_id: @message.company_id
+      else
+        conversation = Conversation.find_by(user_id: id, company_id: @message.company_id) == nil
+      end
       conversation.messages << @message
       @message.company = Company.find(params[:company_id])
     else 
