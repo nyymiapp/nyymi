@@ -1,14 +1,9 @@
-<p>
-  	<% if a.abandoned  %>
-      <span class="label label-info">hylätty</span>
-  	<% end %>
-  </h2>
-</p>
+
 
 <% if !a.abandoned %>
-	<%= link_to "hylkää hakemus", toggle_abandoned_application_path(a.id), method: :post, class: "btn btn-danger btn-lg", style:"color:white;" %>
+	<%= link_to "hylkää hakemus", toggle_abandoned_application_path(a.id), method: :post, class: "btn btn-default", style:"" %>
 <% else %>
-	<%= link_to "poista hylätyistä", toggle_abandoned_application_path(a.id), method: :post, class: "btn btn-danger btn-lg", style:"color:white;" %>
+	<%= link_to "poista hylätyistä", toggle_abandoned_application_path(a.id), method: :post, class: "btn btn-default", style:"" %>
 <% end %>
 
 </br></br>

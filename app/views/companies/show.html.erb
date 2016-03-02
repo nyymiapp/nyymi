@@ -78,6 +78,7 @@ function($scope){
 
 </br>
 
+<% if not @company.users.include? current_user %>
 <div class="btn btn-primary" id="send_message_button">Lähetä viesti</div></br>
 
 <div ng-app="send_message_app" ng-controller="MainCtrl">
@@ -89,6 +90,8 @@ function($scope){
   </div>
   </br>
 </div>
+
+<% end %>
 
 <h3> Paikka </h3>
 

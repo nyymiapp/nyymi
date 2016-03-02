@@ -35,8 +35,12 @@ Vanhentuu hakijoille: <%= @open_job.expires %></br></br>
 	<% @applications.each do |a| %>
     <tr>
     <% div_id = "hidden-partial-#{a.id}" -%>
-		<td><div id="<%= div_id -%>" class="hidden_partial_button"> <%=a.user.username %></div>
-      <div style="display:none;" id="<%= div_id -%>divi" class="hidden_partial">
+		<td><div id="<%= div_id -%>" class="hidden_partial_button btn btn-default" style="margin-bottom:10px;"> <%=a.user.username %>
+        <% if a.abandoned  %>
+       <span class="label label-info">hylätty</span>
+       <% end %>
+       </div>
+      <div style="display:none;border: 1px solid #2ecc71; padding:10px;" id="<%= div_id -%>divi" class="hidden_partial">
         <%= render 'applications/showpartial', a: a %>
       </div>
     </td>

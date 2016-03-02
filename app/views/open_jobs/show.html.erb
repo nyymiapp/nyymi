@@ -119,6 +119,8 @@ function($scope){
 <% if current_user %>
   <div ng-app="apsyla" ng-controller="MainCtrl">
 
+    <% if not @open_job.company.users.include? current_user %>
+
     <div id="create_application_button" class="btn btn-primary">
       Tee hakemus!
     </div>
@@ -163,6 +165,10 @@ function($scope){
 	</div>
 
   </div>
+  <% else %>
+  Et voi hakea työtä jonka yrityksen ylläpitäjä olet.
+  <% end %>
+
 <% else %>
 Kirjaudu sisään jotta voit hakea!
 <% end %>

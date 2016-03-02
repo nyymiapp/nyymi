@@ -1,5 +1,6 @@
 <div id="div-item-data" data-item-company-id="<%= conversation.company.id %>" data-item-conversation-id="<%= conversation.id %>"></div>
 
+</br>
 <div id="conversation-<%= conversation.id %>"> 
 	<% conversation.messages.each do |m| %>
 		<b><%= User.find(m.sender_id).username %>: </b> <%= m.content %>  </br>

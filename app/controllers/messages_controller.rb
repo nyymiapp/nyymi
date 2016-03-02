@@ -9,6 +9,7 @@ class MessagesController < ApplicationController
   end
 
   def create
+    # Paramseissa tulee aina joko company id tai conversation id. 
     @message = Message.new
     @message.content = params[:content]
     @message.user = current_user
@@ -18,29 +19,26 @@ class MessagesController < ApplicationController
     @message.sendername = current_user.username
     @message.save!
 
-    # user id pitää olla SE joka ei ole yrityksen ylläpitäjä!
     if params[:conversation_id] == nil or params[:conversation_id] == ""
-      if @message.company.users.include? current_user and params[:receiver_id] != nil and params[:receiver_id] != "" 
-        id = @message.receiver_id
-        puts "receiver"
-      else 
-        id = current_user.id
-      end
-      if Conversation.find_by(user_id: id, company_id: @message.company_id) == nil
-        puts "createssa"
-        conversation = Conversation.create user_id: id, company_id: @message.company_id
+      admin = Company.find(@message.company_id).users.include? current_user
+      if admin
+        id=receiver_id
       else
-        puts "löydetään"
-        conversation = Conversation.find_by(user_id: id, company_id: @message.company_id)
+        id=current_user.id
       end
-      puts conversation
-      conversation.messages << @message
-      @message.company = Company.find(params[:company_id])
-    else 
+      if Conversation.find_by(user_id:id, company_id: @message.company_id ) == nil
+        conversation = Conversation.create user_id: current_user.id, company_id: @message.company_id
+      else 
+        conversation = Conversation.find_by(user_id:id, company_id: @message.company_id )
+      end
+    else
       conversation = Conversation.find(params[:conversation_id])
-      conversation.messages << @message
     end
+
+    conversation.messages << @message
     conversation.save!
+
+    # user id pitää olla SE joka ei ole yrityksen ylläpitäjä!
 
     c = 'message_channel_' + User.find(conversation.user_id).channel
 
