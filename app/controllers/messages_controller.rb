@@ -27,10 +27,13 @@ class MessagesController < ApplicationController
         id = current_user.id
       end
       if Conversation.find_by(user_id: id, company_id: @message.company_id) == nil
+        puts "createssa"
         conversation = Conversation.create user_id: id, company_id: @message.company_id
       else
-        conversation = Conversation.find_by(user_id: id, company_id: @message.company_id) == nil
+        puts "löydetään"
+        conversation = Conversation.find_by(user_id: id, company_id: @message.company_id)
       end
+      puts conversation
       conversation.messages << @message
       @message.company = Company.find(params[:company_id])
     else 
