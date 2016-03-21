@@ -90,6 +90,7 @@ function($scope, $parse){
 <% if @user.companies.count > 0 %>
 	<% @user.companies.each do |c| %>
 		<% c.conversations.each do |a| %>
+    <% if a.user != current_user %>
      <tr>
     <% div_id = "hidden-partial-#{a.id}" -%>
     <td><div id="<%= div_id -%>" class="hidden_partial_button btn btn-default"> <%= User.find(a.user).username %></div>
@@ -98,6 +99,7 @@ function($scope, $parse){
       </div>
     </td>
     </tr>
+    <% end %>
 		<% end %>
 	<% end %>
    </tbody>

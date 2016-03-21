@@ -1,3 +1,5 @@
+<p id="notice"> </p>
+
 <script>
 
 var appi = angular.module('send_message_for_hakija_app', []);
@@ -9,9 +11,9 @@ function($scope, $parse){
   $scope.message = {};
   $scope.message.content = " ";
 
-  $scope.sendMessage = function(param_receiver_id, param_company_id, application_id){
+  $scope.sendMessage = function(param_receiver_id, param_company_id, param_application_id){
 
-    var the_string = 'message.content' + application_id;
+    var the_string = 'message.content' + param_application_id;
     var getter = $parse(the_string);
 
     var contentt = getter($scope);
@@ -21,12 +23,14 @@ function($scope, $parse){
     var message = {
       content: contentt,
       receiver_id: param_receiver_id, 
-      company_id: param_company_id
+      company_id: param_company_id,
+      invitationsended: "true",
+      application_id: param_application_id
     }
 
     $.post('/messages', message)
     .success(function(data, status) {
-         alert("Onnistui");
+             $("#notice").html("<div class='alert alert-success'> Haastattelukutsu lähetetty! Hakijan vastaus tulee Viestit -osioon. <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button></div>");
     }).error(function(data, status) {
         alert("error");
     });
@@ -40,7 +44,7 @@ function($scope, $parse){
 <% if current_user && @open_job.company.users.includes(current_user) %>
   <h1> <%= @open_job.name %> ylläpito
 
-       <span><%= link_to 'Poista', @open_job , method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger", style:"color:white;"%></span>
+       <span><%= link_to 'Poista avoin työpaikka', @open_job , method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger", style:"color:white;"%></span>
 
 <% if can? :edit, @open_job %>
         <span> <%= link_to 'Muokkaa', edit_open_job_path(@open_job), 'data-no-turbolink' => true, class:"btn btn-default"  %> </span>
@@ -78,7 +82,10 @@ Vanhentuu hakijoille: <%= @open_job.expires %></br></br>
     <% div_id = "hidden-partial-#{a.id}" -%>
 		<td><div id="<%= div_id -%>" class="hidden_partial_button btn btn-default" style="margin-bottom:10px;"> <%=a.user.username %>
         <% if a.abandoned  %>
-       <span class="label label-info">hylätty</span>
+       <span class="label label-primary">hylätty</span>
+       <% end %>
+      <% if a.invitationsended == "true"  %>
+         <span class="label label-primary">haastattelukutsu lähetetty</span>
        <% end %>
        </div>
       <div style="display:none;border: 1px solid #2ecc71; padding:10px;" id="<%= div_id -%>divi" class="hidden_partial">

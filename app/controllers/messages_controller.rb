@@ -19,6 +19,12 @@ class MessagesController < ApplicationController
     @message.sendername = current_user.username
     @message.save!
 
+    if params[:invitationsended] == "true"
+      @application = Application.find(params[:application_id])
+      @application.invitationsended = "true"
+      @application.save!
+    end
+
     if params[:conversation_id] == nil or params[:conversation_id] == ""
       admin = Company.find(@message.company_id).users.include? current_user
       if admin

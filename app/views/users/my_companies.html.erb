@@ -2,7 +2,7 @@
 <table class="table table-hover">
 		<% @user.companies.each do |c| %>
       <tr>
-			<td><%= link_to c.name, administration_company_path(c) %> </td>
+			<td><%= link_to c.name, administration_company_path(c), 'data-no-turbolink' => true %> </td>
 			</tr>
 		<% end %>
 </table>
@@ -40,8 +40,8 @@
     <th> <a ng-click="sort_by('company.name')">company</a> </th>
     </thead>
     <tr ng-repeat="open_job in open_jobs| orderBy:order | filter:searchText">
-      <td><%= link_to '{{open_job.name}}', '/open_jobs/{{open_job.id}}/administration' %></td>
-      <td><%= link_to '{{open_job.companyname}}', '/companies/{{open_job.company_id}}/administration' %></td>
+      <td><%= link_to '{{open_job.name}}', '/open_jobs/{{open_job.id}}/administration' , 'data-no-turbolink' => true%></td>
+      <td><%= link_to '{{open_job.companyname}}', '/companies/{{open_job.company_id}}/administration', 'data-no-turbolink' => true %></td>
     </tr>
   </table>
 
