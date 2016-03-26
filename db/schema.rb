@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160302180606) do
+ActiveRecord::Schema.define(version: 20160326163924) do
 
   create_table "applications", force: :cascade do |t|
     t.integer  "open_job_id"
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 20160302180606) do
     t.integer  "sender_id"
     t.integer  "receiver_id"
     t.string   "sendername"
+    t.boolean  "seen"
   end
 
   create_table "open_jobs", force: :cascade do |t|

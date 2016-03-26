@@ -1,5 +1,5 @@
 class ConversationsController < ApplicationController
-  before_action :set_conversation, only: [:show, :edit, :update, :destroy]
+  before_action :set_conversation, only: [:show, :edit, :update, :destroy, :set_read]
 
   # GET /conversations
   # GET /conversations.json
@@ -10,6 +10,18 @@ class ConversationsController < ApplicationController
   # GET /conversations/1
   # GET /conversations/1.json
   def show
+  end
+
+  def set_read
+    @messages = @conversation.messages
+    @messages.reverse_each do |m|
+      if not m.seen
+        m.seen = true
+        m.save!
+      else 
+        break
+      end
+    end
   end
 
   # GET /conversations/new

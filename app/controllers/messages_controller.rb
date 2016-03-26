@@ -17,6 +17,7 @@ class MessagesController < ApplicationController
     @message.company_id = params[:company_id]
     @message.sender_id = current_user.id
     @message.sendername = current_user.username
+    @message.seen = false
     @message.save!
 
     if params[:invitationsended] == "true"
@@ -81,6 +82,6 @@ class MessagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def message_params
-      params.require(:message).permit(:user_id, :company_id, :conversation_id, :sender_id)
+      params.require(:message).permit(:user_id, :company_id, :conversation_id, :sender_id, :seen)
     end
 end

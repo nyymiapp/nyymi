@@ -24,7 +24,7 @@
   $( document ).ready(function() {
     var notice = localStorage.getItem("notification");
     localStorage.setItem("notification", "");
-    if(notice == "Application created!"){
+    if(notice == "Hakemus luotu!"){
       $("#notice").html("<div class='alert alert-success'>" + notice + " <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button></div>");
     }
 

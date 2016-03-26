@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get 'about', to: 'companies#about'
   get 'welcome', to: 'open_jobs#welcome'
   post 'messages', to: 'messages#create'
+  post 'set_read', to: 'conversations#set_read'
 
   get 'current_user_open_jobs', to: 'open_jobs#current_user_open_jobs'
 

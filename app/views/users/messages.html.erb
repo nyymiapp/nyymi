@@ -79,7 +79,7 @@ function($scope, $parse){
 	<% @user.conversations.each do |a| %>
     <tr>
     <% div_id = "hidden-partial-#{a.id}" -%>
-		<td><div id="<%= div_id -%>" class="hidden_partial_button btn btn-default"> <%=a.company.name %></div>
+		<td><div id="<%= div_id -%>" class="hidden_partial_button btn btn-default"> <%=a.company.name %> <%= a.not_seen(current_user.id) %></div>
       <div style="display:none;" id="<%= div_id -%>divi" class="hidden_partial">
         <%= render 'conversations/showpartial', conversation: a %>
       </div>
@@ -93,7 +93,7 @@ function($scope, $parse){
     <% if a.user != current_user %>
      <tr>
     <% div_id = "hidden-partial-#{a.id}" -%>
-    <td><div id="<%= div_id -%>" class="hidden_partial_button btn btn-default"> <%= User.find(a.user).username %></div>
+    <td><div id="<%= div_id -%>" class="hidden_partial_button btn btn-default"> <%= User.find(a.user).username %> <%= a.not_seen(current_user.id) %></div>
       <div style="display:none;" id="<%= div_id -%>divi" class="hidden_partial">
         <%= render 'conversations/showpartial', conversation: a %>
       </div>
@@ -118,7 +118,17 @@ $( document ).ready(function() {
 $( ".hidden_partial_button" ).click(function() {
   id = this.id
   $( "#" + id + "divi" ).slideToggle( "slow", function() {
-    // Animation complete.
+    var conversation = {
+      id: id.split("-")[2],
+    }
+
+    $.post('/set_read', conversation)
+    .success(function(data, status) {
+
+    }).error(function(data, status) {
+        alert("error");
+    });
+
   });
 });
 
