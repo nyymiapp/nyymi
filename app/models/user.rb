@@ -14,4 +14,19 @@ class User < ActiveRecord::Base
 
     validates :username, uniqueness: true, length: { minimum: 1 }
 
+    def not_seen
+    	sum = 0
+    	self.conversations.each do |c|
+    		sum += c.not_seen(self.id)
+    	end
+    	self.companies.each do |c|
+    		c.conversations.each do |co|
+    			if co.user_id != self.id 
+    				sum += co.not_seen(self.id)
+    			end
+    		end
+    	end
+    	return sum
+    end
+
 end
