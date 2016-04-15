@@ -44,7 +44,7 @@ function($scope, $parse){
 <% if current_user && @open_job.company.users.includes(current_user) %>
   <h1> <%= @open_job.name %> ylläpito
 
-       <span><%= link_to 'Poista avoin työpaikka', @open_job , method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger", style:"color:white;"%></span>
+       <span><%= link_to 'Poista avoin työpaikka', @open_job , method: :delete, class:"btn btn-danger", style:"color:white;"%></span>
 
 <% if can? :edit, @open_job %>
         <span> <%= link_to 'Muokkaa', edit_open_job_path(@open_job), 'data-no-turbolink' => true, class:"btn btn-default"  %> </span>

@@ -33,9 +33,13 @@ gem 'jquery-turbolinks'
 
 gem "cancan"
 
+gem 'selenium-webdriver'
+
 gem 'jbuilder', '~> 2.0'
 
 gem 'poltergeist'
+
+gem "capybara-webkit"
 
 gem 'simplecov', :require => false, :group => :test
 
@@ -56,6 +60,7 @@ group :test do
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'launchy'
+  gem 'database_cleaner'
 end
 
 group :development, :test do

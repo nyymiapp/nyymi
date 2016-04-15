@@ -8,6 +8,14 @@ RSpec.describe OpenJob, type: :model do
     expect(OpenJob.count).to eq(0)
   end
 
+  it "is not saved with expire date in the past" do
+    date = DateTime.now - 2.months
+    open_job = OpenJob.create name:"UMT Software", expires:date
+
+    expect(open_job.valid?).to be(false)
+    expect(OpenJob.count).to eq(0)
+  end
+
   describe "with name" do
     let(:company){ Company.create name:"UMT Software"}
     let(:open_job){ OpenJob.create name:"Developer"}

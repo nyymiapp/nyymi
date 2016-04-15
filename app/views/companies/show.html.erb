@@ -56,7 +56,7 @@ function($scope){
 
 <% if current_user and current_user.companies.include? @company %>
 	
-	<%= link_to "Admin page", administration_company_path(@company), class:"btn btn-primary", style:"color:white;" %>
+	<%= link_to "Ylläpito", administration_company_path(@company), class:"btn btn-primary", style:"color:white;", id:"company_administration" %>
 
 <% end %>
 

@@ -29,7 +29,8 @@ describe "Users page" do
   			fill_in('user[password_confirmation]', with:'Foobar1!')
       		click_button "Create User"
     		expect(User.count).to eq(1)
-			expect(page).to have_content "Welcome! Now you can"
+			expect(page).to have_content "Tervetuloa!"
+			DatabaseCleaner.clean
 		end
 
 	end
@@ -40,6 +41,7 @@ describe "Users page" do
 			visit root_path
 			sign_in(username:"Pekka", password:"Foobar1")
 			expect(page).to have_content "Kirjaudu ulos"
+			DatabaseCleaner.clean
 		end
 
 		it "can edit realname" do 
@@ -51,6 +53,7 @@ describe "Users page" do
 			fill_in('user[password_confirmation]', with:'Foobar1')
 			click_button "Update User"
 			expect(page).to have_content "feikki"
+			DatabaseCleaner.clean
 		end
 	end
 

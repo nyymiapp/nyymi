@@ -13,6 +13,6 @@
 	<li><%= link_to current_user.username, current_user, style:"color:white;"  %></li>
 	<li><%= link_to 'Kirjaudu ulos', signout_path, style:"color:white;" %></li>
 <% else %>
-	<li><%= link_to 'Kirjaudu sisään', signin_path, style:"color:white;" %></li>
+	<li><%= link_to 'Kirjaudu sisään', signin_path, style:"color:white;", id:"login" %></li>
 	<li><%= link_to 'Rekisteröidy', signup_path, style:"color:white;" %></li>
 <% end %>
