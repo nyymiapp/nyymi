@@ -18,3 +18,7 @@ Tätä sovellusta käytetään anonyymiin työnhakuun. Se piilottaa hakijasta ni
 [Pusher](https://pusher.com/) huolehtii chatin viestien lähetyksen websocketeilla. 
 
 [Database Cleaneria](https://github.com/DatabaseCleaner/database_cleaner) käytetään testeissä tietokannan tyhjennykseen.
+
+[Bootstrap](http://getbootstrap.com/components/) tyyleihin.
+
+
