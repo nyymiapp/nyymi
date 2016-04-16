@@ -3,9 +3,9 @@ class ExperiencesController < ApplicationController
 
   # GET /experiences
   # GET /experiences.json
-  def index
+  /def index
     @experiences = Experience.all
-  end
+  end/
 
   # GET /experiences/1
   # GET /experiences/1.json
@@ -13,14 +13,6 @@ class ExperiencesController < ApplicationController
     
   end
 
-  # GET /experiences/new
-  def new
-    @experience = Experience.new
-  end
-
-  # GET /experiences/1/edit
-  def edit
-  end
 
   # POST /experiences
   # POST /experiences.json
@@ -47,7 +39,7 @@ class ExperiencesController < ApplicationController
 
   # PATCH/PUT /experiences/1
   # PATCH/PUT /experiences/1.json
-  def update
+  /def update
     respond_to do |format|
       if @experience.update(experience_params)
         format.html { redirect_to @experience, notice: 'Experience was successfully updated.' }
@@ -57,17 +49,17 @@ class ExperiencesController < ApplicationController
         format.json { render json: @experience.errors, status: :unprocessable_entity }
       end
     end
-  end
+  end/
 
   # DELETE /experiences/1
   # DELETE /experiences/1.json
-  def destroy
+  /def destroy
     @experience.destroy
     respond_to do |format|
       format.html { redirect_to experiences_url, notice: 'Experience was successfully destroyed.' }
       format.json { head :no_content }
     end
-  end
+  end/
 
   private
     # Use callbacks to share common setup or constraints between actions.

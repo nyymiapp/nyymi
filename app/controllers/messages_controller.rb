@@ -34,7 +34,7 @@ class MessagesController < ApplicationController
         id=current_user.id
       end
       if Conversation.find_by(user_id:id, company_id: @message.company_id ) == nil
-        conversation = Conversation.create user_id: current_user.id, company_id: @message.company_id
+        conversation = Conversation.create user_id: current_user.id, company_id: @message.company_id, company:Company.find(@message.company_id)
       else 
         conversation = Conversation.find_by(user_id:id, company_id: @message.company_id )
       end
@@ -46,12 +46,13 @@ class MessagesController < ApplicationController
     conversation.save!
 
     # user id pitää olla SE joka ei ole yrityksen ylläpitäjä!
-
     c = 'message_channel_' + User.find(conversation.user_id).channel
 
     Pusher.trigger(c, 'new_message', {
         message: @message.to_json
     })
+
+    #puts conversation.company
 
     conversation.company.users.each do |u|
       if u.id == conversation.user_id
