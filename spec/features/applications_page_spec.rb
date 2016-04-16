@@ -65,6 +65,9 @@ def sign_in_and_create_application
 			
 	#click_link "Kirjaudu ulos"
 	company = Company.create name:"UMT Software"
+	user2 = User.create username:"Pekka2", password:"Foobar1", password_confirmation:"Foobar1", id:2, email:"toivanenpihla@gmail.com"
+	company.users << user2
+	company.save
 	date = DateTime.now + 2.months
 	job = OpenJob.create name:"developer", company_id:"1", expires:date
 

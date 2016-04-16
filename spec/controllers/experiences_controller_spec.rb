@@ -44,13 +44,6 @@ RSpec.describe ExperiencesController, type: :controller do
     end
   end
 
-  describe "GET #new" do
-    it "assigns a new experience as @experience" do
-      get :new, {}, valid_session
-      expect(assigns(:experience)).to be_a_new(Experience)
-    end
-  end
-
   describe "GET #edit" do
     it "assigns the requested experience as @experience" do
       experience = Experience.create! valid_attributes

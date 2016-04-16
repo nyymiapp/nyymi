@@ -20,6 +20,28 @@ describe "Messages page" do
 		company.destroy
 		DatabaseCleaner.clean
 	end
+
+	it "user can see message", js:true do 
+		user = User.create username:"Pekka", password:"Foobar1", password_confirmation:"Foobar1", channel:"abc123", id:1
+		company = Company.create name:"UMT Software", id:1
+		user2 = User.create username:"Pekka2", password:"Foobar1", password_confirmation:"Foobar1", channel:"def456", id:2
+		company.users << user2
+		company.save
+		conversation = Conversation.create company:company, user:user, id:1
+		message = Message.create company: company, user:user, content: "juuhh", sender_id:2
+		conversation.messages << message
+		conversation.save
+
+		sign_in(username:"Pekka", password:"Foobar1")
+		click_link "Viestit"
+		find("#hidden-partial-1").click
+		expect(page).to have_content "juuhh"
+		user.destroy
+		company.destroy
+		DatabaseCleaner.clean
+	end
+
+
 end
 
  def wait_for_websocket
