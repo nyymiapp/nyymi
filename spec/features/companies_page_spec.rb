@@ -91,7 +91,7 @@ describe "Companies page" do
   		click_link "Muokkaa perustietoja"
   		fill_in('company[description]', with:'uusikuvaus')
   		click_button "Update Company"
-  		expect(page).to have_content "Company was successfully updated."
+  		expect(page).to have_content "Päivitetty"
   		visit company_path(Company.first)
   		expect(page).to have_content "uusikuvaus"
        DatabaseCleaner.clean
