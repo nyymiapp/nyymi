@@ -59,9 +59,9 @@ Vanhentuu hakijoille: <%= @open_job.expires %></br></br>
 
 
      <% if session[:show_abandoned] == "true" %>
-        <span> <%= link_to "Älä näytä hylättyjä hakemuksia", toggle_showing_abandoned_path, method: :post, class: "btn btn-primary", style:"color:white;" %></span>
+        <span> <%= link_to "Älä näytä hylättyjä hakemuksia", toggle_showing_abandoned_path, method: :post, class: "btn cool_button", style:"color:white;" %></span>
         <% else %>
-        <span><%= link_to "Näytä myös hylätyt hakemukset", toggle_showing_abandoned_path, method: :post, class: "btn btn-primary", style:"color:white;" %></span>
+        <span><%= link_to "Näytä myös hylätyt hakemukset", toggle_showing_abandoned_path, method: :post, class: "btn cool_button", style:"color:white;" %></span>
         <% end %>
 
   </h2>
@@ -88,7 +88,7 @@ Vanhentuu hakijoille: <%= @open_job.expires %></br></br>
          <span class="label label-primary">haastattelukutsu lähetetty</span>
        <% end %>
        </div>
-      <div style="display:none;border: 1px solid #2ecc71; padding:10px;" id="<%= div_id -%>divi" class="hidden_partial">
+      <div style="display:none;border: 1px solid #EEA236; padding:10px;" id="<%= div_id -%>divi" class="hidden_partial">
         <%= render 'applications/showpartial', a: a %>
       </div>
     </td>

@@ -79,7 +79,7 @@ function($scope, $parse){
 	<% @user.conversations.each do |a| %>
     <tr>
     <% div_id = "hidden-partial-#{a.id}" -%>
-		<td><div id="<%= div_id -%>" class="hidden_partial_button btn btn-default"> <%=a.company.name %> <span class="label label-info"><%= a.not_seen(current_user.id) %></span></div>
+		<td><div id="<%= div_id -%>" class="hidden_partial_button btn cool_button"> <%=a.company.name %> <span class="label label-info"><%= a.not_seen(current_user.id) %></span></div>
       <div style="display:none;" id="<%= div_id -%>divi" class="hidden_partial">
         <%= render 'conversations/showpartial', conversation: a %>
       </div>
@@ -93,7 +93,7 @@ function($scope, $parse){
     <% if a.user != current_user %>
      <tr>
     <% div_id = "hidden-partial-#{a.id}" -%>
-    <td><div id="<%= div_id -%>" class="hidden_partial_button btn btn-default"> <%= User.find(a.user).username %> liittyen yritykseen <%=c.name%> <span class="label label-info"><%= a.not_seen(current_user.id) %></span></div>
+    <td><div id="<%= div_id -%>" class="hidden_partial_button btn cool_button"> <%= User.find(a.user).username %> liittyen yritykseen <%=c.name%> <span class="label label-info"><%= a.not_seen(current_user.id) %></span></div>
       <div style="display:none;" id="<%= div_id -%>divi" class="hidden_partial">
         <%= render 'conversations/showpartial', conversation: a %>
       </div>
