@@ -100,21 +100,6 @@ describe "Open jobs page" do
 		end
 	end
 
-	/describe "When logged in" do 
-		it "cannot go to administration page", js:true do 
-			user = User.create username:"Pekka", password:"Foobar1", password_confirmation:"Foobar1"
-			user2 = User.create username:"Pekka2", password:"Foobar1", password_confirmation:"Foobar1"
-			sign_in_and_create_company
-			create_open_job
-			click_link "Kirjaudu ulos"
-			sign_in(username:"Pekka2", password:"Foobar1")
-			#visit administration_open_job_path(OpenJob.first)
-			#expect(page).to have_content "You're not admin!"
-			user.destroy
-			user2.destroy
-			DatabaseCleaner.clean
-		end
-	end/
 end
 
 def sign_in_and_create_company

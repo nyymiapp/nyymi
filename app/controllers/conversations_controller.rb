@@ -15,7 +15,7 @@ class ConversationsController < ApplicationController
   def set_read
     @messages = @conversation.messages
     @messages.reverse_each do |m|
-      if not m.seen
+      if not m.seen and m.sender_id != current_user.id
         m.seen = true
         m.save!
       else 
