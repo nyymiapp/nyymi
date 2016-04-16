@@ -4,14 +4,6 @@ class ApplicationsController < ApplicationController
   load_and_authorize_resource
   before_action :set_application, only: [:show, :edit, :update, :destroy]
 
-
-  # poistettu coveragen lisäämiseks
-  # GET /applications
-  # GET /applications.json
-  #def index
- #   @applications = Application.all
- # end
-
   # GET /applications/1
   # GET /applications/1.json
   def show
@@ -68,7 +60,7 @@ class ApplicationsController < ApplicationController
   def send_email_for_admins(application)
     application.open_job.company.users.each do |u|
       begin
-        NotificationMailer.email("nyymi@nyymiapp.com", u.email, "Your company has new application.", "New application in Nyymi").deliver_now
+        NotificationMailer.email("nyymi@nyymiapp.com", u.email, "Yrityksesi on saanut uuden hakemuksen.", "Uusi hakemus Nyymissä").deliver_now
       rescue => ex
         puts ex.message
       end

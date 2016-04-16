@@ -37,30 +37,6 @@ class ExperiencesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /experiences/1
-  # PATCH/PUT /experiences/1.json
-  /def update
-    respond_to do |format|
-      if @experience.update(experience_params)
-        format.html { redirect_to @experience, notice: 'Experience was successfully updated.' }
-        format.json { render :show, status: :ok, location: @experience }
-      else
-        format.html { render :edit }
-        format.json { render json: @experience.errors, status: :unprocessable_entity }
-      end
-    end
-  end/
-
-  # DELETE /experiences/1
-  # DELETE /experiences/1.json
-  /def destroy
-    @experience.destroy
-    respond_to do |format|
-      format.html { redirect_to experiences_url, notice: 'Experience was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end/
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_experience
