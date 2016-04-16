@@ -61,22 +61,15 @@ describe "Applications page" do
 end
 
 def sign_in_and_create_application
-	#sign_in_create_company_create_open_job
-			
-	#click_link "Kirjaudu ulos"
 	company = Company.create name:"UMT Software"
 	user2 = User.create username:"Pekka2", password:"Foobar1", password_confirmation:"Foobar1", id:2, email:"toivanenpihla@gmail.com"
 	company.users << user2
 	company.save
 	date = DateTime.now + 2.months
 	job = OpenJob.create name:"developer", company_id:"1", expires:date
-
 	sign_in(username:"Pekka", password:"Foobar1")
-			
 	visit open_jobs_path
-
 	click_link "developer"
-
 	find('#create_application_button').click
 
 end

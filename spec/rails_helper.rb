@@ -71,4 +71,12 @@ RSpec.configure do |config|
     fill_in('password', with:credentials[:password])
     click_button('Kirjaudu sisään')
   end
+
+  def create_users_and_company
+    @user = User.create username:"Pekka", password:"Foobar1", password_confirmation:"Foobar1", channel:"abc123"
+    @company = Company.create name:"UMT Software", id:1
+    @user2 = User.create username:"Pekka2", password:"Foobar1", password_confirmation:"Foobar1", channel:"def456"
+    @company.users << @user2
+    @company.save
+  end
 end

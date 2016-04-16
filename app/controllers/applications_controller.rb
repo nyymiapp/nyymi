@@ -9,11 +9,6 @@ class ApplicationsController < ApplicationController
   def show
   end
 
-  # GET /applications/new
-  def new
-    @application = Application.new
-  end
-
   # POST /applications
   # POST /applications.json
   def create

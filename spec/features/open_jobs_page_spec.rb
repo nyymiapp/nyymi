@@ -10,7 +10,6 @@ describe "Open jobs page" do
 			user = User.create username:"Pekka", password:"Foobar1", password_confirmation:"Foobar1"
 			sign_in_and_create_company
 			create_open_job
-
 			click_link "developer"
 			expect(page).to have_content "developer ylläpito"
 			click_link "Muokkaa"
@@ -109,17 +108,14 @@ def sign_in_and_create_company
   	fill_in('company[location]', with:'paikkakunta')
   	fill_in('company[website]', with:'nettisivut')
   	fill_in('company[description]', with:'kuvaus')
-
     click_button "Create Company"
 end
 
 def create_open_job
-		find(:css, '#company_administration').click
-
-		find('#create_open_job_button').click
-
-		fill_in('open_job[name]', with:'developer')
-  		fill_in('open_job[description]', with:'rails-kehittäjä')
-  		click_button "Create Open job"
-		expect(page).to have_content "Avoin "
+	find(:css, '#company_administration').click
+	find('#create_open_job_button').click
+	fill_in('open_job[name]', with:'developer')
+  	fill_in('open_job[description]', with:'rails-kehittäjä')
+  	click_button "Create Open job"
+	expect(page).to have_content "Avoin "
 end

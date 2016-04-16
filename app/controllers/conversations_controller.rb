@@ -33,23 +33,6 @@ class ConversationsController < ApplicationController
   def edit
   end
 
-  # POST /conversations
-  # POST /conversations.json
-  /def create
-    @conversation = Conversation.new(conversation_params)
-
-    respond_to do |format|
-      if @conversation.save
-        format.html { redirect_to @conversation, notice: 'Conversation was successfully created.' }
-        format.json { render :show, status: :created, location: @conversation }
-      else
-        format.html { render :new }
-        format.json { render json: @conversation.errors, status: :unprocessable_entity }
-      end
-    end
-  end/
-
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_conversation

@@ -16,14 +16,14 @@ describe "Companies page" do
   		Company.create name:"Yritys"
   		visit edit_company_path(Company.first)
   		expect(page).to have_content "You are not authorized to access this page."
-       DatabaseCleaner.clean
+      DatabaseCleaner.clean
   	end
 
   	it "couldn't go to company administration path" do 
   		Company.create name:"Yritys"
   		visit administration_company_path(Company.first)
   		expect(page).to have_content "You are not authorized to access this page."
-       DatabaseCleaner.clean
+      DatabaseCleaner.clean
   	end
 
   	it "can go to about path" do 
@@ -107,7 +107,7 @@ describe "Companies page" do
       click_button "Lisää"
       expect(page).to have_content "Ylläpitäjä lisätty"
       user2.destroy
-       DatabaseCleaner.clean
+      DatabaseCleaner.clean
     end
 
   	it "couldn't go to edit company path when not administrator" do 
@@ -119,16 +119,16 @@ describe "Companies page" do
   		fill_in('company[website]', with:'nettisivut')
   		fill_in('company[description]', with:'kuvaus')
       	
-      	click_button "Create Company"
-      	click_link "Kirjaudu ulos"
+      click_button "Create Company"
+      click_link "Kirjaudu ulos"
 
-      	sign_in(username:"Pekka", password:"Foobar1")
+      sign_in(username:"Pekka", password:"Foobar1")
 
-      	expect(Company.count).to eq(1)
+      expect(Company.count).to eq(1)
 
-      	visit edit_company_path(Company.first)
-  		  expect(page).to have_content "You are not authorized to access this page."
-        DatabaseCleaner.clean
+      visit edit_company_path(Company.first)
+  		expect(page).to have_content "You are not authorized to access this page."
+      DatabaseCleaner.clean
   	end
 
 
