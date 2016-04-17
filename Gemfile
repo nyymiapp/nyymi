@@ -39,7 +39,7 @@ gem 'jbuilder', '~> 2.0'
 
 gem 'poltergeist'
 
-gem "capybara-webkit"
+#gem "capybara-webkit"
 
 gem 'simplecov', :require => false, :group => :test
 
