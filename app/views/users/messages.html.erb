@@ -19,7 +19,17 @@ var channel = pusher.subscribe('message_channel_' + user_id);
 channel.bind('new_message', function(data) {
       var obj = JSON.parse(data.message)
       $( "#conversation-" + obj.conversation_id ).append("<b>"+ obj.sendername + "</b>: " + obj.content + "</br>");
-      console.log(obj.message);
+});
+
+
+$('.conversation_channel').each(function(index, object){
+      var channel_id = object.getAttribute("conversation-channel");
+
+      var channel = pusher.subscribe('conversation_channel_' + channel_id);
+      channel.bind('set_seen_messages', function(data) {
+        var obj = JSON.parse(data.message)
+        $('#label_' + object.id).text(obj);
+      });
 });
 
 });
@@ -29,7 +39,6 @@ var appi = angular.module('send_message_to_conversation_app', []);
 appi.controller('MainCtrl', [
 '$scope','$parse',
 function($scope, $parse){
-
 
   $scope.message = {};
   $scope.message.content = " ";
@@ -77,9 +86,10 @@ function($scope, $parse){
 
   <tbody>
 	<% @user.conversations.each do |a| %>
+    <div class="conversation_channel" conversation-channel="<%= a.userchannel %>" id="<%=a.id %>"></div>
     <tr>
     <% div_id = "hidden-partial-#{a.id}" -%>
-		<td><div id="<%= div_id -%>" class="hidden_partial_button btn cool_button"> <%=a.company.name %> <span class="label label-info"><%= a.not_seen(current_user.id) %></span></div>
+		<td><div id="<%= div_id -%>" class="hidden_partial_button btn cool_button"> <%=a.company.name %> <span id="label_<%=a.id%>" class="label label-info"><%= a.not_seen(current_user.id) %></span></div>
       <div style="display:none;" id="<%= div_id -%>divi" class="hidden_partial">
         <%= render 'conversations/showpartial', conversation: a %>
       </div>
@@ -91,9 +101,10 @@ function($scope, $parse){
 	<% @user.companies.each do |c| %>
 		<% c.conversations.each do |a| %>
     <% if a.user != current_user %>
+    <div class="conversation_channel" conversation-channel="<%= a.channel %>" id="<%=a.id %>"></div>
      <tr>
     <% div_id = "hidden-partial-#{a.id}" -%>
-    <td><div id="<%= div_id -%>" class="hidden_partial_button btn cool_button"> <%= User.find(a.user).username %> liittyen yritykseen <%=c.name%> <span class="label label-info"><%= a.not_seen(current_user.id) %></span></div>
+    <td><div id="<%= div_id -%>" class="hidden_partial_button btn cool_button"> <%= User.find(a.user).username %> liittyen yritykseen <%=c.name%> <span class="label label-info" id="label_<%=a.id%>"><%= a.not_seen(current_user.id) %></span></div>
       <div style="display:none;" id="<%= div_id -%>divi" class="hidden_partial">
         <%= render 'conversations/showpartial', conversation: a %>
       </div>

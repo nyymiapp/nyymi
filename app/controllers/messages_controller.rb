@@ -1,3 +1,5 @@
+require 'digest/bubblebabble'
+
 class MessagesController < ApplicationController
   before_action :set_message, only: [:show, :edit, :update, :destroy]
 
@@ -37,6 +39,8 @@ class MessagesController < ApplicationController
 
       if Conversation.find_by(user_id:id, company_id: @message.company_id ) == nil
         conversation = Conversation.create user_id: id, company_id: @message.company_id, company:Company.find(@message.company_id)
+        conversation.channel = Digest::SHA256.bubblebabble (@message.content + "1234")
+        conversation.userchannel = Digest::SHA256.bubblebabble (@message.content + "4567")
       else 
         conversation = Conversation.find_by(user_id:id, company_id: @message.company_id )
       end
@@ -46,6 +50,7 @@ class MessagesController < ApplicationController
     end
     conversation.messages << @message
     conversation.save!
+    puts conversation.channel
 
     # user id pitää olla SE joka ei ole yrityksen ylläpitäjä!
     c = 'message_channel_' + User.find(conversation.user_id).channel

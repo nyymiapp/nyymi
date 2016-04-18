@@ -13,6 +13,22 @@ class ConversationsController < ApplicationController
   end
 
   def set_read
+    if @conversation.company.users.include? current_user
+       c = 'conversation_channel_' + @conversation.channel
+
+       Pusher.trigger(c, 'set_seen_messages', {
+         message: 0,
+         conversation_id: @conversation.id
+       })
+    else 
+       c = 'conversation_channel_' + @conversation.userchannel
+
+       Pusher.trigger(c, 'set_seen_messages', {
+         message: 0,
+         conversation_id: @conversation.id
+       })
+    end
+
     @messages = @conversation.messages
     @messages.reverse_each do |m|
       if not m.seen and m.sender_id != current_user.id
@@ -41,6 +57,6 @@ class ConversationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def conversation_params
-      params.require(:conversation).permit(:user_id, :company_id)
+      params.require(:conversation).permit(:user_id, :company_id, :userchannel, :channel)
     end
 end
