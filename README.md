@@ -17,4 +17,6 @@ Tätä sovellusta käytetään anonyymiin työnhakuun. Se piilottaa hakijasta ni
 
 [Bootstrap](http://getbootstrap.com/components/) tyyleihin.
 
+Google maps karttoihin
+
 
