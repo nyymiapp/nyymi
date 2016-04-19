@@ -90,9 +90,9 @@ function($scope){
     	open_job_id: $scope.open_job_id, 
 	}
 
-	$.post('/applications', application).success(function(data, status) {
+	   $.post('/applications', application).success(function(data, status) {
 
-        for (var i in $scope.experiences) {
+       for (var i in $scope.experiences) {
   				$scope.sendExperience($scope.experiences[i]);
 			 }
 			 localStorage.setItem("notification", "Hakemus luotu!");

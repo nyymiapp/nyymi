@@ -17,6 +17,7 @@ class ExperiencesController < ApplicationController
     @experience.strictplace = params[:strictplace]
     @experience.start = params[:start]
     @experience.end = params[:end]
+    puts Application.first.id + " on id"
     @experience.application = Application.find(session[:current_application_id])
     @experience.save
 

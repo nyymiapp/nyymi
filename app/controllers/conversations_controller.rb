@@ -25,9 +25,7 @@ class ConversationsController < ApplicationController
     end
 
     if @conversation.company.users.include? current_user
-       #puts "Etsitään conversation channelia user id: " + current_user.id + " conversation id: " + @conversation.id
        channeli = ConversationChannel.find_by(user_id: current_user.id, conversation_id: @conversation.id).channel
-       puts "CHANNELI: " + channeli
        c = 'conversation_channel_' + channeli
 
        Pusher.trigger(c, 'set_seen_messages', {
@@ -62,6 +60,7 @@ class ConversationsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_conversation
+      puts Conversation.find(params[:id])
       @conversation = Conversation.find(params[:id])
     end
 

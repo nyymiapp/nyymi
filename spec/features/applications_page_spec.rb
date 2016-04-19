@@ -5,7 +5,7 @@ describe "Applications page" do
 	describe "When company and open job is created" do 
 		it "user can make an application", js:true do
 			user = User.create username:"Pekka", password:"Foobar1", password_confirmation:"Foobar1", id:1
-			sign_in_and_create_application
+			sign_in_and_go_to_create_application
 
 			click_button "Lähetä hakemus!"
 			expect(page).to have_content "Hakemus luotu!"
@@ -16,7 +16,7 @@ describe "Applications page" do
 
 		it "user can make application with experiences", js:true do 
 			user = User.create username:"Pekka", password:"Foobar1", password_confirmation:"Foobar1", id:1
-			sign_in_and_create_application
+			sign_in_and_go_to_create_application
 
 			find("#create_experience_button").click
 			select "Työ", :from => "experience_place"
@@ -25,11 +25,11 @@ describe "Applications page" do
 			find("#save_experience").click
 			expect(page).to have_content "tallennettu"
 
+			click_button "Lähetä hakemus!"
 			user.destroy
 			e = Experience.create description:"kuvaus"
 			e.destroy
 			DatabaseCleaner.clean
-
 		end
 
 
@@ -60,7 +60,7 @@ describe "Applications page" do
 	end
 end
 
-def sign_in_and_create_application
+def sign_in_and_go_to_create_application
 	company = Company.create name:"UMT Software"
 	user2 = User.create username:"Pekka2", password:"Foobar1", password_confirmation:"Foobar1", id:2, email:"toivanenpihla@gmail.com"
 	company.users << user2
