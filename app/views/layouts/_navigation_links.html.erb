@@ -9,7 +9,7 @@
 		<li><%= link_to "Yritysten ylläpito", my_companies_user_path(current_user), style:"color:white;" %></li>
 	<% end %>
 	<li><%= link_to "Uusi yritys", new_company_path, style:"color:white;" %></li>
-	<li><%= link_to "Viestit <span style='padding-right:5px;' class='label label-info'>#{current_user.not_seen}</span>".html_safe, messages_user_path(current_user), style:"color:white;", 'data-no-turbolink' => true %></li>
+	<li><%= link_to "Viestit <span style='padding-right:5px;' class='label label-info' id='not_seen_messages'>#{current_user.not_seen}</span>".html_safe, messages_user_path(current_user), style:"color:white;", 'data-no-turbolink' => true %></li>
 	<li><%= link_to current_user.username, current_user, style:"color:white;"  %></li>
 	<li><%= link_to 'Kirjaudu ulos', signout_path, style:"color:white;" %></li>
 <% else %>

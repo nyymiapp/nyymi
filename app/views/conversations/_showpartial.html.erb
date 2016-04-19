@@ -3,7 +3,7 @@
 </br>
 <div id="conversation-<%= conversation.id %>"> 
 	<% conversation.messages.each do |m| %>
-		<b><%= User.find(m.sender_id).username %>: </b> <%= m.content %>  </br>
+		<%= m.created_at.strftime("%H:%M:%S") %> <b><%= User.find(m.sender_id).username %>: </b> <%= m.content %>  </br>
 	<% end %>
 </div>
 

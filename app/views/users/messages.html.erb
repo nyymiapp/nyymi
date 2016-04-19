@@ -21,12 +21,18 @@ channel.bind('new_message', function(data) {
       $( "#conversation-" + obj.conversation_id ).append("<b>"+ obj.sendername + "</b>: " + obj.content + "</br>");
 });
 
+var channel = pusher.subscribe('user_not_seen_channel_' + user_id);
+channel.bind('new_not_seen_value', function(data) {
+      var obj = JSON.parse(data.message)
+      $( "#not_seen_messages").text(obj);
+});
+
 
 $('.conversation_channel').each(function(index, object){
       var channel_id = object.getAttribute("conversation-channel");
-
       var channel = pusher.subscribe('conversation_channel_' + channel_id);
       channel.bind('set_seen_messages', function(data) {
+        console.log('CHANNEL: ' + channel_id + " numero: " + JSON.parse(data.message));
         var obj = JSON.parse(data.message)
         $('#label_' + object.id).text(obj);
       });
@@ -101,7 +107,8 @@ function($scope, $parse){
 	<% @user.companies.each do |c| %>
 		<% c.conversations.each do |a| %>
     <% if a.user != current_user %>
-    <div class="conversation_channel" conversation-channel="<%= a.channel %>" id="<%=a.id %>"></div>
+    <% channeli = ConversationChannel.find_by(user_id:current_user.id, conversation_id:a.id).channel %>
+    <div class="conversation_channel" conversation-channel="<%= channeli %>" id="<%=a.id %>"></div>
      <tr>
     <% div_id = "hidden-partial-#{a.id}" -%>
     <td><div id="<%= div_id -%>" class="hidden_partial_button btn cool_button"> <%= User.find(a.user).username %> liittyen yritykseen <%=c.name%> <span class="label label-info" id="label_<%=a.id%>"><%= a.not_seen(current_user.id) %></span></div>
@@ -115,10 +122,6 @@ function($scope, $parse){
 	<% end %>
    </tbody>
 
-<% end %>
-
-<% if @user.conversations.count == 0 %>
-  Sinulla ei ole vielä keskusteluja. Voit lähettää yrityksille yksityisviestejä niiden sivuilta. 
 <% end %>
 
 </div>

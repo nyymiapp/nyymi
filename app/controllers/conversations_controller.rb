@@ -13,8 +13,22 @@ class ConversationsController < ApplicationController
   end
 
   def set_read
+
+    @messages = @conversation.messages
+    @messages.reverse_each do |m|
+      if not m.seen and m.sender_id != current_user.id
+        m.seen = true
+        m.save!
+      else 
+        break
+      end
+    end
+
     if @conversation.company.users.include? current_user
-       c = 'conversation_channel_' + @conversation.channel
+       #puts "Etsitään conversation channelia user id: " + current_user.id + " conversation id: " + @conversation.id
+       channeli = ConversationChannel.find_by(user_id: current_user.id, conversation_id: @conversation.id).channel
+       puts "CHANNELI: " + channeli
+       c = 'conversation_channel_' + channeli
 
        Pusher.trigger(c, 'set_seen_messages', {
          message: 0,
@@ -27,17 +41,13 @@ class ConversationsController < ApplicationController
          message: 0,
          conversation_id: @conversation.id
        })
-    end
+    end  
 
-    @messages = @conversation.messages
-    @messages.reverse_each do |m|
-      if not m.seen and m.sender_id != current_user.id
-        m.seen = true
-        m.save!
-      else 
-        break
-      end
-    end
+    c = 'user_not_seen_channel_' + current_user.channel
+    Pusher.trigger(c, 'new_not_seen_value', {
+      message: current_user.not_seen,
+    })
+
   end
 
   # GET /conversations/new

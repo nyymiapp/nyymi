@@ -1,4 +1,5 @@
 require 'digest/bubblebabble'
+require 'securerandom'
 
 class MessagesController < ApplicationController
   before_action :set_message, only: [:show, :edit, :update, :destroy]
@@ -39,8 +40,11 @@ class MessagesController < ApplicationController
 
       if Conversation.find_by(user_id:id, company_id: @message.company_id ) == nil
         conversation = Conversation.create user_id: id, company_id: @message.company_id, company:Company.find(@message.company_id)
-        conversation.channel = Digest::SHA256.bubblebabble (@message.content + "1234")
-        conversation.userchannel = Digest::SHA256.bubblebabble (@message.content + "4567")
+        conversation.channel = Digest::SHA256.bubblebabble (@message.content + SecureRandom.hex)
+        conversation.userchannel = Digest::SHA256.bubblebabble (@message.content + SecureRandom.hex)
+        Company.find(conversation.company_id).users.each do |u|
+          c = ConversationChannel.create user_id: u.id, conversation_id:conversation.id, channel:SecureRandom.hex
+        end
       else 
         conversation = Conversation.find_by(user_id:id, company_id: @message.company_id )
       end
@@ -50,7 +54,8 @@ class MessagesController < ApplicationController
     end
     conversation.messages << @message
     conversation.save!
-    puts conversation.channel
+
+    trigger_seen_messages(conversation)
 
     # user id pitää olla SE joka ei ole yrityksen ylläpitäjä!
     c = 'message_channel_' + User.find(conversation.user_id).channel
@@ -58,8 +63,6 @@ class MessagesController < ApplicationController
     Pusher.trigger(c, 'new_message', {
         message: @message.to_json
     })
-
-    #puts conversation.company
 
     conversation.company.users.each do |u|
       if u.id == conversation.user_id
@@ -80,6 +83,34 @@ class MessagesController < ApplicationController
         format.json { render json: @message.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def trigger_seen_messages(conversation)
+    conversation.company.users.each do |user|
+       c = 'conversation_channel_' + ConversationChannel.find_by(user_id:user.id, conversation_id:conversation.id).channel
+
+       Pusher.trigger(c, 'set_seen_messages', {
+         message: conversation.not_seen(user.id),
+         conversation_id: conversation.id
+       })
+
+       c = 'user_not_seen_channel_' + user.channel
+       Pusher.trigger(c, 'new_not_seen_value', {
+         message: user.not_seen,
+       })
+
+    end
+    c = 'conversation_channel_' + conversation.userchannel
+
+    Pusher.trigger(c, 'set_seen_messages', {
+         message: conversation.not_seen(conversation.user.id),
+         conversation_id: conversation.id
+    })
+
+    c = 'user_not_seen_channel_' + conversation.user.channel
+    Pusher.trigger(c, 'new_not_seen_value', {
+         message: conversation.user.not_seen,
+    })    
   end
 
   private
