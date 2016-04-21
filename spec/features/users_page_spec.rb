@@ -1,14 +1,17 @@
 require 'rails_helper'
 
 describe "Users page" do
+	self.use_transactional_fixtures = false
 	describe "User not logged in" do 
 		it "should see rekisteröidy and kirjaudu sisään buttons" do 
+			self.use_transactional_fixtures = false
 			visit root_path
 			expect(page).to have_content "Rekisteröidy"
 			expect(page).to have_content "Kirjaudu sisään"
 		end
 
 		it "should not log in when credentials are wrong" do 
+			self.use_transactional_fixtures = false
 			visit root_path
 			click_link "Kirjaudu sisään"
 			fill_in('username', with:'käyttäjänimi')
@@ -18,6 +21,7 @@ describe "Users page" do
 		end
 
 		it "should log in automaticly when registered" do 
+			self.use_transactional_fixtures = false
 			visit root_path
 			click_link "Rekisteröidy"
 
@@ -38,6 +42,7 @@ describe "Users page" do
 	describe "User logged in" do 
 		let!(:user) { FactoryGirl.create :user }
 		it "should see kirjaudu ulos button" do 
+			self.use_transactional_fixtures = false
 			visit root_path
 			sign_in(username:"Pekka", password:"Foobar1")
 			expect(page).to have_content "Kirjaudu ulos"
@@ -45,6 +50,7 @@ describe "Users page" do
 		end
 
 		it "can edit realname" do 
+			self.use_transactional_fixtures = false
 			visit root_path
 			sign_in(username:"Pekka", password:"Foobar1")
 			click_link "Muokkaa tietoja"

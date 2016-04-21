@@ -4,9 +4,10 @@ require 'spec_helper'
 describe "Open jobs page" do
 	describe "When user is administrator" do 
 		Capybara.javascript_driver = :selenium
-		 DatabaseCleaner.clean
+		DatabaseCleaner.clean
 
 		it "can create an open job and edit description", js:true do 
+			self.use_transactional_fixtures = false
 			user = User.create username:"Pekka", password:"Foobar1", password_confirmation:"Foobar1"
 			sign_in_and_create_company
 			create_open_job
@@ -21,6 +22,7 @@ describe "Open jobs page" do
 		end
 
 		it "can destroy open job", js:true do 
+			self.use_transactional_fixtures = false
 			user = User.create username:"Pekka", password:"Foobar1", password_confirmation:"Foobar1"
 			sign_in_and_create_company
 
@@ -38,6 +40,7 @@ describe "Open jobs page" do
 		end
 
 		it "cannot create open job without name", js:true do 
+			self.use_transactional_fixtures = false
 			user = User.create username:"Pekka", password:"Foobar1", password_confirmation:"Foobar1"
 			sign_in_and_create_company
 
@@ -53,6 +56,7 @@ describe "Open jobs page" do
 		end
 
 		it "cannot create open job with expired last open day", js:true do 
+			self.use_transactional_fixtures = false
 			DatabaseCleaner.clean
 			user = User.create username:"Pekka", password:"Foobar1", password_confirmation:"Foobar1"
 			sign_in_and_create_company
@@ -70,6 +74,7 @@ describe "Open jobs page" do
 		end
 
 		it "can see applications of open job", js:true do 
+			self.use_transactional_fixtures = false
 			user = User.create username:"Pekka", password:"Foobar1", password_confirmation:"Foobar1"
 			sign_in_and_create_company
 			create_open_job	
@@ -89,6 +94,7 @@ describe "Open jobs page" do
 
 	describe "When not logged in" do 
 		it "should see an open job" do
+			self.use_transactional_fixtures = false
 			company = Company.create name:"Yritys"
 			open_job = OpenJob.create name:"developer", company: company
 			visit open_job_path(OpenJob.first)

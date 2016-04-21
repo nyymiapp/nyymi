@@ -1,18 +1,23 @@
 require 'rails_helper'
 
 describe "Companies page" do
+  self.use_transactional_fixtures = false
+
   it "should not have any before been created" do
+    self.use_transactional_fixtures = false
     visit companies_path
     expect(page).to have_no_content "Luo uusi yritys"
   end
 
   describe "User not logged in " do
   	it "couldn't go to new company path" do 
+      self.use_transactional_fixtures = false
   		visit new_company_path
   		expect(page).to have_content "You are not authorized to access this page."
   	end
 
   	it "couldn't go to edit company path" do 
+      self.use_transactional_fixtures = false
   		Company.create name:"Yritys"
   		visit edit_company_path(Company.first)
   		expect(page).to have_content "You are not authorized to access this page."
@@ -20,6 +25,7 @@ describe "Companies page" do
   	end
 
   	it "couldn't go to company administration path" do 
+      self.use_transactional_fixtures = false
   		Company.create name:"Yritys"
   		visit administration_company_path(Company.first)
   		expect(page).to have_content "You are not authorized to access this page."
@@ -27,6 +33,7 @@ describe "Companies page" do
   	end
 
   	it "can go to about path" do 
+      self.use_transactional_fixtures = false
   		visit about_path
   		expect(page).to have_content "Nyymistä"
   	end
@@ -38,6 +45,7 @@ describe "Companies page" do
   	let!(:user2) { FactoryGirl.create :user2 }
 
   	it "doesn't see admin page button when not admin" do 
+      self.use_transactional_fixtures = false
   		Company.create name:"yritys"
   		sign_in(username:"Pekka", password:"Foobar1")
   		visit company_path(Company.first)
@@ -46,6 +54,7 @@ describe "Companies page" do
   	end
 
   	it "couldn't go to company administration path if not admin" do 
+      self.use_transactional_fixtures = false
   		Company.create name:"Yritys"
   		sign_in(username:"Pekka", password:"Foobar1")
   		visit administration_company_path(Company.first)
@@ -54,6 +63,7 @@ describe "Companies page" do
   	end
 
   	it "can go to about path" do 
+      self.use_transactional_fixtures = false
   		sign_in(username:"Pekka", password:"Foobar1")
   		visit about_path
   		expect(page).to have_content "Nyymistä"
@@ -61,6 +71,7 @@ describe "Companies page" do
   	end
 
   	it "can create a company from index page" do 
+      self.use_transactional_fixtures = false
   		sign_in(username:"Pekka", password:"Foobar1")
   		visit companies_path
   		expect(page).to have_content "Luo uusi yritys"
@@ -68,6 +79,7 @@ describe "Companies page" do
   	end
 
   	it "becomes administrator when creates a company" do 
+      self.use_transactional_fixtures = false
   		sign_in_and_create_company
 
   		click_link "Ylläpito"
@@ -77,6 +89,7 @@ describe "Companies page" do
   	end
 
   	it "can destroy company when administrator" do 
+      self.use_transactional_fixtures = false
   		sign_in_and_create_company
   		click_link "Ylläpito"
   		click_link "Poista yritys"
@@ -85,6 +98,7 @@ describe "Companies page" do
   	end
 
   	it "can update company information when administrator" do 
+      self.use_transactional_fixtures = false
   		sign_in_and_create_company
   		  
   		click_link "Ylläpito"
@@ -98,6 +112,7 @@ describe "Companies page" do
   	end
 
     it "can add admin when administrator", js:true do 
+      self.use_transactional_fixtures = false
       user2 = User.create username:"Pekka2", password:"Foobar1", password_confirmation:"Foobar1"
       sign_in_and_create_company
         
@@ -111,6 +126,7 @@ describe "Companies page" do
     end
 
   	it "couldn't go to edit company path when not administrator" do 
+      self.use_transactional_fixtures = false
   		sign_in(username:"Pekka2", password:"Foobar1")
   		visit new_company_path
 

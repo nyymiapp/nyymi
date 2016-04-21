@@ -12,24 +12,21 @@ class MessagesController < ApplicationController
   end
 
   def create
-    # Paramseissa tulee aina joko company id tai conversation id. 
+    # Paramseissa tulee aina joko company id tai conversation id.
     @message = Message.new(message_params)
-    #@message.content = params[:content]
     @message.user = current_user
-    #@message.receiver_id = params[:receiver_id]
-    #@message.company_id = params[:company_id]
     @message.sender_id = current_user.id
     @message.sendername = current_user.username
     @message.seen = false
     @message.save!
 
-    if params[:invitationsended] == "true"
-      @application = Application.find(params[:application_id])
+    if message_params[:invitationsended] == "true"
+      @application = Application.find(message_params[:application_id])
       @application.invitationsended = "true"
       @application.save!
     end
 
-    if params[:conversation_id] == nil or params[:conversation_id] == ""
+    if message_params[:conversation_id] == nil or message_params[:conversation_id] == ""
       admin = Company.find(@message.company_id).users.include? current_user
 
       if admin
@@ -50,7 +47,7 @@ class MessagesController < ApplicationController
       end
 
     else
-      conversation = Conversation.find(params[:conversation_id])
+      conversation = Conversation.find(message_params[:conversation_id])
     end
     conversation.messages << @message
     conversation.save!
@@ -121,6 +118,6 @@ class MessagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def message_params
-      params.require(:message).permit(:user_id, :company_id, :conversation_id, :sender_id, :seen)
+      params.require(:message).permit(:user_id, :company_id, :conversation_id, :sender_id, :seen, :content)
     end
 end

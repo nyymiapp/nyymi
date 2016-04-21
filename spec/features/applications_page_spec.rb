@@ -1,9 +1,10 @@
 require 'rails_helper'
 
 describe "Applications page" do
-
+	self.use_transactional_fixtures = false
 	describe "When company and open job is created" do 
 		it "user can make an application", js:true do
+			self.use_transactional_fixtures = false
 			user = User.create username:"Pekka", password:"Foobar1", password_confirmation:"Foobar1", id:1
 			sign_in_and_go_to_create_application
 
@@ -11,10 +12,12 @@ describe "Applications page" do
 			expect(page).to have_content "Hakemus luotu!"
 
 			user.destroy
+			@user2.destroy
 			DatabaseCleaner.clean
 		end
 
 		it "user can make application with experiences", js:true do 
+			self.use_transactional_fixtures = false
 			user = User.create username:"Pekka", password:"Foobar1", password_confirmation:"Foobar1", id:1
 			sign_in_and_go_to_create_application
 
@@ -27,6 +30,7 @@ describe "Applications page" do
 
 			click_button "Lähetä hakemus!"
 			user.destroy
+			@user2.destroy
 			e = Experience.create description:"kuvaus"
 			e.destroy
 			DatabaseCleaner.clean
@@ -34,6 +38,7 @@ describe "Applications page" do
 
 
 		it "admin of company can see applications and toggle abandoned", js:true do 
+			self.use_transactional_fixtures = false
 			user = User.create username:"Pekka", password:"Foobar1", password_confirmation:"Foobar1", id:1
 			user2 = User.create username:"Pekka2", password:"Foobar1", password_confirmation:"Foobar1", id:2
 			company = Company.create name:"UMT Software"
@@ -62,8 +67,8 @@ end
 
 def sign_in_and_go_to_create_application
 	company = Company.create name:"UMT Software"
-	user2 = User.create username:"Pekka2", password:"Foobar1", password_confirmation:"Foobar1", id:2, email:"toivanenpihla@gmail.com"
-	company.users << user2
+	@user2 = User.create username:"Pekka2", password:"Foobar1", password_confirmation:"Foobar1", id:2, email:"toivanenpihla@gmail.com"
+	company.users << @user2
 	company.save
 	date = DateTime.now + 2.months
 	job = OpenJob.create name:"developer", company_id:"1", expires:date

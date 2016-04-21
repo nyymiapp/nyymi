@@ -43,6 +43,8 @@ RSpec.configure do |config|
 
   # POISTETTUUUUUUUU config.use_transactional_fixtures = true
 
+  config.use_transactional_fixtures = false
+
   DatabaseCleaner.strategy = :truncation
 
   # RSpec Rails can automatically mix in different behaviours to your tests
