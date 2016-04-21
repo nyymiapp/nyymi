@@ -16,7 +16,7 @@ describe "Messages page" do
 		DatabaseCleaner.clean
 	end
 
-	it "user can see message", js:true do 
+	/it "user can see message", js:true do 
 		create_users_and_company
 		create_conversation_and_message
 		sign_in(username:"Pekka", password:"Foobar1")
@@ -26,7 +26,7 @@ describe "Messages page" do
 		@user.destroy
 		@company.destroy
 		DatabaseCleaner.clean
-	end
+	end/
 end
 
 def create_conversation_and_message

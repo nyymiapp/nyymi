@@ -21,6 +21,8 @@ class ApplicationsController < ApplicationController
 
     @application.save
 
+    puts "Application.count ApplicationsControllerissa: : " + Application.count.to_s
+
     send_email_for_admins(@application)
 
     session[:current_application_id] = @application.id

@@ -13,11 +13,11 @@ class MessagesController < ApplicationController
 
   def create
     # Paramseissa tulee aina joko company id tai conversation id. 
-    @message = Message.new
-    @message.content = params[:content]
+    @message = Message.new(message_params)
+    #@message.content = params[:content]
     @message.user = current_user
-    @message.receiver_id = params[:receiver_id]
-    @message.company_id = params[:company_id]
+    #@message.receiver_id = params[:receiver_id]
+    #@message.company_id = params[:company_id]
     @message.sender_id = current_user.id
     @message.sendername = current_user.username
     @message.seen = false

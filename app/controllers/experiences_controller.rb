@@ -11,13 +11,8 @@ class ExperiencesController < ApplicationController
   # POST /experiences
   # POST /experiences.json
   def create
-    @experience = Experience.new
-    @experience.place = params[:place]
-    @experience.description = params[:description]
-    @experience.strictplace = params[:strictplace]
-    @experience.start = params[:start]
-    @experience.end = params[:end]
-    puts Application.first.id + " on id"
+    @experience = Experience.new(experience_params)
+    puts "Application.count ExperiencesControllerissa: " + Application.count.to_s 
     @experience.application = Application.find(session[:current_application_id])
     @experience.save
 

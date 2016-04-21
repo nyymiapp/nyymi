@@ -100,9 +100,9 @@ function($scope){
      });
   };
 
-   $scope.sendExperience = function(experience){
+   $scope.sendExperience = function(param_experience){
 
-	$.post('/experiences', experience).success(function(data, status) {
+	$.post('/experiences', {experience: param_experience} ).success(function(data, status) {
 		console.log("experience onnistui");
      });
   };

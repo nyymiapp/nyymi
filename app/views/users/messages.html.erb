@@ -58,12 +58,12 @@ function($scope, $parse){
 
     getter.assign($scope, "");
 
-    var message = {
+    var param_message = {
       content: contentt,
       conversation_id: param_conversation_id, 
     }
 
-    $.post('/messages', message)
+    $.post('/messages', { message: param_message })
     .success(function(data, status) {
          
     }).error(function(data, status) {
