@@ -1,6 +1,11 @@
 require 'rails_helper'
 
 describe "Users page" do
+	before :each do
+    	DatabaseCleaner.strategy = :truncation
+    	DatabaseCleaner.start
+    end
+
 	self.use_transactional_fixtures = false
 	describe "User not logged in" do 
 		it "should see rekisteröidy and kirjaudu sisään buttons" do 
@@ -8,6 +13,7 @@ describe "Users page" do
 			visit root_path
 			expect(page).to have_content "Rekisteröidy"
 			expect(page).to have_content "Kirjaudu sisään"
+			DatabaseCleaner.clean
 		end
 
 		it "should not log in when credentials are wrong" do 
@@ -18,6 +24,7 @@ describe "Users page" do
 			fill_in('password', with:'salasana')
 			click_button "Kirjaudu sisään"
 			expect(page).to have_content "Käyttäjänimi ja/tai salasana väärin"
+			DatabaseCleaner.clean
 		end
 
 		it "should log in automaticly when registered" do 

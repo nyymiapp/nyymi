@@ -2,6 +2,11 @@ require 'rails_helper'
 require 'spec_helper'
 
 describe "Messages page" do
+	before :each do
+    	DatabaseCleaner.strategy = :truncation
+    	DatabaseCleaner.start
+    end
+    
 	self.use_transactional_fixtures = false
 
 	it "user can create a message", js:true do 

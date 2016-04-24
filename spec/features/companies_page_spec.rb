@@ -1,12 +1,19 @@
 require 'rails_helper'
 
 describe "Companies page" do
+
+  before :each do
+      DatabaseCleaner.strategy = :truncation
+      DatabaseCleaner.start
+  end
+
   self.use_transactional_fixtures = false
 
   it "should not have any before been created" do
     self.use_transactional_fixtures = false
     visit companies_path
     expect(page).to have_no_content "Luo uusi yritys"
+    DatabaseCleaner.clean
   end
 
   describe "User not logged in " do
@@ -14,6 +21,7 @@ describe "Companies page" do
       self.use_transactional_fixtures = false
   		visit new_company_path
   		expect(page).to have_content "You are not authorized to access this page."
+      DatabaseCleaner.clean
   	end
 
   	it "couldn't go to edit company path" do 

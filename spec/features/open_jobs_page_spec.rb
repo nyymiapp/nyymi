@@ -2,6 +2,11 @@ require 'rails_helper'
 require 'spec_helper'
 
 describe "Open jobs page" do
+	before :each do
+    	DatabaseCleaner.strategy = :truncation
+    	DatabaseCleaner.start
+    end
+    
 	describe "When user is administrator" do 
 		Capybara.javascript_driver = :selenium
 		DatabaseCleaner.clean

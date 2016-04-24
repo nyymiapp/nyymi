@@ -1,6 +1,12 @@
 require 'rails_helper'
 
 describe "Applications page" do
+
+	before :each do
+    	DatabaseCleaner.strategy = :truncation
+    	DatabaseCleaner.start
+    end
+    
 	self.use_transactional_fixtures = false
 	describe "When company and open job is created" do 
 		it "user can make an application", js:true do
