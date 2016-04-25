@@ -1,7 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  DatabaseCleaner.clean
+ 
+ before :each do
+      DatabaseCleaner.strategy = :truncation
+      DatabaseCleaner.start
+ end
 
  it "has the username set correctly" do
     user = User.new username:"Pekka"

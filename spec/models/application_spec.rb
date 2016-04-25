@@ -1,6 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe Application, type: :model do
+  self.use_transactional_fixtures = false
+
+  before :each do
+      DatabaseCleaner.strategy = :truncation
+      DatabaseCleaner.start
+  end
+
   it "is not saved without user_id and open_job_id" do
     application = Application.create 
 
