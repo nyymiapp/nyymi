@@ -7,25 +7,6 @@ class ExperiencesController < ApplicationController
     
   end
 
-
-  # POST /experiences
-  # POST /experiences.json
-  def create
-    @experience = Experience.new(experience_params)
-    @experience.application = Application.find(session[:current_application_id])
-    @experience.save
-
-    respond_to do |format|
-      if @experience.save
-        format.html { redirect_to @experience  }
-        format.json { render :json => '#{@experience.id}' }
-      else
-        format.html { render :new }
-        format.json { render json: @experience.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_experience

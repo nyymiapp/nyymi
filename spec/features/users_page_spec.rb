@@ -6,7 +6,6 @@ describe "Users page" do
     	DatabaseCleaner.start
     end
 
-	self.use_transactional_fixtures = false
 	describe "User not logged in" do 
 		it "should see rekisteröidy and kirjaudu sisään buttons" do 
 			self.use_transactional_fixtures = false
@@ -69,6 +68,14 @@ describe "Users page" do
 			DatabaseCleaner.clean
 		end
 	end
+
+		after :each do
+    		DatabaseCleaner.clean
+  		end
+
+  		after :all do
+    		self.use_transactional_fixtures = true
+  		end
 
 
 end

@@ -155,6 +155,14 @@ describe "Companies page" do
       DatabaseCleaner.clean
   	end
 
+      after :each do
+        DatabaseCleaner.clean
+      end
+
+      after :all do
+        self.use_transactional_fixtures = true
+      end
+
 
   end
 end

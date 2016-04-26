@@ -20,7 +20,7 @@ class ApplicationsController < ApplicationController
     @application.open_job = OpenJob.find(params[:open_job_id])
     @application.freetext = params[:freetext]
     @application.abandoned = false
-    
+
     hashi = JSON.parse(params[:experiences].to_json)
     hashi.each do |key, value|
       @experience = Experience.new(value)
@@ -34,8 +34,6 @@ class ApplicationsController < ApplicationController
     puts "Application.count ApplicationsControllerissa: : " + Application.count.to_s
 
     send_email_for_admins(@application)
-
-    session[:current_application_id] = @application.id
 
     @application.open_job.applications << @application
     @application.open_job.save!

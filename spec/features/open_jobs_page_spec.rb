@@ -110,6 +110,14 @@ describe "Open jobs page" do
 		end
 	end
 
+		after :each do
+    		DatabaseCleaner.clean
+  		end
+
+  		after :all do
+    		self.use_transactional_fixtures = true
+  		end
+
 end
 
 def sign_in_and_create_company

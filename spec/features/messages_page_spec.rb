@@ -10,7 +10,6 @@ describe "Messages page" do
 	self.use_transactional_fixtures = false
 
 	it "user can create a message", js:true do 
-		self.use_transactional_fixtures = false
 		create_users_and_company
 		sign_in(username:"Pekka", password:"Foobar1")
 		visit company_path(Company.first)
@@ -25,7 +24,6 @@ describe "Messages page" do
 	end
 
 	it "user can see message", js:true do 
-		self.use_transactional_fixtures = false
 		create_users_and_company
 		create_conversation_and_message
 		sign_in(username:"Pekka", password:"Foobar1")
@@ -36,6 +34,14 @@ describe "Messages page" do
 		@company.destroy
 		DatabaseCleaner.clean
 	end
+
+	after :each do
+    		DatabaseCleaner.clean
+  	end
+
+  	after :all do
+    		self.use_transactional_fixtures = true
+  	end
 end
 
 def create_conversation_and_message
