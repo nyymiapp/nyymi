@@ -1,5 +1,9 @@
 # nyymi
 
+[![Coverage Status](https://coveralls.io/repos/github/nyymiapp/nyymi/badge.svg?branch=master)](https://coveralls.io/github/nyymiapp/nyymi?branch=master)
+
+
+
 [Aikakirjanpito](https://docs.google.com/spreadsheets/d/1HR3h8OUmtGv9Rlxunj25JdfaotxLDICiaqsESHZKF8A/edit?usp=sharing) [Heroku](https://nyymi.herokuapp.com/) [Travis](https://travis-ci.org/nyymiapp/nyymi)
 
 ## Käyttö
