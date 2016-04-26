@@ -1,4 +1,6 @@
 require 'mail'
+require 'rubygems'
+require 'json'
 
 class ApplicationsController < ApplicationController
   load_and_authorize_resource
@@ -18,6 +20,14 @@ class ApplicationsController < ApplicationController
     @application.open_job = OpenJob.find(params[:open_job_id])
     @application.freetext = params[:freetext]
     @application.abandoned = false
+    
+    hashi = JSON.parse(params[:experiences].to_json)
+    hashi.each do |key, value|
+      @experience = Experience.new(value)
+      @experience.application = @application
+      @experience.save
+      puts @experience.place
+    end
 
     @application.save
 
@@ -79,6 +89,6 @@ class ApplicationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def application_params
-      params.require(:application).permit(:open_job_id, :user_id, :freetext, :abandoned)
+      params.require(:application).permit(:open_job_id, :user_id, :freetext, :abandoned, experiences: Experience.attribute_names.collect { |att| att.to_sym })
     end
 end

@@ -62,7 +62,7 @@ function($scope){
     	start: $scope.experience.starting,
     	end: $scope.experience.end, 
     	strictplace: $scope.experience.strictplace
-	}
+	  }
 	console.log(experience);
 	$( "#experiences" ).append("kokemus " + $scope.experience.place + " tallennettu </br>");
 	 $scope.experiences.push(experience);
@@ -88,15 +88,13 @@ function($scope){
   	var application = {
     	freetext: $scope.application.freetext,
     	open_job_id: $scope.open_job_id, 
-	}
+      experiences: $scope.experiences
+	  }
 
 	   $.post('/applications', application).success(function(data, status) {
-
-       for (var i in $scope.experiences) {
-  				$scope.sendExperience($scope.experiences[i]);
-			 }
+       
 			 localStorage.setItem("notification", "Hakemus luotu!");
-             window.location = "/open_jobs";
+        window.location = "/open_jobs";
      });
   };
 
