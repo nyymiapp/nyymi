@@ -30,8 +30,6 @@ class ApplicationsController < ApplicationController
 
     @application.save
 
-    puts "Application.count ApplicationsControllerissa: : " + Application.count.to_s
-
     send_email_for_admins(@application)
 
     @application.open_job.applications << @application

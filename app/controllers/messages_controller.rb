@@ -41,7 +41,7 @@ class MessagesController < ApplicationController
 
     trigger_new_message(@message, conversation)
 
-     respond_to_message_request(@message)
+    respond_to_message_request(@message)
 
   end
 
