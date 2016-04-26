@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   get 'about', to: 'companies#about'
   get 'welcome', to: 'open_jobs#welcome'
   post 'messages', to: 'messages#create'
+  post 'send_message_for_company', to: 'messages#send_message_for_company'
+  post 'send_interview_invitation', to: 'messages#send_interview_invitation'
   post 'set_read', to: 'conversations#set_read'
 
   get 'current_user_open_jobs', to: 'open_jobs#current_user_open_jobs'

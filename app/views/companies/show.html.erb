@@ -34,7 +34,7 @@ function($scope){
 
     console.log(param_message.content + " param_message");
 
-    $.post('/messages', { message: param_message })
+    $.post('/send_message_for_company', { message: param_message })
     .success(function(data, status) {
         $scope.message.content = " ";
         $( "#notice" ).append("<div class='alert alert-success'> <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>Viesti lähetetty!</div>");

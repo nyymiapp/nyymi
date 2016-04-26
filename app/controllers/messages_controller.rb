@@ -11,44 +11,26 @@ class MessagesController < ApplicationController
     @message = Message.new
   end
 
-  def create
-    # Paramseissa tulee aina joko company id tai conversation id.
+  def create_message(message_params)
     @message = Message.new(message_params)
     @message.user = current_user
     @message.sender_id = current_user.id
     @message.sendername = current_user.username
     @message.seen = false
     @message.save!
+    return @message
+  end
 
-    if message_params[:invitationsended] == "true"
-      @application = Application.find(message_params[:application_id])
-      @application.invitationsended = "true"
-      @application.save!
-    end
+  def send_interview_invitation
+    @message = create_message(message_params)
 
-    if message_params[:conversation_id] == nil or message_params[:conversation_id] == ""
-      admin = Company.find(@message.company_id).users.include? current_user
+    @application = Application.find(params[:application_id])
+    @application.invitationsended = "true"
+    @application.save!
 
-      if admin
-        id=@message.receiver_id
-      else
-        id=current_user.id
-      end
+    id=@message.receiver_id
 
-      if Conversation.find_by(user_id:id, company_id: @message.company_id ) == nil
-        conversation = Conversation.create user_id: id, company_id: @message.company_id, company:Company.find(@message.company_id)
-        conversation.channel = Digest::SHA256.bubblebabble (@message.content + SecureRandom.hex)
-        conversation.userchannel = Digest::SHA256.bubblebabble (@message.content + SecureRandom.hex)
-        Company.find(conversation.company_id).users.each do |u|
-          c = ConversationChannel.create user_id: u.id, conversation_id:conversation.id, channel:SecureRandom.hex
-        end
-      else 
-        conversation = Conversation.find_by(user_id:id, company_id: @message.company_id )
-      end
-
-    else
-      conversation = Conversation.find(message_params[:conversation_id])
-    end
+    conversation = find_conversation(id, @message)
     conversation.messages << @message
     conversation.save!
 
@@ -57,8 +39,78 @@ class MessagesController < ApplicationController
     # user id pitää olla SE joka ei ole yrityksen ylläpitäjä!
     c = 'message_channel_' + User.find(conversation.user_id).channel
 
+    trigger_new_message(@message, conversation)
+
+     respond_to_message_request(@message)
+
+  end
+
+  def find_conversation(id, message)
+    if Conversation.find_by(user_id:id, company_id: @message.company_id ) == nil
+        conversation = Conversation.create user_id: id, company_id: @message.company_id, company:Company.find(@message.company_id)
+        conversation.user = User.find(id)
+        conversation.channel = Digest::SHA256.bubblebabble (@message.content + SecureRandom.hex)
+        conversation.userchannel = Digest::SHA256.bubblebabble (@message.content + SecureRandom.hex)
+        Company.find(conversation.company_id).users.each do |u|
+          c = ConversationChannel.create user_id: u.id, conversation_id:conversation.id, channel:SecureRandom.hex
+        end
+    else 
+        conversation = Conversation.find_by(user_id:id, company_id: @message.company_id )
+    end
+    return conversation
+  end
+
+  def send_message_for_company
+    @message = create_message(message_params)
+
+    id=current_user.id
+
+    conversation = find_conversation(id, @message)
+    conversation.messages << @message
+    conversation.save!
+
+    trigger_seen_messages(conversation)
+
+    trigger_new_message(@message, conversation)
+
+    respond_to_message_request(@message)
+  end
+
+  def create
+    # Paramseissa tulee aina joko company id tai conversation id.
+    @message = create_message(message_params)
+
+    conversation = Conversation.find(message_params[:conversation_id])
+
+    conversation.messages << @message
+    conversation.save!
+
+    trigger_seen_messages(conversation)
+
+    # user id pitää olla SE joka ei ole yrityksen ylläpitäjä!
+
+    trigger_new_message(@message, conversation)
+
+    respond_to_message_request(@message)
+  end
+
+  def respond_to_message_request(message)
+     respond_to do |format|
+      if message.save
+        format.html { render :show, notice: 'Message was successfully created.' }
+        format.json { render :show, status: :created, location: message }
+      else
+        format.html { render :new }
+        format.json { render json: message.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def trigger_new_message(message, conversation)
+    c = 'message_channel_' + User.find(conversation.user_id).channel
+
     Pusher.trigger(c, 'new_message', {
-        message: @message.to_json
+        message: message.to_json
     })
 
     conversation.company.users.each do |u|
@@ -67,24 +119,19 @@ class MessagesController < ApplicationController
       end
       c = 'message_channel_' + u.channel
       Pusher.trigger(c, 'new_message', {
-        message: @message.to_json
+        message: message.to_json
       })
-    end
-
-    respond_to do |format|
-      if @message.save
-        format.html { render :show, notice: 'Message was successfully created.' }
-        format.json { render :show, status: :created, location: @message }
-      else
-        format.html { render :new }
-        format.json { render json: @message.errors, status: :unprocessable_entity }
-      end
     end
   end
 
   def trigger_seen_messages(conversation)
     conversation.company.users.each do |user|
-       c = 'conversation_channel_' + ConversationChannel.find_by(user_id:user.id, conversation_id:conversation.id).channel
+       if ConversationChannel.find_by(user_id:user.id, conversation_id:conversation.id) == nil
+        conversationchanneli = ConversationChannel.create user_id: user.id, conversation_id:conversation.id, channel:SecureRandom.hex
+       else
+        conversationchanneli = ConversationChannel.find_by(user_id:user.id, conversation_id:conversation.id)
+       end
+       c = 'conversation_channel_' + conversationchanneli.channel
 
        Pusher.trigger(c, 'set_seen_messages', {
          message: conversation.not_seen(user.id),
@@ -118,6 +165,6 @@ class MessagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def message_params
-      params.require(:message).permit(:user_id, :company_id, :conversation_id, :sender_id, :seen, :content)
+      params.require(:message).permit(:user_id, :company_id, :conversation_id, :sender_id, :seen, :content, :receiver_id)
     end
 end

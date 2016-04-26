@@ -28,7 +28,7 @@ function($scope, $parse){
       application_id: param_application_id
     }
 
-    $.post('/messages', { message: param_message })
+    $.post('/send_interview_invitation', { message: param_message, application_id: param_application_id })
     .success(function(data, status) {
              $("#notice").html("<div class='alert alert-success'> Haastattelukutsu lähetetty! Hakijan vastaus tulee Viestit -osioon. <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button></div>");
     }).error(function(data, status) {
