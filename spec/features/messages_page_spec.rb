@@ -65,7 +65,7 @@ def create_conversation_and_message
 end
 
 def wait_for_websocket
-    Timeout.timeout(Capybara.default_max_wait_time) do
+    Timeout.timeout(20.seconds) do
       loop until message_sended?
     end
 end
