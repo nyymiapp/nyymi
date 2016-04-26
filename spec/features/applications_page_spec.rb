@@ -2,28 +2,56 @@ require 'rails_helper'
 
 describe "Applications page" do
 
+	before :all do
+    	self.use_transactional_fixtures = false
+  	end
+
 	before :each do
     	DatabaseCleaner.strategy = :truncation
     	DatabaseCleaner.start
     end
     
-	self.use_transactional_fixtures = false
 	describe "When company and open job is created" do 
-		it "user can make an application", js:true do
-			self.use_transactional_fixtures = false
-			user = User.create username:"Pekka", password:"Foobar1", password_confirmation:"Foobar1", id:1
-			sign_in_and_go_to_create_application
+	  it "user can make an application", js:true do
 
-			click_button "Lähetä hakemus!"
-			expect(page).to have_content "Hakemus luotu!"
+      	user = User.create username:"Arto", password:"Foobar1", password_confirmation:"Foobar1"
 
-			user.destroy
-			@user2.destroy
-			DatabaseCleaner.clean
-		end
+
+      	company = Company.create name:"UMT Software"
+      	@user2 = User.create username:"Pekka3", password:"Foobar1", password_confirmation:"Foobar1", id:2, email:"toivanenpihla@gmail.com"
+      	company.users << @user2
+      	company.save
+
+      	date = DateTime.now + 2.months
+      	job = OpenJob.create name:"developer", company_id:"1", expires:date
+
+
+      	sign_in(username:"Arto", password:"Foobar1")
+
+      	visit open_jobs_path
+      	click_link "developer"
+      	find('#create_application_button').click
+
+      	find("#create_experience_button").click
+      	select "Työ", :from => "experience_place"
+      	fill_in('experience[strictplace]', with:'paikka')
+      	fill_in('experience[des]', with:'kuvaus')
+      	find("#save_experience").click
+      	expect(page).to have_content "tallennettu"
+
+      	click_button "Lähetä hakemus!"
+      	expect(page).to have_content "Hakemus luotu!"
+    end
+
+  		after :each do
+    		DatabaseCleaner.clean
+  		end
+
+  		after :all do
+    		self.use_transactional_fixtures = true
+  		end
 
 		it "user can make application with experiences", js:true do 
-			self.use_transactional_fixtures = false
 			user = User.create username:"Pekka", password:"Foobar1", password_confirmation:"Foobar1", id:1
 			sign_in_and_go_to_create_application
 
@@ -39,12 +67,10 @@ describe "Applications page" do
 			@user2.destroy
 			e = Experience.create description:"kuvaus"
 			e.destroy
-			DatabaseCleaner.clean
 		end
 
 
 		it "admin of company can see applications and toggle abandoned", js:true do 
-			self.use_transactional_fixtures = false
 			user = User.create username:"Pekka", password:"Foobar1", password_confirmation:"Foobar1", id:1
 			user2 = User.create username:"Pekka2", password:"Foobar1", password_confirmation:"Foobar1", id:2
 			company = Company.create name:"UMT Software"
@@ -65,7 +91,6 @@ describe "Applications page" do
 			user.destroy
 			user2.destroy
 			company.destroy
-			DatabaseCleaner.clean
 
 		end
 	end
