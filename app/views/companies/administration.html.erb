@@ -4,7 +4,7 @@
   <h1> <%= @company.name %> ylläpito</h1>
 
        <%= link_to 'Poista yritys', @company , method: :delete, data: { confirm: 'Oletko varma? Kaikki yrityksen avoimet työpaikat poistuvat myös.' }, class:"btn btn-danger", style:"color:white;"%> 
-        <%= link_to 'Muokkaa perustietoja', edit_company_path(@company), 'data-no-turbolink' => true, class:"btn btn-primary", style:"color:white;"  %> 
+        <%= link_to 'Muokkaa perustietoja', edit_company_path(@company), 'data-no-turbolink' => true, class:"btn cool_button", style:"color:white;"  %> 
 	<h3> Ylläpitäjät </h3>
 	<% @company.users.each do |a| %>
 		<%= a.username %> </br>
@@ -63,7 +63,7 @@ function($scope){
 
 </script>
 
-<div class="btn btn-primary" id="add_admin_button">Lisää uusi ylläpitäjä</div></br>
+<div class="btn btn-default" id="add_admin_button">Lisää uusi ylläpitäjä</div></br>
 
 <div ng-app="admin_app" ng-controller="MainCtrl">
 
@@ -77,7 +77,7 @@ function($scope){
   </br>
 </div>
 
-<div class="btn btn-primary" id="create_open_job_button">Luo uusi avoin työpaikka</div>
+<div class="btn btn-default" id="create_open_job_button">Luo uusi avoin työpaikka</div>
 <div style="display:none;" id="create_open_job_form"> 
 	<h3> Luo uusi avoin työpaikka </h3>
 
