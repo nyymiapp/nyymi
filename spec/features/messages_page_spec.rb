@@ -24,7 +24,11 @@ describe "Messages page" do
 	end
 
 	it "user can see message", js:true do 
-		create_users_and_company
+		@user = User.create username:"Pekka", password:"Foobar1", password_confirmation:"Foobar1", channel:"abc123", id:1
+    	@company = Company.create name:"UMT Software", id:1
+   		@user2 = User.create username:"Pekka2", password:"Foobar1", password_confirmation:"Foobar1", channel:"def456"
+   		@company.users << @user2
+   		@company.save
 		create_conversation_and_message
 		sign_in(username:"Pekka", password:"Foobar1")
 		click_link "Viestit"
