@@ -43,6 +43,7 @@ describe "Messages page" do
 		click_link "Viestit"
 		find("#hidden-partial-1").click
 		expect(page).to have_content "juuhh"
+		sleep 2.seconds
 		@user.destroy
 		@company.destroy
 		DatabaseCleaner.clean

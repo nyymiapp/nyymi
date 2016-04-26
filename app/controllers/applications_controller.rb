@@ -26,7 +26,6 @@ class ApplicationsController < ApplicationController
       @experience = Experience.new(value)
       @experience.application = @application
       @experience.save
-      puts @experience.place
     end
 
     @application.save
@@ -70,13 +69,6 @@ class ApplicationsController < ApplicationController
         puts ex.message
       end
     end
-  end
-
-
-  # DELETE /applications/1
-  # DELETE /applications/1.json
-  def destroy
-    @application.destroy
   end
 
   private

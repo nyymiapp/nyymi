@@ -20,9 +20,6 @@ class OpenJobsController < ApplicationController
   end
 
   # GET /open_jobs/new
-  def new
-    @open_job = OpenJob.new
-  end
 
    def administration
     @open_job = OpenJob.find(params[:id])

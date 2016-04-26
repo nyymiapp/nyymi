@@ -87,6 +87,7 @@ describe "Applications page" do
 			click_link "hylkää hakemus"
 
 			click_link "Näytä myös hylätyt hakemukset"
+			sleep 5.seconds
 			
 			user.destroy
 			user2.destroy
