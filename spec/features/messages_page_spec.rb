@@ -45,7 +45,7 @@ describe "Messages page" do
 end
 
 def create_conversation_and_message
-	@conversation = Conversation.create company:@company, user:@user, id:1
+	@conversation = Conversation.create company:@company, user:@user, id:1, userchannel: "asdjdhdasd", channel: "asdjidlfjs"
 	@message = Message.create company: @company, user:@user, content: "juuhh", sender_id:2
 	@conversation.messages << @message
 	@conversation.save
