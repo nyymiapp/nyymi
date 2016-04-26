@@ -10,7 +10,11 @@ describe "Messages page" do
 	self.use_transactional_fixtures = false
 
 	it "user can create a message", js:true do 
-		create_users_and_company
+		@user = User.create username:"Pekka", password:"Foobar1", password_confirmation:"Foobar1", channel:"abc123", id:1
+    	@company = Company.create name:"UMT Software", id:1
+   		@user2 = User.create username:"Pekka2", password:"Foobar1", password_confirmation:"Foobar1", channel:"def456"
+   		@company.users << @user2
+   		@company.save
 		sign_in(username:"Pekka", password:"Foobar1")
 		visit company_path(Company.first)
 		find("#send_message_button").click
@@ -29,7 +33,12 @@ describe "Messages page" do
    		@user2 = User.create username:"Pekka2", password:"Foobar1", password_confirmation:"Foobar1", channel:"def456"
    		@company.users << @user2
    		@company.save
-		create_conversation_and_message
+		
+		@conversation = Conversation.create company:@company, user:@user, id:1, userchannel: "asdjdhdasd", channel: "asdjidlfjs"
+		@message = Message.create company: @company, user:@user, content: "juuhh", sender_id:2
+		@conversation.messages << @message
+		@conversation.save
+
 		sign_in(username:"Pekka", password:"Foobar1")
 		click_link "Viestit"
 		find("#hidden-partial-1").click
