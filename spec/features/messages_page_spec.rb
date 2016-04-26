@@ -36,11 +36,11 @@ describe "Messages page" do
 	end
 
 	after :each do
-    		DatabaseCleaner.clean
+    	DatabaseCleaner.clean
   	end
 
   	after :all do
-    		self.use_transactional_fixtures = true
+    	self.use_transactional_fixtures = true
   	end
 end
 
