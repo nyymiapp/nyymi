@@ -21,11 +21,13 @@ class ApplicationsController < ApplicationController
     @application.freetext = params[:freetext]
     @application.abandoned = false
 
-    hashi = JSON.parse(params[:experiences].to_json)
-    hashi.each do |key, value|
-      @experience = Experience.new(value)
-      @experience.application = @application
-      @experience.save
+    if params[:experiences] != nil and params[:experiences] == ""
+      hashi = JSON.parse(params[:experiences].to_json)
+      hashi.each do |key, value|
+        @experience = Experience.new(value)
+        @experience.application = @application
+        @experience.save
+      end
     end
 
     @application.save

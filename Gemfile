@@ -49,6 +49,7 @@ gem 'simplecov', :require => false, :group => :test
 
 group :development do
   gem 'rails_layout'
+  gem "rails-erd"
 end
 
 group :development, :test do
