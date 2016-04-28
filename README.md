@@ -9,6 +9,8 @@
 ## Käyttö
 Tätä sovellusta käytetään anonyymiin työnhakuun. Se piilottaa hakijasta nimen sekä muut yhteystiedot ja opiskelupaikoista koulun nimen. Työnantaja luo yrityksen ja asettaa sille avoimia työpaikkoja, joita muut käyttäjät voivat hakea. 
 
+Sovellus toimii itse omana käyttöohjeenaan, sillä eri tilanteissa käyttäjälle näytetään notifikaatioina käyttöohjeita ja suositellaan toimintatapoja sovelluksessa. Alkuun pääsee rekisteröitymällä. 
+
 ## Ulkoiset gemit
 
 [Sendgrid](http://sendgrid.com/) hoitaa sähköpostien lähetyksen.
