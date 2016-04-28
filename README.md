@@ -26,6 +26,6 @@ Google maps karttoihin
 ## Testausperiaate
 
 RSpec-testeillä testataan ainoastaan olioiden validointia. 
-Aluksi testausperiaatteena oli kirjoittaa selaintestit [CanCan-sääntöjen](https://github.com/nyymiapp/nyymi/blob/master/app/models/ability.rb) pohjalta. Tämä periaate onkin nähtävissä joissain selaintesteissä kuten [companies_page_specissä](https://github.com/nyymiapp/nyymi/blob/master/spec/features/companies_page_spec.rb). Testien kirjoituksen aikana huomattiin että tämä lähestymistapa on hyvin työläs ja siirryttiin coverage-driven-testaukseen. 
+Aluksi testausperiaatteena oli kirjoittaa selaintestit [CanCan-sääntöjen](https://github.com/nyymiapp/nyymi/blob/master/app/models/ability.rb) pohjalta. Tämä periaate onkin nähtävissä joissain selaintesteissä kuten [companies_page_specissä](https://github.com/nyymiapp/nyymi/blob/master/spec/features/companies_page_spec.rb). Testien kirjoituksen aikana huomattiin että tämä lähestymistapa on hyvin työläs ja siirryttiin coverage-driven-testaukseen. Testauksen ulkopuolelle on jätetty kaikki osat joiden testaaminen katsottiin liian vaikeaksi. 
 
 
