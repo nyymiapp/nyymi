@@ -38,6 +38,6 @@ Aluksi testausperiaatteena oli kirjoittaa selaintestit [CanCan-sääntöjen](htt
 
 ##Kaavio
 
-[Rails-erdillä](https://github.com/voormedia/rails-erd) piirretty [kaavio](https://github.com/nyymiapp/nyymi/blob/master/erd.pdf)
+[Rails-erdillä](https://github.com/voormedia/rails-erd) piirretty [kaavio](https://github.com/nyymiapp/nyymi/blob/master/erd.pdf). Siitä näkyy että Companyn ja Userin välillä on many-to-many- yhteys. 
 
 
