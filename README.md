@@ -9,6 +9,8 @@
 ## Käyttö
 Tätä sovellusta käytetään anonyymiin työnhakuun. Se piilottaa hakijasta nimen sekä muut yhteystiedot ja opiskelupaikoista koulun nimen. Työnantaja luo yrityksen ja asettaa sille avoimia työpaikkoja, joita muut käyttäjät voivat hakea. 
 
+Sovellus toimii itse omana käyttöohjeenaan, sillä eri tilanteissa käyttäjälle näytetään notifikaatioina käyttöohjeita ja suositellaan toimintatapoja sovelluksessa. Alkuun pääsee rekisteröitymällä. 
+
 ## Ulkoiset gemit
 
 [Sendgrid](http://sendgrid.com/) hoitaa sähköpostien lähetyksen.
@@ -21,6 +23,17 @@ Tätä sovellusta käytetään anonyymiin työnhakuun. Se piilottaa hakijasta ni
 
 [Bootstrap](http://getbootstrap.com/components/) tyyleihin.
 
+[CSS-teemaa](http://www.free-css.com/free-css-templates/page193/spot) on otettu tuosta 
+
+[JBuilder](https://github.com/rails/jbuilder) json.builder-tiedostojen ohjelmointiin
+
+[json](https://rubygems.org/gems/json/versions/1.8.3) jsonin parsimiseen
+
 Google maps karttoihin
+
+## Testausperiaate
+
+RSpec-testeillä testataan ainoastaan olioiden validointia. 
+Aluksi testausperiaatteena oli kirjoittaa selaintestit [CanCan-sääntöjen](https://github.com/nyymiapp/nyymi/blob/master/app/models/ability.rb) pohjalta. Tämä periaate onkin nähtävissä joissain selaintesteissä kuten [companies_page_specissä](https://github.com/nyymiapp/nyymi/blob/master/spec/features/companies_page_spec.rb). Testien kirjoituksen aikana huomattiin että tämä lähestymistapa on hyvin työläs ja siirryttiin coverage-driven-testaukseen. Testauksen ulkopuolelle on jätetty kaikki osat joiden testaaminen katsottiin liian vaikeaksi. 
 
 
