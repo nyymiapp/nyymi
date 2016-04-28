@@ -23,6 +23,8 @@ Sovellus toimii itse omana käyttöohjeenaan, sillä eri tilanteissa käyttäjä
 
 [Bootstrap](http://getbootstrap.com/components/) tyyleihin.
 
+[CSS-teemaa](http://www.free-css.com/free-css-templates/page193/spot) on otettu tuosta 
+
 [JBuilder](https://github.com/rails/jbuilder) json.builder-tiedostojen ohjelmointiin
 
 [json](https://rubygems.org/gems/json/versions/1.8.3) jsonin parsimiseen
