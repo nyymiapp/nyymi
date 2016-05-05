@@ -128,7 +128,6 @@ class MessagesController < ApplicationController
     conversation.company.users.each do |user|
        if ConversationChannel.find_by(user_id:user.id, conversation_id:conversation.id) == nil
         conversationchanneli = ConversationChannel.create user_id: user.id, conversation_id:conversation.id, channel:SecureRandom.hex
-        puts "luodaan konversaatio"
        else
         conversationchanneli = ConversationChannel.find_by(user_id:user.id, conversation_id:conversation.id)
        end
