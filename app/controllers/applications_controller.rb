@@ -21,7 +21,7 @@ class ApplicationsController < ApplicationController
     @application.freetext = params[:freetext]
     @application.abandoned = false
 
-    if params[:experiences] != nil and params[:experiences] == ""
+    if params[:experiences] != nil and params[:experiences] != ""
       hashi = JSON.parse(params[:experiences].to_json)
       hashi.each do |key, value|
         @experience = Experience.new(value)

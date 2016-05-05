@@ -11,102 +11,82 @@
 </p>
 
 <script>
-
 $( document ).ready(function() {
-
 $( "#create_application_button" ).click(function() {
   $( "#send_application_form" ).slideToggle( "slow", function() {
     // Animation complete.
   });
 });
-
 $( "#create_experience_button" ).click(function() {
   $( "#create_experience_form" ).slideToggle( "slow", function() {
     // Animation complete.
   });
 });
-
 $('#experience_place').on('change', function() {
   if(this.value == "työ" || this.value == "vapaaehtoistyö" || this.value=="luottamustoimi"){
-  	$( "#experience_strictplace" ).slideDown( "slow", function() {
+    $( "#experience_strictplace" ).slideDown( "slow", function() {
     // Animation complete.
-  	});
+    });
   } else {
-  	$( "#experience_strictplace" ).slideUp( "slow", function() {
+    $( "#experience_strictplace" ).slideUp( "slow", function() {
     // Animation complete.
-  	});
+    });
   }
 });
-
 });
-
 var appi = angular.module('apsyla', []);
-
 appi.controller('MainCtrl', [
 '$scope',
 function($scope){
-
   $scope.application = {};
   $scope.application.freetext = " ";
-
   $scope.experience = {};
   $scope.experience.place = " ";
   $scope.experience.strictplace = " ";
-
   $scope.experiences = [];
-
   $scope.addExperience = function(){
-  	var experience = {
-    	place: $scope.experience.place,
-    	description: $scope.experience.des,
-    	start: $scope.experience.starting,
-    	end: $scope.experience.end, 
-    	strictplace: $scope.experience.strictplace
-	  }
-	console.log(experience);
-	$( "#experiences" ).append("kokemus " + $scope.experience.place + " tallennettu </br>");
-	 $scope.experiences.push(experience);
-	 $scope.experience.place = "";
-	 $scope.experience.des = "";
-	 $scope.experience.starting = "";
-	 $scope.experience.end = "";
-	 $scope.experience.strictplace = "";
-	 console.log( $scope.experiences);
-
-	  $( "#create_experience_form" ).slideToggle( "slow", function() {
+    var experience = {
+      place: $scope.experience.place,
+      description: $scope.experience.des,
+      start: $scope.experience.starting,
+      end: $scope.experience.end, 
+      strictplace: $scope.experience.strictplace
+    }
+  console.log(experience);
+  $( "#experiences" ).append("kokemus " + $scope.experience.place + " tallennettu </br>");
+   $scope.experiences.push(experience);
+   $scope.experience.place = "";
+   $scope.experience.des = "";
+   $scope.experience.starting = "";
+   $scope.experience.end = "";
+   $scope.experience.strictplace = "";
+   console.log( $scope.experiences);
+    $( "#create_experience_form" ).slideToggle( "slow", function() {
     // Animation complete.
-  	  });
+      });
   };
-
   $scope.sendApplication = function(){
-  	$scope.open_job_id=(/open_jobs\/(\d+)/.exec(window.location.href)[1]);
-
-  	if(angular.isUndefined($scope.application.freetext) || $scope.application.freetext === null){
-  		$scope.application.freetext = "";
-  	}
-
-  	var application = {
-    	freetext: $scope.application.freetext,
-    	open_job_id: $scope.open_job_id, 
+    $scope.open_job_id=(/open_jobs\/(\d+)/.exec(window.location.href)[1]);
+    if(angular.isUndefined($scope.application.freetext) || $scope.application.freetext === null){
+      $scope.application.freetext = "";
+    }
+    var application = {
+      freetext: $scope.application.freetext,
+      open_job_id: $scope.open_job_id, 
       experiences: $scope.experiences
-	  }
-
-	   $.post('/applications', application).success(function(data, status) {
+    }
+     $.post('/applications', application).success(function(data, status) {
        
-			 localStorage.setItem("notification", "Hakemus luotu!");
+       localStorage.setItem("notification", "Hakemus luotu!");
         window.location = "/open_jobs";
      });
   };
-
    $scope.sendExperience = function(param_experience){
-
-	$.post('/experiences', {experience: param_experience} ).success(function(data, status) {
-		console.log("experience onnistui");
+  $.post('/experiences', {experience: param_experience} ).success(function(data, status) {
+    console.log("experience onnistui");
      });
   };
-
 }]);
-
 </script>
 
 
@@ -119,48 +99,48 @@ function($scope){
 
     <% if not @open_job.company.users.include? current_user %>
 
-    <div id="create_application_button" class="btn cool_button">
+    <div id="create_application_button" class="btn btn-primary">
       Tee hakemus!
     </div>
 
 
     <div id="send_application_form" style="display:none;border: 1px solid #EEA236; padding:10px; border-radius:1px;" ></br>
-    	Vapaa kenttä </br></br>
-		<textarea type='text' ng-model='application.freetext' name='application[freetext]' rows="5" cols="80"></textarea> </br></br>
+      Vapaa kenttä </br></br>
+    <textarea type='text' ng-model='application.freetext' name='application[freetext]' rows="5" cols="80"></textarea> </br></br>
 
 
-		<div id="experiences"> </div></br></br>
+    <div id="experiences"> </div></br></br>
 
-		<div id="create_experience_button" class="btn" style="border: 1px solid #EEA236">Lisää kokemus</div></br></br>
+    <div id="create_experience_button" class="btn btn-primary">Lisää kokemus</div></br></br>
 
-		<div style="display:none;border: 1px solid #EEA236; padding:10px; border-radius:1px;" id="create_experience_form">
+    <div style="display:none;border: 1px solid #EEA236; padding:10px; border-radius:1px;" id="create_experience_form">
 
-			<h4>Uusi kokemus </h4>
-			 Valitse tyyppi: <select name="experience[place]" ng-model="experience.place" id="experience_place">
-      			<option value="yliopisto">Yliopisto</option> <!-- interpolation -->
-     			<option value="ammattikorkeakoulu">Ammattikorkeakoulu</option>
-     			<option value="työ">Työ</option>
-     			<option value="lukio">Lukio</option>
-     			<option value="ammattikoulu">Ammattikoulu</option>
-     			<option value="luottamustoimi">Luottamustoimi</option>
-     			<option value="muu koulutus">Muu koulutus</option>
-     			<option value="vapaaehtoistyö">Vapaaehtoistyö</option>
-     			<option value="muu kokemus">Muu kokemus</option>
-    		</select> </br> </br>
-    		<div id="experience_strictplace" style="display:none;"> 
-				Paikan nimi </br><input type='text' ng-model='experience.strictplace' name='experience[strictplace]'> </br></br>
-			</div>
-			Kuvaus tekemisestä </br><textarea type='text' ng-model='experience.des' name='experience[des]' rows="5" cols="50"></textarea> </br></br>
-			Alku <input type="date" name="experience[starting]" ng-model="experience.starting"
+      <h4>Uusi kokemus </h4>
+       Valitse tyyppi: <select name="experience[place]" ng-model="experience.place" id="experience_place">
+            <option value="yliopisto">Yliopisto</option> <!-- interpolation -->
+          <option value="ammattikorkeakoulu">Ammattikorkeakoulu</option>
+          <option value="työ">Työ</option>
+          <option value="lukio">Lukio</option>
+          <option value="ammattikoulu">Ammattikoulu</option>
+          <option value="luottamustoimi">Luottamustoimi</option>
+          <option value="muu koulutus">Muu koulutus</option>
+          <option value="vapaaehtoistyö">Vapaaehtoistyö</option>
+          <option value="muu kokemus">Muu kokemus</option>
+        </select> </br> </br>
+        <div id="experience_strictplace" style="display:none;"> 
+        Paikan nimi </br><input type='text' ng-model='experience.strictplace' name='experience[strictplace]'> </br></br>
+      </div>
+      Kuvaus tekemisestä </br><textarea type='text' ng-model='experience.des' name='experience[des]' rows="5" cols="50"></textarea> </br></br>
+      Alku <input type="date" name="experience[starting]" ng-model="experience.starting"
        placeholder="yyyy-MM-dd" /> </br> </br>
 
-       		Loppu <input type="date" name="experience[end]" ng-model="experience.end"
+          Loppu <input type="date" name="experience[end]" ng-model="experience.end"
        placeholder="yyyy-MM-dd" /> </br> </br>
 
-			<button ng-click='addExperience()' id="save_experience" >Tallenna kokemus</button>
-		</div></br>
-		<button ng-click='sendApplication()' class="btn cool_button" style="">Lähetä hakemus!</button>
-	</div>
+      <button ng-click='addExperience()' id="save_experience" >Tallenna kokemus</button>
+    </div></br>
+    <button ng-click='sendApplication()' class="btn cool_button" style="">Lähetä hakemus!</button>
+  </div>
 
   </div>
   <% else %>
