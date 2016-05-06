@@ -81,7 +81,7 @@ function($scope){
 
 </br>
 
-<% if not @company.users.include? current_user %>
+<% if current_user != nil and not @company.users.include? current_user %>
 <div class="btn btn-primary" id="send_message_button">Lähetä viesti</div></br>
 
 <div ng-app="send_message_app" ng-controller="MainCtrl">
